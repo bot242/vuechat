@@ -45,7 +45,7 @@
               <i class="fas fa-plus-circle fa-5x"></i>
             </div>
             <div v-for="images in image" :key="images.id"  >
-              <img  v-bind:class="{red: isImage}" :src="images.avatar" style="width:90%;"  @click="setImg(images)"     
+              <img  v-bind:class="{'active': activeIndex === images}" :src="images.avatar" style="width:90%;"  @click="setImg(images)"     
 />
             </div>
           </slick>
@@ -82,7 +82,7 @@
               <img class="padrig1" v-if="url" :src="url"  />
                
             </span>
-            <p class="chatname" style="float: right">{{msg}}</p>
+            <p class="chatname" style="float: right;   box-shadow: 0 0 10px;">{{msg}}</p>
           </div>
           <div v-show="!isChat" class="chat22">
             <span v-show="!isM">
@@ -94,7 +94,7 @@
               <img class="padrig1" v-if="url" :src="url"  />
              
             </span>
-            <p class="chatname1" style="float: right">{{msg}}</p>
+            <p class="chatname1" style="float: right;   box-shadow: 0 0 10px;">{{msg}}</p>
           </div>
           <div v-show="!isIcon" class="chat33">
             <span v-show="!isM">
@@ -103,7 +103,7 @@
             <span v-show="!isQ">
               <img class="padrig3" v-if="url" :src="url" />
             </span>
-            <p class="chatname" style="float: left">{{msg}}</p>
+            <p class="chatname" style="float: left;   box-shadow: 0 0 10px;">{{msg}}</p>
           </div>
         </div>
       </div>
@@ -139,7 +139,6 @@ export default {
       isQ: true,
       isM: true,
       isActive: false,
-      isImage: false,
       isColor: false,
       isGreen: false,
       image: [],
@@ -148,6 +147,7 @@ export default {
       outputImg: "",
       newOutput: [],
       response: "",
+      activeIndex: undefined,
       as:"",
       slickOptions: {
         slidesToShow: 4,
@@ -278,10 +278,7 @@ export default {
         (this.outputImg  = event.avatar),
         (this.isQ = true),
         (this.isM = false);
-        if (this.outputImg===event.avatar){
-              this.isImage = !this.isImage;
-              // alert("s")
-        }
+{ this.activeIndex = event }
                 console.log("test",this.outputImg )
                 console.log('sumbmit',this.outputId)
 
@@ -398,21 +395,29 @@ export default {
   position: relative;
   float: right;
   top: 475px;
+        box-shadow: 0 0 10px;
+            border-radius: 50%;
+
 }
+
 .padrig2 {
   width: 9%;
   position: relative;
   float: right;
   top: 250px;
   /* background-color: purple; */
-  border-radius: 45px 0px 0px 45px;
-  padding: 2px 3px 2px 3px;
+  /* border-radius: 45px 0px 0px 45px; */
+  /* padding: 2px 3px 2px 3px; */
+   box-shadow: 0 0 10px;
+            border-radius: 50%;
 }
 .padrig3 {
   width: 9%;
   position: relative;
   float: left;
   top: 475px;
+   box-shadow: 0 0 10px;
+            border-radius: 50%;
 }
 .row {
   margin-right: 0 !important;
@@ -466,9 +471,9 @@ export default {
 .slick-next:before {
   color: black !important;
 }
-img.is-active{
-  background-color: lightblue;
-  border: green solid 2px;
-  color: red;
+.active{
+    border: 2px solid #2dc263;
+    border-radius: 50%;
+    padding: 2px;
 }
 </style>
