@@ -1,6 +1,6 @@
 <template>
 
-<b-tab title="Publish" class="pub">
+<!-- <b-tab title="Publish" class="pub"> -->
     <div class="ssd">
                     <template>
                         <div role="tablist">
@@ -225,13 +225,13 @@
                             </b-collapse>
                         </b-card>
 
-                        <p class="para"><b>Still need help?</b>Ask us at <a
+                        <!-- <p class="para"><b>Still need help?</b>Ask us at <a
                                 href="mailto:care@zoogle.chat">care@zoogle.chat</a>
-                            or <a href="https://twitter.com/zooglechat" target="_blank">@Zooglechat</a></p>
+                            or <a href="https://twitter.com/zooglechat" target="_blank">@Zooglechat</a></p> -->
 
                     </template>
     </div>
-                </b-tab>
+                <!-- </b-tab> -->
 
 
 

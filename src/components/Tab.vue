@@ -46,7 +46,7 @@
           id="pills-home"
           role="tabpanel"
           aria-labelledby="pills-home-tab">
-          <WidgetTab />
+          <!-- <WidgetTab /> -->
         </div>
         <!-- <div
           class="tab-pane fade"
@@ -98,7 +98,9 @@ export default {
   background-color: #f0f4f7;
   margin-top: 1%;
 }
-
+/* .tab-content{
+  margin-left: 3%;
+} */
 .nav-pills .nav-link.active {
   color: white !important;
   background-color: #188de4 !important;

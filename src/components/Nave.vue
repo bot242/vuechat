@@ -1,7 +1,11 @@
 
 <template>
-
+<div >
+      <!-- <sidebar-menu :menu="menu" /> -->
+ 
+<!-- <SidebarCustom> -->
 <div class="header">
+  
   
   <link rel="stylesheet" 
         href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
@@ -20,6 +24,7 @@
 
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
+                        
                         <b-nav-form>
                             <b-button href="#" size="sm" class="my-2 my-sm-0 sam">Upgrade Plan</b-button>
                             <b-button href="#" size="sm" class="my-2 my-sm-0 sam1">Need help?</b-button>
@@ -29,27 +34,72 @@
 
                         <b-nav-item-dropdown right>
                             <b-dropdown-item href="#">Profile</b-dropdown-item>
-                            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                            <b-dropdown-item href='/login' >
+signout
+                            </b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
     </div>
-    
+    <Tab/>
+</div>
 
 </template>
 
 <script>
+import Tab from './Tab'
+import { SidebarMenu } from 'vue-sidebar-menu'
+// import SidebarCustom from './SidebarCustom'
 export default {
   name: "Nave",
-  
+  components:{
+    Tab,
+    SidebarMenu,
+    // SidebarCustom
+  },
+     props : ['user'],
+     
+  data() {
+            return {
+                authenticated: false,
+                menu: [
+                {
+                    href: '/Bot',
+                    title: 'Create Bot',
+                    icon: 'fa fa-user'
+                },
+                {
+                    href: 'Nave',
+                    title: 'Chat',
+                    icon: 'fas fa-robot'
+                },
+                // {
+                //      href: 'mdv',
+                //     title: 'menu',
+                //     icon: 'fas fa-chart'
+                // }
+            ]
+            }
+        },
+        methods: {
+            setAuthenticated(status) {
+                this.authenticated = status;
+            },
+            logout() {
+                this.authenticated = false;
+            },
+            
+        }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .header {
-    background-color: #f0f4f7;
+        background-color: #f0f4f7;
+    width: 100%;
+    /* margin-left: 50px; */
 }
 .sam{
     margin-right:20px; 
