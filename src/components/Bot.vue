@@ -18,7 +18,6 @@
           </div>
         </div>
       </div>
-
       <!-- sdsd -->
       <div class="col-xs-6 col-md-3" v-if="isHidden">
         <div class="panel form-panel" style="padding: 20px; height: 200px;">
@@ -32,13 +31,13 @@
                 placeholder="http:// Website.com"
                 @change="sub"
                 style="width: 200px;"
+                @keyup.enter="asd"
               />
-
               <div class="row ss">
                 <div
                   role="button"
                   class="btn btn-default btn-form-card p-big-input t-blue m-t-10"
-                  v-on:click="asd "
+                  v-on:click="asd"
                   v-bind:class="{no: isNo, }"
                 >Create</div>
                 <div
@@ -51,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-md-3" v-for="botcounts in botcount" :key="botcounts.user">
+      <div class="col-xs-6 col-md-3" v-for="(botcounts, index) in botcount" :key="botcounts.user">
         <div class="panel bot" @click="admin(botcounts)">
           <div class="panel-body">
             <img class="img-avatar" src="https://avatars.collectcdn.com/a5.png" />
@@ -73,17 +72,17 @@
                               <h3>BotName</h3>
                             </label>
                             <input
+                              style="width: 225px"
                               type="text"
                               class="botname-inline m-a text-center f-s-25 h-40 outline-none"
                               v-model="name"
-                              @change="someHandler(botcounts)"
                             />
                           </div>
                         </div>
                       </form>
                       <button
                         class="pull-right btn btn-success float-right"
-                        @click="showModal=false"
+                        @click="someHandler(botcounts); showModal=false;"
                       >Done</button>
                     </div>
                   </div>
@@ -92,15 +91,16 @@
             </span>
             <div
               aria-label="Not installed, Go to &quot;Builder > Publish&quot; to install"
-              class="bot-indicator quicky-title hint--bottom-right indicator-inactive"
+              class="indicator-inactive bot-indicator"
             ></div>
             <!-- <router-link to="/Scrip"></router-link> -->
             <div
               role="button"
               class="btn btn-default btn-form-card p-big-input t-black m-t-10"
-              @click="edit(botcounts)"
-            > <span> <a href="/Script">  Edit </a></span></div>
-
+              @click="edit(botcounts); isColor=!isColor"
+            >
+            <span> <a href="/Widget">  Edit </a></span> 
+            </div>
             <div role="button" class="btn btn-default btn-form-card">Responses</div>
             <div role="button" class="btn btn-default btn-form-card">Open</div>
             <a
@@ -108,14 +108,14 @@
               class="btn btn-default btn-form-card btn-float-top-2 quicky-title hint--bottom f-s-18"
               aria-label="Delete"
             >
-              <i class="ion-ios-trash-outline"></i>
+              <i class="fas fa-trash" @click="del(botcounts, index)"></i>
             </a>
             <a
               role="button"
               class="btn btn-default btn-form-card btn-float-top-1 quicky-title hint--bottom f-s-18"
               aria-label="Copy"
             >
-              <i class="ion-ios-copy-outline"></i>
+              <i class="fas fa-copy"></i>
             </a>
           </div>
         </div>
@@ -124,6 +124,7 @@
   </div>
 </template>
 <script>
+// import Swal from 'sweetalert2/dist/sweetalert2.js'
 import Vue from "vue";
 import VeeValidate from "vee-validate";
 import axios from "axios";
@@ -132,18 +133,20 @@ export default {
   data() {
     return {
       bot: [],
-      count: 0,
-      use: "",
-      isHidden: false,
-      isActive: false,
-      isShow: false,
-      isNo: false,
       url: "",
-      botcount: null,
-      userdetail: "",
-      activeIndex: undefined,
+      use: "",
       name: "",
-      showModal: false
+      count: 0,
+      userdetail: "",
+      isNo: false,
+      isShow: false,
+      botcount: null,
+      isActive: false,
+      isHidden: false,
+      showModal: false,
+      activeIndex: undefined,
+      used: [],
+      isColor: false
     };
   },
 
@@ -151,26 +154,26 @@ export default {
     {
       var user = JSON.parse(localStorage.getItem("id"));
       this.userid = user;
-      console.log("user_id", this.userid);
+      console.log("user-id", this.userid);
       axios
         .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
         .then(response =>
-          console.log("aassssssssss", (this.botcount = response.data))
+          console.log("bot-count", (this.botcount = response.data))
         );
     }
   },
   methods: {
     admin(event) {
       this.use = event.id;
-      console.log("sucess", this.use);
+      console.log("bot-id:", this.use);
     },
     someHandler(event) {
       this.use = event.id;
-      console.log("sucess", this.use);
+      console.log("success", this.use);
       let formData = new FormData();
 
       formData.append("templatename", this.name);
-      console.log("ssss", formData);
+      console.log("ssss", ...formData);
       axios
         .patch(
           "http://192.168.100.144:8001/api/bot/" + this.use + "/",
@@ -183,14 +186,17 @@ export default {
           }
         )
         .then(function(data) {
-          console.log("asa", data.data);
+          console.log("adddaaaa", data.data);
         })
         .catch(function() {
           console.log("FAILURE!!");
         });
-      setTimeout(function() {
-        location.reload(true);
-      }, 100);
+      axios
+        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .then(response =>
+          console.log("bot-name", (this.botcount = response.data))
+        );
+      this.name = "";
     },
     onChange(event) {
       this.userdetail = event.user;
@@ -201,12 +207,8 @@ export default {
       console.log(" sadsa", this.bot.push({ id: this.count++ }));
     },
     sub() {
-      console.log(
-        "success ,login user id",
-        JSON.parse(localStorage.getItem("id"))
-      );
-
-      var val = this.url;
+      console.log("login user id", JSON.parse(localStorage.getItem("id")));
+      let val = "http://" + this.url;
       console.log(val, "test");
       var regex = /^(https?:\/\/)?[a-z0-9-]*\.?[a-z0-9-]+\.[a-z0-9-]+(\/[^<>]*)?$/;
       var isValid = regex.test(val);
@@ -224,16 +226,23 @@ export default {
       (this.use = event.id), localStorage.setItem("bot_id", this.use);
       this.activeIndex = event;
       console.log("test", this.use);
+      // (this.isColor = !this.isColor);
+
       // this.$router.push("/Public");
+      axios
+        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .then(response =>
+          console.log("bot-count", (this.botcount = response.data))
+        );
     },
     asd() {
       // alert("asd");
       let formData = new FormData();
       let s = JSON.parse(localStorage.getItem("id"));
       console.log("id", s);
-      formData.append("website", this.url);
-      formData.append("user", s);
-      console.log("ssss", formData);
+      formData.append("website", "http://" + this.url);
+      formData.append("user_id", s);
+      console.log("ssss", ...formData);
       this.axios
         .post("http://192.168.100.144:8001/api/bot/", formData, {
           headers: {
@@ -247,9 +256,70 @@ export default {
         .catch(function() {
           console.log("FAILURE!!");
         });
-      setTimeout(function() {
-        location.reload(true);
-      }, 100);
+      this.axios
+        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .then(response =>
+          console.log("bot-count", (this.botcount = response.data))
+        );
+      this.url = "";
+
+    },
+    
+    del(event, id) {
+      this.use = event.id;
+      console.log("bot-deleted", this.use);
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Are you sure?",
+          text: "All questions and data collected by this bot will be deleted",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true
+        })
+        .then(result => {
+          if (result.value) {
+            swalWithBootstrapButtons.fire(
+              "Deleted!",
+              "Your Selected bot has been deleted.",
+              "success"
+            );
+            axios
+              .delete("http://192.168.100.144:8001/api/userbot/" + this.use + "/")
+              .then(response => {
+                this.used.splice(id, 1).push(response.data);
+                console.log(response.data, "used");
+                axios
+                  .get(
+                    "http://192.168.100.144:8001/api/userbot/" +
+                      this.userid +
+                      "/"
+                  )
+                  .then(response =>
+                    console.log("bot-delete", (this.botcount = response.data))
+                  );
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelled",
+              "Your bot is safe :)",
+              "error"
+            );
+          }
+        });
     }
   }
 };
@@ -298,10 +368,10 @@ body {
   cursor: pointer;
 }
 .t-blue {
-  color: #4051b4 !important;
+  color: #333 !important;
 }
 .t-blue:hover {
-  color: #4051b4 !important;
+  color: #2bbb5f !important;
 }
 .t-black {
   color: #333 !important;
@@ -310,7 +380,7 @@ body {
 }
 a:focus,
 a:hover {
-  color: #23527c;
+  color: #2bbb5f;
   text-decoration: underline;
 }
 a:active,
@@ -380,7 +450,7 @@ a:hover {
   top: 0;
   left: 20;
   width: 20%;
-  height: 20%;
+  height: 150px;
   background-color: gray;
   transition: opacity 0.3s ease;
 }
@@ -439,4 +509,23 @@ a:hover {
 .css {
   color: black;
 }
+.f-s-18 {
+  font-size: 13px;
+}
+.btn-form-card {
+  border: 1px solid #fff;
+}
+.btn-float-top-2 {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+}
+.btn-float-top-1 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+/* .available span {
+  
+} */
 </style>

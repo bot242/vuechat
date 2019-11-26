@@ -208,7 +208,7 @@
                   data-toggle="dropdown"
                 >
                   <div class="user-nav d-sm-flex d-none">
-                      <span class="user-name text-bold-600">{{ name }}</span>
+                    <span class="user-name text-bold-600">{{ name }}</span>
                   </div>
                   <span>
                     <img
@@ -225,11 +225,9 @@
                     <i class="fas fa-users-cog"></i> Edit Profile
                   </a>
                   <div class="dropdown-divider"></div>
-                 <span v-if="isLoggedIn">
-                    <a class="dropdown-item" @click="logout"> 
-                      <i class="fas fa-power-off"></i> Logout
-                    </a>
-                    </span>
+                  <a class="dropdown-item" @click="logout">
+                    <i class="fas fa-power-off"></i> Logout
+                  </a>
                 </div>
               </li>
             </ul>
@@ -249,6 +247,7 @@
               <!-- widget atb start -->
               <b-row title="widget-tab1">
                 <b-col cols="12" md="4" sm="6">
+                
                   <div class="details-slider mt-1 mb-2 ml-4">
                     Position
                     <i class="far fa-question-circle"></i>
@@ -271,7 +270,6 @@
                       v-bind:class="{red: isGreen}"
                     ></div>
                   </div>
-
                   <div class="r welcome mt-1 mb-2 ml-4">
                     Welcome Message
                     <i class="far fa-question-circle"></i>
@@ -294,20 +292,21 @@
                     ></div>
                     <div style="padding: 15px 9px 9px 15px;">
                       <slick ref="slick" :options="slickOptions" v-if="image.length">
-                        <div class="data1 uploadbg">
+                        <!-- <div class="data1 uploadbg">
                           <input
                             type="file"
                             class="ava-upload"
-                            @change="onFileChange"
-                            accept="image/*"
-                            style="width:90%;"
+                            id="file"
+                            ref="file"
+                            v-on:change="handleFileUpload()"
                           />
+
                           <i class="fas fa-plus-circle fa-5x"></i>
-                        </div>
+                        </div> -->
                         <div v-for="images in image" :key="images.id">
                           <img
                             v-bind:class="{'reds': activeIndex === images}"
-                            :src="images.avatar"
+                            :src="'http://192.168.100.144:8001/static/asset/avatar/'+images.image"
                             style="width:90%;"
                             @click="setImg(images)"
                           />
@@ -320,7 +319,7 @@
                     zoogle.chat Branding
                     <i class="far fa-question-circle"></i>
                   </div>
-                  <button v-on:click="widget()">Send</button>
+                  <button class="btn btn-blue form-big-input w-200" v-on:click="widget()">Update</button>
                   <modal name="hello-world">hello, world!</modal>
                 </b-col>
                 <b-col cols="12" md="8" sm="6">
@@ -330,36 +329,57 @@
                       <div class="float-left mr-1 indicator2"></div>
                       <div class="float-left indicator3"></div>
                     </div>
+
                     <div class="body1 ml-3 mr-3">
-                      <div>
-                        <span v-show="!isTrue"></span>
-                      </div>
-                      <div v-show="!isTrue" class="chat11">
-                        <span v-show="!isM">
-                          <img class="padrig1" :src="outputImg" :id="outputId" />
-                        </span>
-                        <span v-show="!isQ">
-                          <img class="padrig1" v-if="url" :src="url" />
-                        </span>
-                        <p class="chatname" style="float: right;   box-shadow: 0 0 10px;">{{msg}}</p>
-                      </div>
-                      <div v-show="!isChat" class="chat22">
-                        <span v-show="!isM">
-                          <img class="padrig2" :src="outputImg" :id="outputId" />
-                        </span>
-                        <span v-show="!isQ">
-                          <img class="padrig1" v-if="url" :src="url" />
-                        </span>
-                        <p class="chatname1" style="float: right;   box-shadow: 0 0 10px;">{{msg}}</p>
-                      </div>
-                      <div v-show="!isIcon" class="chat33">
-                        <span v-show="!isM">
-                          <img class="padrig3" :src="outputImg" :id="outputId" />
-                        </span>
-                        <span v-show="!isQ">
-                          <img class="padrig3" v-if="url" :src="url" />
-                        </span>
-                        <p class="chatname" style="float: left;   box-shadow: 0 0 10px;">{{msg}}</p>
+                      <div v-for="bot in botcount" :key="bot.id">
+                        <div v-for="full in all" :key="full.img">
+                          <span v-if="bot.pos_change==='!isTrue'">
+                            <div v-show="bot.pos_change" class="chat11">
+                              <span v-show="bot.img_modal">
+                                <img class="padrig1" :src="full.img" :id="outputId" />
+                              </span>
+                              
+                              <span v-show="!isQ">
+                                <img class="padrig1" v-if="url" :src="url" />
+                              </span>
+                              <p
+                                class="chatname"
+                                style="float: right;   box-shadow: 0 0 10px;"
+                              >{{bot.message}}</p>
+                            </div>
+                          </span>
+
+                          <span v-if="bot.pos_change==='!isChat'">
+                            <div v-show="bot.pos_change" class="chat22">
+                              <span v-show="bot.img_modal">
+                                <img class="padrig2" :src="full.img" :id="outputId" />
+                              </span>
+                              <span v-show="!isQ">
+                                <img class="padrig1" v-if="url" :src="url" />
+                              </span>
+                              <p
+                                class="chatname1"
+                                style="float: right;   box-shadow: 0 0 10px;"
+                              >{{bot.message}}</p>
+                            </div>
+                          </span>
+
+                          <span v-if="bot.pos_change==='!isIcon'">
+                            <div v-show="bot.pos_change" class="chat33">
+                              <span v-show="bot.img_modal">
+                                <img class="padrig3" :src="full.img" :id="outputId" />
+                              </span>
+
+                              <span v-show="!isQ">
+                                <img class="padrig3" v-if="url" :src="url" />
+                              </span>
+                              <p
+                                class="chatname"
+                                style="float: left;   box-shadow: 0 0 10px;"
+                              >{{bot.message}}</p>
+                            </div>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -373,9 +393,6 @@
     </div>
   </div>
   <!-- END: Content-->
-
-  <!-- <div class="sidenav-overlay"></div>
-  <div class="drag-target"></div>-->
 
   <!-- BEGIN: Footer-->
   <footer class="footer footer-static footer-light">
@@ -412,19 +429,22 @@ export default {
   components: {
     Slick
   },
-   computed : {
-      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
-    },
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
 
   data() {
     return {
+      all: [],
+      botcount: [],
       isHidden: false,
       isShow: false,
       isTrue: true,
       isChat: true,
       isIcon: true,
       msg: "Chat now",
-      user: "2",
       isQ: true,
       isM: true,
       isActive: false,
@@ -448,7 +468,11 @@ export default {
         draggable: true,
         edgeFriction: 0.3,
         swipe: true,
-        name:''
+        name: "",
+        gt: "",
+        file: "",
+        avimg: "",
+        api: []
       }
     };
   },
@@ -464,49 +488,106 @@ export default {
       };
     }
   },
-    created(){
-    let a= localStorage.getItem('all')
-    this.name=a
-    console.log('na',this.name)
+  created() {
+    let a = localStorage.getItem("all");
+    this.name = a;
   },
   mounted() {
     this.getTasks(); // Call our getTasks function below
+    this.getvalues();
   },
   methods: {
-      logout: function () {
-        this.$store.dispatch('logout')
-        
+    logout: function() {
+      this.$store
+        .dispatch("logout")
+
         .then(() => {
-          this.$router.push('/login')
-        })
-      },
+          this.$router.push("/login");
+        });
+    },
     getTasks() {
+      let d = localStorage.getItem("id");
       axios({
         method: "get",
-        url: "http://192.168.100.144:8001/api/avatar/",
+        url: "http://192.168.100.144:8001/api/avatarimageupload/" + d + "/",
         auth: {}
-      }).then(response => console.log((this.image = response.data)));
+      }).then(response => {
+        this.image = response.data;
+        let c = response.data[0].image;
+        this.avimg = "http://192.168.100.144:8001/static/asset/avatar/" + c;
+        let mains = response.data[0].img_modal;
+        // this.pos =response.data[0].
+        this.api.push("looy", avimg);
+        console.log("api", this.api);
+      });
     },
     widget() {
-      
+      var user = JSON.parse(localStorage.getItem("id"));
+      this.userid = user;
+      let bid=localStorage.getItem('bot_id')
+      let img = localStorage.getItem("img_id");
+      console.log('asdas',img)
       let formData = new FormData();
       formData.append("position", this.as);
       formData.append("message", this.msg);
-      formData.append("avatar", this.outputId);
-      formData.append("user", this.user);
-      console.log("ssss",...formData);
+      formData.append("avatar", img);
+      formData.append("user", this.userid);
+      formData.append('bot',bid)
+      console.log("ssss", ...formData);
       this.axios
-        .post("http://192.168.100.144:8001/api/widget/", formData, {
+        .put("http://192.168.100.144:8001/api/widget/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Content-Type": "application/json"
           }
         })
-        .then(function(data) {
-          console.log(data.data);
+       .then(function(data) {
+          console.log("asa", data.data);
+          this.getvalues()
         })
-        .catch(function() {
-          console.log("FAILURE!!");
+        .catch(function(e) {
+          console.log("FAILURE!!",e);
+        });
+      // setTimeout(function() {
+      //   location.reload(true);
+      // }, 10);
+      
+      // location.reload()
+ 
+      //   .then(function(data) {
+      //     console.log(data.data, "sucess");
+      //   });
+        
+      // console.log("enter");
+      // this.loading = false;
+      //   this.getvalues();
+      // console.log("leave");
+     
+    },
+  
+    
+    getvalues() {
+      var user = JSON.parse(localStorage.getItem("id"));
+      this.userid = user;
+      let bid=localStorage.getItem('bot_id');
+      this.axios
+        .get(
+          "http://192.168.100.144:8001/api/widgetdetails/" + this.userid +"/"+ bid +"/"
+        )
+        .then(response => {
+          this.botcount = response.data;
+
+          console.log("get bot  ", this.botcount);
+          this.msg = response.data[0].message;
+          let c = response.data[0].avatar_name;
+          console.log('img',c)
+          this.gt = "http://192.168.100.144:8001/static/asset/avatar/" + c;
+          let get = this.gt;
+          console.log("kjlkh", this.gt);
+
+          let main = { img: get };
+          this.all.push(main);
+
         });
     },
 
@@ -515,12 +596,13 @@ export default {
         (this.isChat = true),
         (this.isIcon = true),
         (this.isActive = !this.isActive);
-      (this.isColor = false), (this.isGreen = false);
+      (this.isColor = false), 
+      (this.isGreen = false);
       if (this.isTrue === false) {
         var asa = "Left";
         this.as = asa;
-        console.log("sdda", this.as);
-        console.log("msg", this.msg);
+        // console.log("sdda", this.as);
+        // console.log("msg", this.msg);
       }
     },
     isCenter() {
@@ -533,8 +615,6 @@ export default {
       if (this.isChat === false) {
         var asa = "Center";
         this.as = asa;
-        console.log("sdda", this.as);
-        console.log("msg", this.msg);
       }
     },
     isRight() {
@@ -547,27 +627,42 @@ export default {
       if (this.isIcon === false) {
         var asa = "Right";
         this.as = asa;
-        console.log("sdda", this.as);
-        console.log("msg", this.msg);
       }
     },
-    onFileChange(e) {
-      const file = e.target.files[0];
-      this.url = URL.createObjectURL(file);
-      (this.isQ = false), (this.isM = true), this.newOutput.push(this.images);
-    },
+    // handleFileUpload() {
+    //   this.file = this.$refs.file.files[0];
+    //   console.log(this.file);
+    //   let formData = new FormData();
+    //   let a = localStorage.getItem('id')
+    //   formData.append("image", this.file);
+    //   formData.append("user", a);
+    //   console.log("test", ...formData);
+    //   axios
+    //     .post("http://192.168.100.144:8001/api/imageupload/", formData, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data"
+    //       }
+    //     })
+    //     .then(function() {
+    //       console.log("SUCCESS!! full");
+    //     })
+    //     .catch(function() {
+    //       console.log("FAILURE!!");
+    //     });
+    // },
     setImg(event) {
       (this.outputId = event.id),
-        (this.outputImg = event.avatar),
+        (this.outputImg = event.image),
         (this.isQ = true),
         (this.isM = false);
       {
         this.activeIndex = event;
       }
       console.log("test", this.outputImg);
-      console.log("sumbmit", this.outputId);
+      localStorage.setItem("img_id", this.outputId);
+      localStorage.setItem("img", this.outputImg);
+      console.log("id", this.outputId);
     },
-
     next() {
       this.$refs.slick.next();
     },
@@ -767,5 +862,13 @@ body.vertical-layout.vertical-menu-modern.menu-expanded
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
   transition: -webkit-transform 0.2s ease-in-out;
+}
+.btn-blue {
+  background-color: #0647a5;
+  border-color: #0647a5;
+  color: #fff;
+}
+.btn-blue:hover {
+  color: #fff;
 }
 </style>

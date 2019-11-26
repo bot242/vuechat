@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import 'bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import BootstrapVue from "bootstrap-vue"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 import 'slick-carousel';
@@ -24,7 +24,7 @@ import store from './store';
 import Axios from 'axios'
 import rawDisplayer from './components/rawDisplayer'
 
-
+library.add(faCoffee)
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {

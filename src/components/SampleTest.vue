@@ -8,11 +8,11 @@
         :group="{ name: 'people', pull: 'clone', put: false }"
         @change="log"
       > -->
-      <button @click="simple1"> Add</button>
-      <button @click="simple2"> Add</button>
-      <button @click="simple3"> Add</button>
-      <button @click="simple4"> Add</button>
-      <button @click="simple5"> Add</button>
+    <button @click="simple1" id="1"> Message</button>
+    <button @click="simple2" id="2"> Text</button>
+    <button @click="simple3" id="3"> Date</button>
+    <button @click="simple4" id="4"> List</button>
+    <button @click="simple5" id="5"> Link</button>  
 
 
         <div
@@ -33,22 +33,31 @@
         group="people"
         @change="log"
       > -->
-        <div class="list-group-item" v-for="element in list2" :key="element.name" >
+     <div v-for=" get in all" :key="get.id">
+        <div class="list-group-item" >
           <div class="item">
                     <div class="item-question showhim">
                       <div class="toolbar-header showme">
                         <div class="toolbar-header-buttons">
+                          
                           <div
                             class="btn is-isolated btn-school hint--bottom change"
                             aria-label="Edit"
                           >
-                            <i class="fas fa-pen" @click=" runMethod (s)"></i>
+                                                      <i :class="[faClass(get.fieldicon)]" style="width:auto"></i>
+
+                             {{ get.field }}
+                              
+                            
+                            <i class="fas fa-pen"  @click="$emit(showModal=true)"></i>    
+                                                  
+                          
                           </div>
                           <div
                             class="btn is-isolated btn-school arrow-btn hint--bottom change"
                             aria-label="Drag to Move"
                           >
-                             <i :class="value"></i>                            
+                                                      
                           </div>
                           <div
                             class="btn is-isolated btn-school hint--bottom change delete"
@@ -58,11 +67,11 @@
                           </div>
                         </div>
                       </div>
-                      <i class="fas fa-quote-left"></i>
+                     
                     </div>
                   </div>
-          {{ element.name }}
         </div>
+     </div>
         <div v-if="showModal">
                   <div class="modal-mask">
                     <div class="edit-form">
@@ -71,7 +80,6 @@
                         @click="showModal=false"
                         style="margin-top: 15px;margin-right: 15px;"
                       >Done</button>
-                      <Ranging />
                     </div>
                   </div>
                 </div>
@@ -80,9 +88,7 @@
       <!-- </draggable> -->
     </div>
 
-    <rawDisplayer class="col-3" :value="list1" title="List 1" />
 
-    <rawDisplayer class="col-3" :value="list2" title="List 2" />
   </div>
 </template>
 
@@ -98,67 +104,296 @@ export default {
   data() {
     return {
       count:0,
-      list1: [
-        { name: "John", id: 1 },
-        { name: "Joao", id: 2 },
-        { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 }
-      ],
-      list2: [
-        { name: "Juan", id: 5 },
-        { name: "Edgard", id: 6 },
-        { name: "Johnson", id: 7 }
-      ],
+
+      list2: [],
       showModal: false,
       value:'',
-      s:"showModal"
+      botcount:[],
+      all:'',
+      loading: false
+
+    
+     
+      
     };
   },
-  created(){
-let a= "fas fa-expand-arrows-alt"
-this.value=a
-
-  },
-  methods: {
-    
-runMethod (method) {
-  this[method]()
+mounted(){
+  let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+  this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .then(response =>{this.all = response.data}                
+      );
 },
-
+  methods: {    
     log: function(evt) {
       window.console.log(evt);
     },
- 
+  faClass(icon) {
+            return `fas fa-${icon}`;
+          },
   simple1() {
+
     let a = this.count ++
-    console.log('***',a)
-    let main ={ name:'jon',id: a ,icon:this.s}
-    this.list2.push(main)
+    console.log('id',a)
+    let field="1"
+     
+     let name ="Message"
+     let ico='http://192.168.100.144:8001/api/messageicon/1/'
+      a=[]  
+      let holder = "Select"
+      pos = "1"
+      let ecos = 0      
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1" 
+      let pos = "1"   
+      
+let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      }; 
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then(function(data) {
+        console.log("post-result3", data.data);
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });
+      this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+       .then(response =>{ this.loading = false;this.all = response.data}
+       
+      );
+
   },
   simple2() {
-    let a = this.count ++
-    console.log('***',a)
-    let main ={ name:'sam',id: a}
-    this.list2.push(main)
+   let a = this.count ++
+    console.log('id',a)
+    let field="2"
+     
+     let name ="TextQuestion"
+     let ico='http://192.168.100.144:8001/api/messageicon/2/'
+      a=[]  
+      let holder = "Select"
+      pos = "2"
+      let ecos = 0      
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1" 
+      let pos = "1"   
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      }; 
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then(function(data) {
+        console.log("post-result3", data.data);
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });   
+      this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .then(response =>{this.loading = false;this.all = response.data}
+      );
+      
   },
   simple3() {
-    let a = this.count ++
-    console.log('***',a)
-    let main ={ name:'don',id: a}
-    this.list2.push(main)
-    console.log("####",this.list2)
+   let a = this.count ++
+    console.log('id',a)
+    let field="5"
+     
+     let name ="Date"
+     let ico='http://192.168.100.144:8001/api/messageicon/5/'
+      a=[]  
+      let holder = "Select"
+      pos = "2"
+      let ecos = 0      
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1" 
+      let pos = "1"   
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      }; 
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then(function(data) {
+        console.log("post-result3", data.data);
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });
+      this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .then(response =>{this.loading = false;this.all = response.data}               
+      );
   },
   simple4() {
-    let a = this.count ++
-    console.log('***',a)
-    let main ={ name:'fun',id: a}
-    this.list2.push(main)
+ let a = this.count ++
+    console.log('id',a)
+    let field="8"
+     
+     let name ="List"
+     let ico='http://192.168.100.144:8001/api/messageicon/8/'
+      a=[]  
+      let holder = "Select"
+      pos = "2"
+      let ecos = 0      
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1" 
+      let pos = "1"   
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      }; 
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then(function(data) {
+        console.log("post-result3", data.data);
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });
+      this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .then(response =>{this.all = response.data 
+      
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}              
+      );
   },
   simple5() {
-    let a = this.count ++
-    console.log('***',a)
-    let main ={ name:'bun',id: a}
-    this.list2.push(main)
+ let a = this.count ++
+    console.log('id',a)
+    let field="13"
+     
+     let name ="Links"
+     let ico='http://192.168.100.144:8001/api/messageicon/13/'
+      a=[]  
+      let holder = "Select"
+      pos = "2"
+      let ecos = 0      
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1" 
+      let pos = "1"   
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      }; 
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then(function(data) {
+        console.log("post-result3", data.data);
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });
+      this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .then(response =>{this.all = response.data 
+     let s=this.all
+      console.log('send',s)
+      // if (name==s)
+      let a=response.data[0].fieldicon;
+      console.log('value',a)
+      }               
+      );
   },
    }
 };

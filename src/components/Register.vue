@@ -28,6 +28,10 @@
                                                         <input type="text" id="inputName" class="form-control" v-model="name" placeholder="Name" required>
                                                         <label for="inputName">Name</label>
                                                     </div>
+                                                    <span v-if="this.v==='already'">
+                                                    <p style="color:red;">* user name already exist</p>
+
+                                                    </span>
                                                     <div class="form-label-group">
                                                         <input type="email" id="inputEmail" class="form-control" v-model="mail" placeholder="Email" required>
                                                         <label for="inputEmail">Email</label>
@@ -70,7 +74,8 @@
         name: "",
         mail:"",
         pass:"",
-        is_admin : null
+        is_admin : null,
+        v:''
       }
     },
       methods: {
@@ -82,7 +87,9 @@
         }
         this.$store.dispatch('register', data)
        .then(() => this.$router.push('/login'))
-       .catch(err => console.log(err))
+       .catch(err => {this.v="already"
+
+       })
       }
     }
   }
