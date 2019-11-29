@@ -230,7 +230,7 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     <span v-if="isLoggedIn">
-                    <a class="dropdown-item" @click="logout">
+                    <a class="dropdown-item" @click="logout"> 
                       <i class="fas fa-power-off"></i> Logout
                     </a>
                     </span>
@@ -249,7 +249,7 @@
             <div class="content-header row"></div>
             <div class="content-body">
               <div class="app-content-overlay"></div>
-              <div class="email-app-area">
+              <div class="email-app-area"> 
                 <Scrip/>
               </div>
             </div>
@@ -309,7 +309,7 @@ name:''
   methods: {
     logout: function () {
         this.$store.dispatch('logout')
-
+        
         .then(() => {
           this.$router.push('/login')
         })

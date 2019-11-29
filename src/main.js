@@ -3,10 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// import 'bootstrap'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import BootstrapVue from "bootstrap-vue"
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -22,6 +24,7 @@ import store from './store';
 import Axios from 'axios'
 import rawDisplayer from './components/rawDisplayer'
 
+
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {
@@ -30,10 +33,10 @@ if (token) {
 Vue.component(SidebarPlugin.name, SidebarComponent);
 Vue.use(ToggleButton)
 Vue.use( CKEditor );
-Vue.use(VModal);
-Vue.use(BootstrapVue);
+Vue.use(VModal)
 Vue.use(VueAxios, axios)
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.use(BootstrapVue);
 Vue.config.productionTip = false
 Vue.use(VueSidebarMenu)
 Vue.component("rawDisplayer", rawDisplayer);

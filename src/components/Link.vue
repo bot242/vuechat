@@ -138,9 +138,11 @@ export default {
            this.data=event;
            console.log("==>",this.data)
           this.$emit('changedata',this.data)
-
+           
      },
-     addSel() {
+    onChangeEventHandler() {
+      alert("hi");
+    },addSel() {
       this.sel.push({});
     },
      deleteSel(link) {

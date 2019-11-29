@@ -1125,11 +1125,11 @@ this.axios
 }
 .form-builder .form-builder-preview {
   position: relative;
-  width: 120%;
+  width: 100%;
   border-radius: 3px;
   background: #fff;
   padding: 10px;
-  min-height: 650px;
+  min-height: 500px;
   float: right;
   margin-top: 11px;
   overflow: auto;
@@ -1142,6 +1142,7 @@ this.axios
   border-radius: 10px;
   border: 1px solid #ccc;
   background: rgb(212, 211, 212);
+  padding-bottom: 10px;
   float: left;
 }
 .item-question {
@@ -1220,6 +1221,7 @@ this.axios
 .main {
   width: 85%;
   padding-left: 2%;
+  
 }
 .change {
   padding-left: 0px !important;
