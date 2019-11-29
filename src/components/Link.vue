@@ -10,7 +10,7 @@
         <b>Chat Message</b>
       </div>
       <div class="form-group" style="top:10px">
-                  <ckeditor :editor="linkeditor" v-model="linkdata" :config="editorConfig"></ckeditor>
+                  <ckeditor @input="oncheange(linkdata)" :editor="linkeditor" v-model="linkdata" :config="editorConfig"></ckeditor>
 
       </div>
       <div class="form-group">
@@ -134,6 +134,12 @@ export default {
     };
   },
   methods: {
+    oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+           
+     },
     onChangeEventHandler() {
       alert("hi");
     },addSel() {

@@ -55,7 +55,7 @@
                               get.showmodal=='showDate: true'|| get.showmodal=='showList: true'||
                               get.showmodal=='showLink: true'"
                                class="fas fa-pen" ref="{{key}}"  
-                              @click="open(get,i)"></i>   
+                              @click="open(get,i)" ></i>   
                              </p>
                              
                             
@@ -70,7 +70,7 @@
                           </div>
                           <div
                             class="btn is-isolated btn-school hint--bottom change delete"
-                            aria-label="Delete"
+                            aria-label="Delete"   @click="deletedata(get.id)"
                           >
                             <i class="fas fa-trash-alt"></i>
                           </div>
@@ -82,7 +82,7 @@
         </div>
      </div>
     
-     <b-modal id="modal-1" >
+     <b-modal id="modal-1"  @ok="handleOk">
     <div class="d-block">Edit box</div>
   {{msg}}
     <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
@@ -170,7 +170,11 @@ export default {
     };
   },
 mounted(){
-  let id=localStorage.getItem('id')
+  this.init()
+},
+  methods: {   
+    init(){
+let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
   this.axios
@@ -180,8 +184,8 @@ mounted(){
       }   
 
       );
-},
-  methods: {    
+    }
+    , 
     log: function(evt) {
       window.console.log(evt);
     },
@@ -198,6 +202,43 @@ mounted(){
 
               this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
              
+          },
+           handleOk(bvModalEvt) {
+        // Prevent modal from closing
+         console.log("working success",bvModalEvt)
+         this.axios.get('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/')
+         .then(res=>{
+           console.log(res.data,this.currentdata.id)
+           let obj=res.data
+           obj.placeholder = this.msg;
+           console.log(obj)
+           this.axios.patch('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/',obj)
+         .then(res=>{
+           console.log("success res ==>",res.data)
+           this.init()
+this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
+           
+             
+         }).catch(e=>{
+           alert("unable to get server")
+         })
+         
+         }).catch(e=>{
+           alert("unable to get server")
+         })
+          
+      
+        },
+          deletedata(id){
+              
+              console.log("working success",id)
+              this.axios.delete('http://192.168.100.144:8001/api/script/'+id+'/')
+              .then(res=>{
+                console.log("deleted",res)
+                this.init()
+              }).catch(e=>{
+           alert("unable to get server")
+         })
           },
   simple1() {
 
