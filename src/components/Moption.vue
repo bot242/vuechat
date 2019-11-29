@@ -11,7 +11,7 @@
       </div>
      <div class="form-group" style="top:10px">
 
-      <ckeditor :editor="optioneditor" v-model="optiondata" :config="editorConfig"></ckeditor>
+      <ckeditor  @input="oncheange(optiondata)" :editor="optioneditor" v-model="optiondata" :config="editorConfig"></ckeditor>
             </div>
 
       <div class="form-check">
@@ -64,9 +64,12 @@ export default {
     };
   },
   methods: {
-    onChangeEventHandler() {
-      alert("hi");
-    },
+    oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+
+     },
     addMcho() {
       this.mcho.push({});
     },

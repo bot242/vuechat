@@ -9,7 +9,7 @@
       <div class="form-group">
         <b>Chat Message</b>
       </div>
-      <ckeditor :editor="dateeditor" v-model="datedata" :config="editorConfig"></ckeditor>
+      <ckeditor @input="oncheange(datedata)" :editor="dateeditor" v-model="datedata" :config="editorConfig"></ckeditor>
 
       <div class="form-group"></div>
       <div class="form-check">
@@ -56,7 +56,14 @@ export default {
   methods: {
     onChangeEventHandler() {
       alert("hi");
-    }
+    },
+ oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+           
+     },    
+
   }
 };
 </script>

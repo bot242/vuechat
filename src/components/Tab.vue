@@ -64,7 +64,7 @@
         </div>
       </div>
     </b-tab>
-   <Scrip/>
+   <!-- <Scrip/> -->
       <Public/>
 
     
@@ -76,7 +76,7 @@ import WidgetTab from "./WidgetTab";
 import LandingPage from "./LandingPage";
 import Embed from "./Embed";
 import Public from "./Public";
-import Scrip from "./Scrip";
+// import Scrip from "./Scrip";
 export default {
   name: "Tab",
   components: {
@@ -84,7 +84,7 @@ export default {
     LandingPage,
     Embed,
     Public,
-    Scrip,
+    // Scrip,
   },
   data() {
     return {};

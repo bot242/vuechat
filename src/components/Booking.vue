@@ -10,7 +10,7 @@
         <b>Chat Message</b>
       </div>
       <div class="form-group" style="top:10px">
-        <ckeditor :editor="bookeditor" v-model="bookdata" :config="editorConfig"></ckeditor>
+        <ckeditor @input="oncheange(bookdata)" :editor="bookeditor" v-model="bookdata" :config="editorConfig"></ckeditor>
       </div>
       <div class="form-check">
         <span>
@@ -154,9 +154,12 @@ export default {
     };
   },
   methods: {
-    onChangeEventHandler() {
-      alert("hi");
-    }
+    oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+
+     }
   }
 };
 </script>

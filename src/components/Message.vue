@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <div>
-          <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+          <ckeditor @input="oncheange(editorData)" :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
         </div>
       </div>
     </form>
@@ -27,8 +27,17 @@ export default {
     return {
       editor: ClassicEditor,
       editorData: "",
-      editorConfig: {}
-    };
-  }
+      editorConfig: {},
+      data:''
+    }; 
+  },
+   methods:{
+     oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+           
+     }
+   }
 };
 </script>

@@ -247,7 +247,7 @@
               <!-- widget atb start -->
               <b-row title="widget-tab1">
                 <b-col cols="12" md="4" sm="6">
-                
+
                   <div class="details-slider mt-1 mb-2 ml-4">
                     Position
                     <i class="far fa-question-circle"></i>
@@ -338,7 +338,7 @@
                               <span v-show="bot.img_modal">
                                 <img class="padrig1" :src="full.img" :id="outputId" />
                               </span>
-                              
+
                               <span v-show="!isQ">
                                 <img class="padrig1" v-if="url" :src="url" />
                               </span>
@@ -438,7 +438,7 @@ export default {
   data() {
     return {
       all: [],
-      botcount: [],
+      botcount: "",
       isHidden: false,
       isShow: false,
       isTrue: true,
@@ -541,32 +541,33 @@ export default {
             "Content-Type": "application/json"
           }
         })
-       .then(function(data) {
+       .then((data) =>{
           console.log("asa", data.data);
-          this.getvalues()
+           this.getvalues();
         })
-        .catch(function(e) {
-          console.log("FAILURE!!",e);
+        .catch((e)=> {
+          console.log("FAILURE!!");
         });
       // setTimeout(function() {
       //   location.reload(true);
       // }, 10);
-      
+
       // location.reload()
- 
+
       //   .then(function(data) {
       //     console.log(data.data, "sucess");
       //   });
-        
+
       // console.log("enter");
       // this.loading = false;
       //   this.getvalues();
       // console.log("leave");
-     
+
     },
-  
-    
-    getvalues() {
+
+
+    getvalues:function() {
+      this.all=[]
       var user = JSON.parse(localStorage.getItem("id"));
       this.userid = user;
       let bid=localStorage.getItem('bot_id');
@@ -596,7 +597,7 @@ export default {
         (this.isChat = true),
         (this.isIcon = true),
         (this.isActive = !this.isActive);
-      (this.isColor = false), 
+      (this.isColor = false),
       (this.isGreen = false);
       if (this.isTrue === false) {
         var asa = "Left";
