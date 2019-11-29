@@ -1,0 +1,226 @@
+<template>
+  <div class="row">
+    <div class="col-3">
+      <h3>Draggable 1</h3>
+      <!-- <draggable
+        class="dragArea list-group"
+        :list="list1"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        @change="log"
+      > -->
+      <button @click="simple1"> Add</button>
+      <button @click="simple2"> Add</button>
+      <button @click="simple3"> Add</button>
+      <button @click="simple4"> Add</button>
+      <button @click="simple5"> Add</button>
+
+
+        <div
+          class="card-shadow question-list s"
+          v-for="element in list1"
+          :key="element.name"
+        >
+          {{ element.name }}
+        </div>
+      <!-- </draggable> -->
+    </div>
+
+    <div class="col-3">
+      <h3>Draggable 2</h3>
+      <!-- <draggable
+        class="dragArea list-group"
+        :list="list2"
+        group="people"
+        @change="log"
+      > -->
+     
+        <div class="list-group-item" v-for="element in list2" :key="element.id" >
+          <div class="item">
+            <!-- {{ element.name }} -->
+                    <div class="item-question showhim">
+                      <div class="toolbar-header showme">
+                        <div class="toolbar-header-buttons">
+                          <div
+                            class="btn is-isolated btn-school hint--bottom change"
+                            aria-label="Edit"
+                          >
+                          <div v-for=" botcounts in botcount" :key="botcounts.id">
+                            <span v-if="botcounts.field===element.name">
+                              <!-- {{ botcounts.field }} -->
+                            
+                            <i class="fas fa-pen"  @click="$emit(showModal=true)"></i>    
+                            </span>                      
+                          </div>
+                          </div>
+                          <div
+                            class="btn is-isolated btn-school arrow-btn hint--bottom change"
+                            aria-label="Drag to Move"
+                          >
+                                                      
+                          </div>
+                          <div
+                            class="btn is-isolated btn-school hint--bottom change delete"
+                            aria-label="Delete"
+                          >
+                            <i class="fas fa-trash-alt"></i>
+                          </div>
+                        </div>
+                      </div>
+                       <i :class="value"> </i>
+                    </div>
+                  </div>
+          {{ element.name }}
+        </div>
+        <div v-if="showModal">
+                  <div class="modal-mask">
+                    <div class="edit-form">
+                      <button
+                        class="pull-right btn btn-success float-right"
+                        @click="showModal=false"
+                        style="margin-top: 15px;margin-right: 15px;"
+                      >Done</button>
+                    </div>
+                  </div>
+                </div>
+        
+
+      <!-- </draggable> -->
+    </div>
+
+    <rawDisplayer class="col-3" :value="list1" title="List 1" />
+
+    <rawDisplayer class="col-3" :value="list2" title="List 2" />
+  </div>
+</template>
+
+<script>
+import draggable from "vuedraggable";
+export default {
+  name: "clone",
+  display: "Clone",
+  order: 2,
+  components: {
+    draggable
+  },
+  data() {
+    return {
+      count:0,
+      list1: [
+        { name: "John", id: 1 },
+        { name: "Joao", id: 2 },
+        { name: "Jean", id: 3 },
+        { name: "Gerard", id: 4 }
+      ],
+      list2: [],
+      showModal: false,
+      value:'',
+      botcount:[]
+      
+    };
+  },
+  created(){
+
+
+
+// const EVENTS = [
+//       {name: showModal=true, callback: () => console.log('event1')},
+//       {name: 'my-event2', callback: () => console.log('event2')},
+//       {name: 'my-event3', callback: () => console.log('event3')}
+//     ]
+
+//     for (let e of EVENTS) {
+//       this.$on(e.name, e.callback); // Add event listeners
+//     } 
+  },
+
+
+ mounted(){
+   let obj=JSON.parse("1")
+   console.log('s',obj)
+   this.axios
+          .get("http://192.168.100.144:8001/api/messageicon/")        
+          
+           .then(response =>
+          console.log("aassssssssss", (this.botcount = response.data)),
+        );
+       
+ },   
+  methods: {    
+    log: function(evt) {
+      window.console.log(evt);
+    },
+ 
+  simple1() {
+
+    let a = this.count ++
+    let main ={ name:'Message',id: a,icon:'fas fa-quote-left'}
+    this.list2.push(main)
+    console.log("list",JSON.stringify(this.list2)) 
+     this.botcount.forEach(res => {
+       let icon = res.fieldicon
+let full=icon
+let dicon='fas fa-quote-left'
+if (full===dicon){
+ this.value=full
+console.log('value',this.value)
+
+}
+     });
+  },
+  simple2() {
+    let a = this.count ++
+    console.log('***',a)
+    let main ={ name:'TextQuestion',id: a,icon:'fas fa-comment-alt'}
+    this.list2.push(main)
+        this.list2.forEach(res=>{
+       let c =res.icon
+       console.log(c,'c')
+       localStorage.setItem('icon',c)
+})
+    this.botcount.forEach(res => {
+       let icon = res.fieldicon
+let full=icon
+let dicon= 'fas fa-comment-alt'
+if (full===dicon){
+ this.value=full
+console.log('value',this.value)
+}
+
+     });
+  },
+  simple3() {
+    let a = this.count ++
+    console.log('***',a)
+    let main ={ name:'don',id: a}
+    this.list2.push(main)
+    console.log("####",this.list2)
+  },
+  simple4() {
+    let a = this.count ++
+    console.log('***',a)
+    let main ={ name:'fun',id: a}
+    this.list2.push(main)
+  },
+  simple5() {
+    let a = this.count ++
+    console.log('***',a)
+    let main ={ name:'bun',id: a}
+    this.list2.push(main)
+  },
+   }
+};
+</script>
+<style scoped> 
+.s{
+    cursor: pointer;
+  float: left;
+  width: 100%;
+  margin: 1%;
+  list-style: none;
+  padding: 10px 5px;
+  background: #fff;
+  border-radius: 3px;
+  margin-bottom: 5%;
+}
+
+</style>

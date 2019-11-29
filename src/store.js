@@ -32,7 +32,7 @@ export default new Vuex.Store({
         console.log('user',user)
         return new Promise((resolve, reject) => {
           commit('auth_request')
-          axios({url: 'http://192.168.100.144:8002/api/api-token-auth/', data: user, method: 'POST' })
+          axios({url: 'http://192.168.100.144:8001/api/api-token-auth/', data: user, method: 'POST' })
           .then(resp => {
             const token = JSON.stringify(resp.data.token)
             const user = JSON.stringify(resp.data.id)
@@ -56,7 +56,7 @@ export default new Vuex.Store({
     register({commit}, user){
         return new Promise((resolve, reject) => {
           commit('auth_request')
-          axios({url: 'http://192.168.100.144:8002/api/user/', data: user, method: 'POST' })
+          axios({url: 'http://192.168.100.144:8001/api/user/', data: user, method: 'POST' })
           .then(resp => {
             const token = resp.data.token
             const user = JSON.stringify(resp.data.username)

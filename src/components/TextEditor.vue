@@ -11,7 +11,7 @@
                             <div class="form-group">
                               <b>Chat Message</b>
                             </div>
-                                <ckeditor :editor="texteditor" v-model="textdata" :config="editorConfig"></ckeditor>
+                                <ckeditor  @input="oncheange(textdata)" :editor="texteditor" v-model="textdata" :config="editorConfig"></ckeditor>
 
                             <div class="form-group">
                               <!-- <TextEditor/> -->
@@ -50,6 +50,12 @@ export default {
     onChangeEventHandler() {
       alert("hi");
     },
+    oncheange(event){
+           this.data=event;
+           console.log("==>",this.data)
+          this.$emit('changedata',this.data)
+           
+     },
   }
 }
 </script>

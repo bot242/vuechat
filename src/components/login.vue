@@ -32,7 +32,9 @@
                                                          </div>
                                                         <label for="user-name">Username</label>
                                                     </fieldset>
-
+                                                    <span v-if="this.v==='fail'">
+                                                        <p style="color:red;">* user name or password doesn't match</p>
+                                                    </span>
                                                     <fieldset class="form-label-group position-relative has-icon-left">
                                                         <input type="password" required v-model="password" class="form-control" id="user-password" placeholder="Password" >
                                                         <div class="form-control-position">
@@ -41,6 +43,10 @@
                                                         <label for="user-password">Password</label>
                                                     </fieldset>
                                                  
+                                                        
+                                                 
+                                                
+
                                                     <a href="/register" class="btn btn-outline-primary float-left btn-inline">Register</a>
                                                     <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
                                                 </form>
@@ -69,7 +75,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      v:""
     };
   },
   methods: {
@@ -78,8 +85,12 @@ export default {
       let password = this.password;
       this.$store
         .dispatch("login", { username, password })
-        .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+        .then(() => this.$router.push("/Bot"))
+        .catch(err => {this.v='fail'
+                       console.log('f',this.v)     
+        });
+            
+
     }
   }
 };

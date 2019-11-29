@@ -10,7 +10,7 @@ import WidgetTab from '@/components/WidgetTab.vue'
 import Embed from '@/components/Embed.vue'
 // import Scrip from '@/components/Scrip.vue'
 import SampleTest from '@/components/SampleTest.vue'
-import Testing from '@/components/Testing'
+// import Testing from '@/components/Testing'
 import Testing1 from '@/components/Testing1'
 
 Vue.use(Router)
@@ -52,14 +52,14 @@ let router = new Router({
         requiresAuth: true
       }
     },
-    {
-      path: '/Script',
-      name: 'Script',
-      component: Testing,
-      meta: { 
-        requiresAuth: true
-      }
-    },
+    // {
+    //   path: '/Script',
+    //   name: 'Script',
+    //   component: Testing,
+    //   meta: { 
+    //     requiresAuth: true
+    //   }
+    // },
    
     {
       path: '/Publish',

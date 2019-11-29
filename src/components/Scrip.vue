@@ -966,14 +966,14 @@ export default {
       field3: "4",
       field4: "0",
       bot:
-        "http://192.168.100.144:8002/api/bot/" +
+        "http://192.168.100.144:8001/api/bot/" +
         localStorage.getItem("bot_id") +
         "/",
       user:
-        "http://192.168.100.144:8002/api/user/" +
+        "http://192.168.100.144:8001/api/user/" +
         localStorage.getItem("id") +
         "/",
-      aan: [],
+      // aan: [],
       user_id: localStorage.getItem("id"),
       bot_id: localStorage.getItem("bot_id"),
       field7: "0",
@@ -1031,22 +1031,25 @@ export default {
     },
     addDate() {
       let s = "Date";
+      let aan=[]
+      let  ico=null
       this.dates.push({ id: this.count++, inputtypeid: s });
       this.dates.forEach(res => {
         let ass = res.inputtypeid;
         let obj = {
-          inputtypeid: ass,
+           inputtypeid: ass,
           placeholder: this.field2,
           position: this.field3,
           eoc: this.field4,
           bot: this.bot,
           user: this.user,
           is_subquestion: this.field7,
-          subquestion: this.aan
+          subquestion: aan,
+          icon:ico
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1059,13 +1062,23 @@ export default {
             console.log("FAILURE!!");
           });
       });
+      this.axios
+          .get("http://192.168.100.144:8001/api/botdetails/144/4/")        
+          
+           .then(response =>
+          console.log("aassssssssss", (this.botcount = response.data)),
+       
+        );
     },
     addSelect() {
       let s = "MultiSelect";
+      
       this.selects.push({ id: this.count++, inputtypeid: s });
       this.selects.forEach(res => {
         let ass = res.inputtypeid;
+        
         let obj = {
+          
           inputtypeid: ass,
           placeholder: this.field2,
           position: this.field3,
@@ -1073,11 +1086,11 @@ export default {
           bot: this.bot,
           user: this.user,
           is_subquestion: this.field7,
-          subquestion: this.aan
+          subquestion: aan
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1108,7 +1121,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1139,7 +1152,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1170,7 +1183,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1186,6 +1199,9 @@ export default {
     },
     addOption() {
       let s = "MultiChoice";
+      let aan=[]
+      let  ico=null
+        console.log('ssas',s)
       this.options.push({ id: this.count++, inputtypeid: s });
       this.options.forEach(res => {
         let ass = res.inputtypeid;
@@ -1197,11 +1213,12 @@ export default {
           bot: this.bot,
           user: this.user,
           is_subquestion: this.field7,
-          subquestion: this.aan
+          subquestion: aan,
+          icon:ico
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1232,7 +1249,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1263,7 +1280,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1294,7 +1311,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1325,7 +1342,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1356,7 +1373,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"
@@ -1387,7 +1404,7 @@ export default {
         };
         console.log("s", obj);
         this.axios
-          .post("http://192.168.100.144:8002/api/script/", obj, {
+          .post("http://192.168.100.144:8001/api/script/", obj, {
             headers: {
               "Content-Type": "multipart/form-data",
               "Content-Type": "application/json"

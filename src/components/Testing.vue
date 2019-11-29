@@ -287,7 +287,7 @@
 </div>
 </template>
 <script>
-import Scrip from "./Scrip";
+// import Scrip from "./Scrip";
 export default {
   name: "Testing",
   components: {
