@@ -1,7 +1,6 @@
 <template>
   <div class="main">
     <div class="form-builder">
-      <!-- Stack the columns on mobile by making one full-width and the other half-width -->
       <b-row>
         <b-col cols="12" md="4" sm="9">
           <div class="form-builder-toolbar pull-left not-selectable form-builder-toolbar-sticky">
@@ -9,36 +8,36 @@
             <b-row>
               <b-col cols="6" md="6" sm="6">
                 <ul>
-                  <li class="card-shadow question-list" @click="addRow">
+                  <li class="card-shadow question-list" @click="addRow"  id="1">
                     <i class="fas fa-quote-left"></i>
                     Message
                   </li>
-                  <li class="card-shadow question-list" @click="addText">
+                  <li class="card-shadow question-list" @click="addText"  id="2">
                     <i class="fas fa-comment-alt"></i>
                     Text Question
                   </li>
 
-                  <li class="card-shadow question-list" @click="addDate">
+                  <li class="card-shadow question-list" @click="addDate" id="3">
                     <i class="far fa-calendar-alt"></i>
                     Date
                   </li>
 
-                  <li class="card-shadow question-list" @click="addSelect">
+                  <li class="card-shadow question-list" @click="addSelect" id="4">
                     <i class="fas fa-check-circle"></i>
                     Multi Select
                   </li>
 
-                  <li class="card-shadow question-list" @click="addNumber">
+                  <li class="card-shadow question-list" @click="addNumber" id="5">
                     <i class="fas fa-hashtag"></i>
                     Number
                   </li>
 
-                  <li class="card-shadow question-list" @click="addRating">
+                  <li class="card-shadow question-list" @click="addRating" id="6">
                     <i class="fas fa-star-half-alt"></i>
                     Rating
                   </li>
 
-                  <li class="card-shadow question-list" @click="addLink">
+                  <li class="card-shadow question-list" @click="addLink" id="7">
                     <i class="fas fa-link"></i>
                     Links
                   </li>
@@ -47,37 +46,37 @@
 
               <b-col cols="6" md="6" sm="6">
                 <ul>
-                  <li class="card-shadow question-list" @click="addOption">
+                  <li class="card-shadow question-list" @click="addOption" id="8">
                     <i class="far fa-stop-circle"></i>
                     Multi Choice
                   </li>
 
-                  <li class="card-shadow question-list" @click="addEmail">
+                  <li class="card-shadow question-list" @click="addEmail" id="9">
                     <i class="fas fa-envelope-square"></i>
                     Email
                   </li>
 
-                  <li class="card-shadow question-list" @click="addBooking">
+                  <li class="card-shadow question-list" @click="addBooking" id="10">
                     <i class="far fa-clock"></i>
                     Appointment
                   </li>
 
-                  <li class="card-shadow question-list" @click="addList">
+                  <li class="card-shadow question-list" @click="addList" id="11">
                     <i class="far fa-list-alt"></i>
                     List
                   </li>
 
-                  <li class="card-shadow question-list" @click="addRange">
+                  <li class="card-shadow question-list" @click="addRange" id="12">
                     <i class="fas fa-sliders-h"></i>
                     Range
                   </li>
 
-                  <li class="card-shadow question-list" @click="addScale">
+                  <li class="card-shadow question-list" @click="addScale" id="13">
                     <i class="fas fa-tachometer-alt"></i>
                     Opinion Scale
                   </li>
 
-                  <li class="card-shadow question-list" @click="addFile">
+                  <li class="card-shadow question-list" @click="addFile" id="14">
                     <i class="fas fa-upload"></i>
                     File Upload
                   </li>
@@ -104,812 +103,69 @@
             <div class="edit-form"></div>
             <div class="ui-sortable vertical-container">
               <draggable>
-                <div v-for=" totals in total " v-bind:key="totals">
-                  {{ totals.id }}
-                  <div class="item">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school hint--bottom change"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showModal = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school arrow-btn hint--bottom change"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school hint--bottom change delete"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteRow(input,index )"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-quote-left"></i>
-                    </div>
-                  </div>
-                </div>
-
-                <div v-if="showModal">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showModal=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Message />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- message end -->
-
-                <!-- text start -->
-                <div v-for=" totals in total " v-bind:key="totals">
-                  {{ totals.id }}
-                  <div class="item">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school hint--bottom change"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showText = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school arrow-btn hint--bottom change"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school hint--bottom change"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteText(index2)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-comment-alt"></i>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showText">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showText=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <TextEditor />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- text end -->
-
-                <!-- date start  -->
-
-                <div class="item" v-for="(date, index3) in dates" v-bind:key="index3.id">
+                <div v-for="(get,i) in all" :key="i">
+                <div class="item" >
                   <div class="clearfix">
                     <div class="item-question showhim">
                       <div class="toolbar-header showme">
                         <div class="toolbar-header-buttons">
                           <div
                             class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addDate"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
                             aria-label="Edit"
                           >
-                            <i class="fas fa-pen" @click="showDate = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteDate(index3)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-calendar-alt"></i>
-                      <label class="static">select a date</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showDate">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showDate=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Date />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- date end -->
-
-                <!-- multi select start-->
-
-                <div class="item" v-for="(select, index4) in selects" v-bind:key="index4.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addSelect"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showSelect = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteSelect(index4)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-check-circle"></i>
-                      <label class="static">select your choices</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showSelect">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showSelect=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Select />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- multi select end -->
-
-                <!-- number start -->
-
-                <div class="item" v-for="(numbers, index5) in number" v-bind:key="index5.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addNumber"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showNumber = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteNumber(index5)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-hashtag"></i>
-                      <label class="static">choose a number</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showNumber">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showNumber=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Number />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- number end -->
-
-                <!-- ratings start -->
-
-                <div class="item" v-for="(rate, index6) in rating" v-bind:key="index6.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addRating"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showRating = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteRating(index6)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-star-half-alt"></i>
-                      <label class="static">How was your experience?</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showRating">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showRating=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Ratinng />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- ratings end -->
-
-                <!-- link start -->
-
-                <div class="item" v-for="(link, index7) in links" v-bind:key="index7.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addLink"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showLink = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteLink(index7)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-link"></i>
-                      <label class="static">
-                        please
-                        contact us
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showLink">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showLink=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Link />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- link end -->
-
-                <!-- option start -->
-
-                <div class="item" v-for="(option, index8) in options" v-bind:key="index8.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addOption"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showOption = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteOption(index8)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-stop-circle"></i>
-                      <label class="static">select an option</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showOption">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showOption=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Moption />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- option end -->
-
-                <!-- email start -->
-
-                <div class="item" v-for="(email, index9) in emails" v-bind:key="index9.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addEmail"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showEmail = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteEmail(index9)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-envelope"></i>
-                      <label class="static">
-                        What is
-                        your email address?
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showEmail">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showEmail=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Email />
-                    </div>
-                  </div>
-                </div>
-                <!-- email end -->
-
-                <!-- booking start -->
-
-                <div class="item" v-for="(book, index10) in booking" v-bind:key="index10.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addBooking"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showBooking = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteBooking(index10)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-clock"></i>
-                      <label class="static">
-                        Book
-                        an appointment/meeting
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showBooking">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showBooking=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Booking />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- booking end -->
-
-                <!-- list start -->
-
-                <div class="item" v-for="(lists, index11) in list" v-bind:key="index11.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addList"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showList = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteList(index11)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-clipboard-list"></i>
-                      <label class="static">Type and select your answer</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showList">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showList=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Lining />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- list end -->
-
-                <!-- range start -->
-
-                <div class="item" v-for="(range, index12) in range" v-bind:key="index12.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addRange"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showRange = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteRange(index12)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-sliders-h"></i>
-                      <label class="static">Select a range</label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showRange">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showRange=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Ranging />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- range end -->
-
-                <!-- scale start -->
-
-                <div class="item" v-for="(scales, index13) in scale" v-bind:key="index13.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addScale"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showScale = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Delete"
-                          >
-                            <i class="fas fa-trash-alt" @click="deleteScale(index13)"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <i class="fas fa-tachometer-alt"></i>
-                      <label class="static">
-                        How likely do you recommend us to a friend
-                        or colleague
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="showScale">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showScale=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Scale />
-                    </div>
-                  </div>
-                </div>
-
-                <!-- scale end  -->
-
-                <!-- file start -->
-
-                <div class="item" v-for="(files, index14) in file" v-bind:key="index14.id">
-                  <div class="clearfix">
-                    <div class="item-question showhim">
-                      <div class="toolbar-header showme">
-                        <div class="toolbar-header-buttons">
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Duplicate"
-                          >
-                            <i class="fas fa-copy" @click="addFile"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom logic-active"
-                            aria-label="Logical Jump"
-                          >
-                            <i class="fas fa-random"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change hint--bottom"
-                            aria-label="Edit"
-                          >
-                            <i class="fas fa-pen" @click="showFile = true"></i>
-                          </div>
-                          <div
-                            class="btn is-isolated btn-school change arrow-btn hint--bottom"
-                            aria-label="Drag to Move"
-                          >
-                            <i class="fas fa-expand-arrows-alt"></i>
+                           <i v-if="get.showmodal == 'showModal: true'||get.showmodal=='showText: true'||
+                              get.showmodal=='showDate: true'|| get.showmodal=='showList: true'||
+                              get.showmodal=='showLink: true' || get.showmodal == 'showSelect: true' || get.showmodal == 'showNumber: true'
+                              || get.showmodal == 'showRating: true' || get.showmodal == 'showOption: true' || get.showmodal == 'showEmail: true'
+                              || get.showmodal == 'showBooking: true'|| get.showmodal == 'showRange: true' || get.showmodal == 'showScale: true'
+                              || get.showmodal == 'showFile: true'"
+                               class="fas fa-pen" ref="{{key}}"
+                              @click="open(get,i)"></i>
                           </div>
                           <div class="btn is-isolated btn-school hint--bottom" aria-label="Delete">
                             <i class="fas fa-trash-alt" @click="deleteFile(index14)"></i>
                           </div>
                         </div>
                       </div>
-                      <i class="fas fa-upload"></i>
-                      <label class="static">Upload file</label>
+                       <i :class="[faClass(get.fieldicon)]" style="width:auto"></i>
+                      <label class="static">{{get.placeholder}}</label>
                     </div>
                   </div>
                 </div>
-                <div v-if="showFile">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showFile=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                      <Uploade />
-                    </div>
-                  </div>
                 </div>
               </draggable>
+               <b-modal id="modal-1" >
+    <div class="d-block">Edit box</div>
+  {{msg}}
+    <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
+
+    <TextEditor @changedata="msg =$event" v-if="currentdata.showmodal == 'showText: true'" />
+
+    <Date @changedata="msg =$event" v-if="currentdata.showmodal == 'showDate: true'" />
+
+    <Link @changedata="msg =$event" v-if="currentdata.showmodal == 'showLink: true'" />
+
+    <Lining @changedata="msg =$event" v-if="currentdata.showmodal == 'showList: true'" />
+
+    <Select @changedata="msg =$event" v-if="currentdata.showmodal == 'showSelect: true'"/>
+
+    <Number @changedata="msg =$event" v-if="currentdata.showmodal == 'showNumber: true'"/>
+
+    <Ratinng @changedata="msg =$event" v-if="currentdata.showmodal == 'showRating: true'"/>
+
+    <Moption @changedata="msg =$event" v-if="currentdata.showmodal == 'showOption: true'"/>
+
+    <Email @changedata="msg =$event" v-if="currentdata.showmodal == 'showEmail: true'"/>
+
+    <Booking @changedata="msg =$event" v-if="currentdata.showmodal == 'showBooking: true'"/>
+
+    <Ranging @changedata="msg =$event" v-if="currentdata.showmodal == 'showRange: true'"/>
+
+    <Scale @changedata="msg =$event" v-if="currentdata.showmodal == 'showScale: true'"/>
+
+    <Uploade @changedata="msg =$event" v-if="currentdata.showmodal == 'showFile: true'"/>
+
+    </b-modal>
             </div>
             <div id="END"></div>
           </div>
@@ -939,485 +195,873 @@ import Uploade from "./Uploade";
 export default {
   name: "Scrip",
   components: {
-    draggable,
-    Message,
-    TextEditor,
-    Date,
-    Select,
-    Number,
-    Ratinng,
-    Link,
-    Moption,
-    Email,
-    Booking,
-    Lining,
-    Ranging,
-    Scale,
+    draggable,Message,TextEditor,Date,
+    Select,Number,Ratinng,Link,Moption,
+    Email,Booking,Lining,Ranging,Scale,
     Uploade
   },
   data() {
     return {
-      total: [],
-      inputs: [],
-      count: 0,
-      ass: [],
-      use: "Message",
-      field2: "sadas",
-      field3: "4",
-      field4: "0",
-      bot:
-        "http://192.168.100.144:8001/api/bot/" +
-        localStorage.getItem("bot_id") +
-        "/",
-      user:
-        "http://192.168.100.144:8001/api/user/" +
-        localStorage.getItem("id") +
-        "/",
-      // aan: [],
-      user_id: localStorage.getItem("id"),
-      bot_id: localStorage.getItem("bot_id"),
-      field7: "0",
-      texts: [],
-      dates: [],
-      selects: [],
-      number: [],
-      rating: [],
-      links: [],
-      options: [],
-      emails: [],
-      booking: [],
-      list: [],
-      range: [],
-      scale: [],
-      file: [],
-      sel: [],
-      mcho: [],
-      botcount: null,
+      // total: [],
+      // inputs: [],
+      // count: 0,
+      // ass: [],
+      // use: "Message",
+      // field2: "sadas",
+      // field3: "4",
+      // field4: "0",
+      // bot:
+      //   "http://192.168.100.144:8001/api/bot/" +
+      //   localStorage.getItem("bot_id") +
+      //   "/",
+      // user:
+      //   "http://192.168.100.144:8001/api/user/" +
+      //   localStorage.getItem("id") +
+      //   "/",
+      // // aan: [],
+      // user_id: localStorage.getItem("id"),
+      // bot_id: localStorage.getItem("bot_id"),
+      // field7: "0",
+      // texts: [],
+      // dates: [],
+      // selects: [],
+      // number: [],
+      // rating: [],
+      // links: [],
+      // options: [],
+      // emails: [],
+      // booking: [],
+      // list: [],
+      // range: [],
+      // scale: [],
+      // file: [],
+      // sel: [],
+      // mcho: [],
       showModal: false,
-      showText: false,
-      showDate: false,
-      showSelect: false,
-      showNumber: false,
-      showRating: false,
-      showLink: false,
-      showOption: false,
-      showEmail: false,
-      showBooking: false,
-      showList: false,
-      showRange: false,
-      showScale: false,
-      showFile: false,
-      showDesign: false,
-      showContent: false
+      value:'',
+      botcount:[],
+      all:'',
+      loading: false,
+      currentdata:{},
+      msg:''
     };
   },
-  created() {
-    console.log("type");
-  },
+
+ mounted(){
+  let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+  this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+      console.log( response.data)
+      }
+
+      );
+},
   methods: {
+       log: function(evt) {
+      window.console.log(evt);
+    },
+    faClass(icon) {
+            return `fas fa-${icon}`;
+          },
+
+          open(data,i){
+            this.msg = ''
+            this.showModal = true
+
+            console.log(data,i)
+            this.currentdata = data
+
+              this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
+
+          },
     addRow() {
-      let s = "Message";
-      let a = this.count ++
-      let main = { id: this.count++, inputtypeid: s , id: a };
-      this.total.push(main);
-      console.log("####", this.total);
+       let a = this.count ++
+    console.log('id',a)
+    let field="1"
+
+     let name ="Message"
+     let ico='http://192.168.100.144:8001/api/messageicon/1/'
+     this.axios.get(ico).then(res=>{
+       console.log('ico',res.data)
+     })
+      a=[]
+      let holder = "Message"
+      pos = "1"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+
+        console.log("post-result3", data.data);
+ this.axios.get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+       .then(response =>{
+         this.all = response.data
+         console.log(this.all)
+         }
+
+      );
+        })
+      .catch(function(e) {
+
+        console.log("FAILURE!!");
+      });
     },
     addText() {
-      let s = "TextQuestion";
-      let a = this.count ++
-      let main = { id: this.count++, inputtypeid: s,id:a };
-      this.total.push(main);
-      console.log("####", this.total);
+       let a = this.count ++
+    console.log('id',a)
+    let field="2"
+
+     let name ="TextQuestion"
+     let ico='http://192.168.100.144:8001/api/messageicon/2/'
+        this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Text"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data) => {
+        console.log("post-result3", data.data);
+ this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.loading = false;this.all = response.data});
+        })
+      .catch((e)=> {
+        console.log("FAILURE!!");
+      });
     },
     addDate() {
-      let s = "Date";
-      let aan=[]
-      let  ico=null
-      this.dates.push({ id: this.count++, inputtypeid: s });
-      this.dates.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-           inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: aan,
-          icon:ico
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
-      });
+      let a = this.count ++
+    console.log('id',a)
+    let field="5"
+
+     let name ="Date"
+     let ico='http://192.168.100.144:8001/api/messageicon/5/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Date"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
       this.axios
-          .get("http://192.168.100.144:8001/api/botdetails/144/4/")        
-          
-           .then(response =>
-          console.log("aassssssssss", (this.botcount = response.data)),
-       
-        );
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data) =>{
+        console.log("post-result3", data.data);
+         this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.loading = false;this.all = response.data}
+      );
+        })
+      .catch(() => {
+        console.log("FAILURE!!");
+      });
     },
     addSelect() {
-      let s = "MultiSelect";
-      
-      this.selects.push({ id: this.count++, inputtypeid: s });
-      this.selects.forEach(res => {
-        let ass = res.inputtypeid;
-        
-        let obj = {
-          
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="7"
+
+     let name ="MultiSelect"
+     let ico='http://192.168.100.144:8001/api/messageicon/7/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Select"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addNumber() {
-      let s = "Number";
-      this.number.push({ id: this.count++, inputtypeid: s });
-      this.number.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="9"
+
+     let name ="Number"
+     let ico='http://192.168.100.144:8001/api/messageicon/9/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Number"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addRating() {
-      let s = "Rating";
-      this.rating.push({ id: this.count++, inputtypeid: s });
-      this.rating.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="11"
+
+     let name ="Rating"
+     let ico='http://192.168.100.144:8001/api/messageicon/11/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Rating"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addLink() {
-      let s = "Links";
-      this.links.push({ id: this.count++, inputtypeid: s });
-      this.links.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="13"
+
+     let name ="Links"
+     let ico='http://192.168.100.144:8001/api/messageicon/13/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Link"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+ this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+     let s=this.all
+      console.log('send',s)
+      // if (name==s)
+      let a=response.data[0].fieldicon;
+      console.log('value',a)
+      }
+      );
+        })
+      .catch(function() {
+        console.log("FAILURE!!");
       });
     },
     addOption() {
-      let s = "MultiChoice";
-      let aan=[]
-      let  ico=null
-        console.log('ssas',s)
-      this.options.push({ id: this.count++, inputtypeid: s });
-      this.options.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: aan,
-          icon:ico
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="3"
+
+     let name ="MultiChoice"
+     let ico='http://192.168.100.144:8001/api/messageicon/3/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Option"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addEmail() {
-      let s = "Email";
-      this.emails.push({ id: this.count++, inputtypeid: s });
-      this.emails.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="4"
+
+     let name ="Email"
+     let ico='http://192.168.100.144:8001/api/messageicon/4/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Email"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addBooking() {
-      let s = "Appointment";
-      this.booking.push({ id: this.count++, inputtypeid: s });
-      this.booking.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="6"
+
+     let name ="Appointment"
+     let ico='http://192.168.100.144:8001/api/messageicon/6/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Booking"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addList() {
-      let s = "List";
-      this.list.push({ id: this.count++, inputtypeid: s });
-      this.list.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="8"
+
+     let name ="List"
+     let ico='http://192.168.100.144:8001/api/messageicon/8/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "List"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
     addRange() {
-      let s = "Range";
-      this.range.push({ id: this.count++, inputtypeid: s });
-      this.range.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+       let a = this.count ++
+    console.log('id',a)
+    let field="10"
+
+     let name ="Range"
+     let ico='http://192.168.100.144:8001/api/messageicon/10/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Range"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
+
     addScale() {
-      let s = "OpinionScale";
-      this.scale.push({ id: this.count++, inputtypeid: s });
-      this.scale.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="12"
+
+     let name ="OpinionScale"
+     let ico='http://192.168.100.144:8001/api/messageicon/12/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "Scale"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
+
     addFile() {
-      let s = "FileUpload";
-      this.file.push({ id: this.count++, inputtypeid: s });
-      this.file.forEach(res => {
-        let ass = res.inputtypeid;
-        let obj = {
-          inputtypeid: ass,
-          placeholder: this.field2,
-          position: this.field3,
-          eoc: this.field4,
-          bot: this.bot,
-          user: this.user,
-          is_subquestion: this.field7,
-          subquestion: this.aan
-        };
-        console.log("s", obj);
-        this.axios
-          .post("http://192.168.100.144:8001/api/script/", obj, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Content-Type": "application/json"
-            }
-          })
-          .then(function(data) {
-            console.log(data.data);
-          })
-          .catch(function() {
-            console.log("FAILURE!!");
-          });
+      let a = this.count ++
+    console.log('id',a)
+    let field="14"
+
+     let name ="FileUpload"
+     let ico='http://192.168.100.144:8001/api/messageicon/14/'
+     this.axios.get(ico).then(res=>{
+       console.log(res.data)
+     })
+      a=[]
+      let holder = "File"
+      pos = "2"
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let quest = "1"
+      let pos = "1"
+
+      let obj = {
+          inputtypeid:name ,
+          placeholder: holder,
+          position:pos,
+          eoc: ecos,
+          is_subquestion: quest,
+          subquestion: a,
+          position:pos,
+          icon:ico,
+          subquestion: a,
+        	bot:boot,
+          user:usr,
+      };
+      console.log("obj",obj)
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      this.axios
+      .post("http://192.168.100.144:8001/api/script/", obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json"
+        },
+      })
+      .then((data)=> {
+        console.log("post-result3", data.data);
+this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
+      let a=response.data[0].fieldicon;
+      console.log('value2',a)}
+      );
+        })
+      .catch(() =>{
+        console.log("FAILURE!!");
       });
     },
+
+
     addSel() {
       this.sel.push({});
     },

@@ -10,8 +10,8 @@ import WidgetTab from '@/components/WidgetTab.vue'
 import Embed from '@/components/Embed.vue'
 // import Scrip from '@/components/Scrip.vue'
 import SampleTest from '@/components/SampleTest.vue'
-// import Testing from '@/components/Testing'
-import Testing1 from '@/components/Testing1'
+import Testing from '@/components/Testing.vue'
+import Testing1 from '@/components/Testing1.vue'
 
 Vue.use(Router)
 
@@ -32,7 +32,7 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
@@ -40,7 +40,7 @@ let router = new Router({
       path: '/Widget',
       name: 'widget',
       component: WidgetTab,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
@@ -48,24 +48,24 @@ let router = new Router({
       path: '/Embed',
       name: 'Embed',
       component: Embed,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
-    // {
-    //   path: '/Script',
-    //   name: 'Script',
-    //   component: Testing,
-    //   meta: { 
-    //     requiresAuth: true
-    //   }
-    // },
-   
+    {
+      path: '/Script',
+      name: 'Script',
+      component: Testing,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
     {
       path: '/Publish',
       name: 'Publish',
       component: Testing1,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
@@ -73,7 +73,7 @@ let router = new Router({
       path: '/Nave',
       name: 'Nave',
       component: NaveComponent,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
@@ -81,7 +81,7 @@ let router = new Router({
     //   path: '/Scrip',
     //   name: 'Scrip',
     //   component: Scrip,
-    //   meta: { 
+    //   meta: {
     //     requiresAuth: true
     //   }
     // },
@@ -89,17 +89,17 @@ let router = new Router({
       path: '/sample',
       name: 'Sample',
       component: SampleTest,
-    
+
     },
     {
       path: '/Bot',
       name: 'Bot',
       component: BotComponent,
-      meta: { 
+      meta: {
         requiresAuth: true
       }
     },
-   
+
   ]
 })
 router.beforeEach((to, from, next) => {
@@ -108,9 +108,9 @@ router.beforeEach((to, from, next) => {
       next()
       return
     }
-    next('/login') 
+    next('/login')
   } else {
-    next() 
+    next()
   }
 })
 

@@ -22,7 +22,6 @@ import store from './store';
 import Axios from 'axios'
 import rawDisplayer from './components/rawDisplayer'
 
-
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {

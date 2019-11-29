@@ -12,7 +12,7 @@
     <button @click="simple2" id="2"> Text</button>
     <button @click="simple3" id="3"> Date</button>
     <button @click="simple4" id="4"> List</button>
-    <button @click="simple5" id="5"> Link</button>  
+    <button @click="simple5" id="5"> Link</button>
 
 
         <!-- <div
@@ -27,46 +27,40 @@
 
     <div class="col-3">
       <h3>Draggable 2</h3>
-      <!-- <draggable
-        class="dragArea list-group"
-        :list="list2"
-        group="people"
-        @change="log"
-      > -->
      <div v-for="(get,i) in all" :key="i">
         <div class="list-group-item" >
           <div class="item">
                     <div class="item-question showhim">
                       <div class="toolbar-header showme">
                         <div class="toolbar-header-buttons">
-                          
+
                           <div
                             class="btn is-isolated btn-school hint--bottom change"
                             aria-label="Edit"
                           >
-                      
+
 
                              <h4>
-                               <i :class="[faClass(get.fieldicon)]" style="width:auto"></i> 
+                               <i :class="[faClass(get.fieldicon)]" style="width:auto"></i>
                              {{ get.field }}
                               </h4>
-                             <p> {{get.placeholder}}  
+                             <p> {{get.placeholder}}
                               <i v-if="get.showmodal == 'showModal: true'||get.showmodal=='showText: true'||
                               get.showmodal=='showDate: true'|| get.showmodal=='showList: true'||
                               get.showmodal=='showLink: true'"
-                               class="fas fa-pen" ref="{{key}}"  
-                              @click="open(get,i)" ></i>   
+                               class="fas fa-pen" ref="{{key}}"
+                              @click="open(get,i)"></i>
                              </p>
-                             
-                            
-                           
-                         
+
+
+
+
                           </div>
                           <div
                             class="btn is-isolated btn-school arrow-btn hint--bottom change"
                             aria-label="Drag to Move"
                           >
-                                                      
+
                           </div>
                           <div
                             class="btn is-isolated btn-school hint--bottom change delete"
@@ -76,7 +70,7 @@
                           </div>
                         </div>
                       </div>
-                     
+
                     </div>
                   </div>
         </div>
@@ -86,7 +80,7 @@
     <div class="d-block">Edit box</div>
   {{msg}}
     <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
-    
+
     <TextEditor @changedata="msg =$event" v-if="currentdata.showmodal == 'showText: true'" />
 
     <Date @changedata="msg =$event" v-if="currentdata.showmodal == 'showDate: true'" />
@@ -94,45 +88,16 @@
     <Link @changedata="msg =$event" v-if="currentdata.showmodal == 'showLink: true'" />
 
     <Lining @changedata="msg =$event" v-if="currentdata.showmodal == 'showList: true'" />
-     
+
     </b-modal>
-        <!-- <div v-if="showModal">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showModal=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                    </div>
-                  </div>
-                </div> -->
-        
 
-      <!-- </draggable> -->
-      
+
     </div>
-   
-    <!--<div v-if="showModal">
-                  <div class="modal-mask">
-                    <div class="edit-form">
-                      <button
-                        class="pull-right btn btn-success float-right"
-                        @click="showModal=false"
-                        style="margin-top: 15px;margin-right: 15px;"
-                      >Done</button>
-                  
-                    </div>
-                  </div>
-                </div>-->
-
-  
-
 
   </div>
-  
+
 </template>
- 
+
 <script>
 import Message from "./Message";
 import draggable from "vuedraggable";
@@ -141,7 +106,7 @@ import Date from "./Date";
 import Link from "./Link";
 import Lining from "./Lining";
 
-export default {  
+export default {
   name: "clone",
   display: "Clone",
   order: 2,
@@ -164,9 +129,9 @@ export default {
       loading: false,
       currentdata:{},
       msg:''
-    
-     
-      
+
+
+
     };
   },
 mounted(){
@@ -178,10 +143,10 @@ let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
   this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
       console.log( response.data)
-      }   
+      }
 
       );
     }
@@ -195,13 +160,13 @@ let id=localStorage.getItem('id')
 
           open(data,i){
             this.msg = ''
-            this.showModal = true 
+            this.showModal = true
 
             console.log(data,i)
             this.currentdata = data
 
               this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
-             
+
           },
            handleOk(bvModalEvt) {
         // Prevent modal from closing
@@ -245,21 +210,21 @@ this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
     let a = this.count ++
     console.log('id',a)
     let field="1"
-     
+
      let name ="Message"
      let ico='http://192.168.100.144:8001/api/messageicon/1/'
      this.axios.get(ico).then(res=>{
-       console.log(res.data)
+       console.log('ico',res.data)
      })
-      a=[]  
+      a=[]
       let holder = "Select"
       pos = "1"
-      let ecos = 0      
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
       let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
-      let quest = "1" 
-      let pos = "1"   
-      
+      let quest = "1"
+      let pos = "1"
+
 let obj = {
           inputtypeid:name ,
           placeholder: holder,
@@ -272,7 +237,7 @@ let obj = {
           subquestion: a,
         	bot:boot,
           user:usr,
-      }; 
+      };
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
@@ -283,46 +248,40 @@ let obj = {
         },
       })
       .then((data)=> {
-        
+
         console.log("post-result3", data.data);
- this.axios.get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+ this.axios.get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
        .then(response =>{
          this.all = response.data
          console.log(this.all)
          }
-       
+
       );
         })
       .catch(function(e) {
-// if(e.status == 400){
 
-// }
-// if(e.status == 500){
-  
-// }
-//         //error
         console.log("FAILURE!!");
       });
-     //next
+
   },
   simple2() {
    let a = this.count ++
     console.log('id',a)
     let field="2"
-     
+
      let name ="TextQuestion"
      let ico='http://192.168.100.144:8001/api/messageicon/2/'
         this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
-      a=[]  
+      a=[]
       let holder = "Select"
       pos = "2"
-      let ecos = 0      
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
       let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
-      let quest = "1" 
-      let pos = "1"   
+      let quest = "1"
+      let pos = "1"
 
       let obj = {
           inputtypeid:name ,
@@ -336,7 +295,7 @@ let obj = {
           subquestion: a,
         	bot:boot,
           user:usr,
-      }; 
+      };
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
@@ -350,33 +309,33 @@ let obj = {
       .then((data) => {
         console.log("post-result3", data.data);
  this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.loading = false;this.all = response.data});
         })
       .catch((e)=> {
         console.log("FAILURE!!");
-      });   
-     
-      
+      });
+
+
   },
   simple3() {
    let a = this.count ++
     console.log('id',a)
     let field="5"
-     
+
      let name ="Date"
      let ico='http://192.168.100.144:8001/api/messageicon/5/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
-      a=[]  
+      a=[]
       let holder = "Select"
       pos = "2"
-      let ecos = 0      
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
       let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
-      let quest = "1" 
-      let pos = "1"   
+      let quest = "1"
+      let pos = "1"
 
       let obj = {
           inputtypeid:name ,
@@ -390,7 +349,7 @@ let obj = {
           subquestion: a,
         	bot:boot,
           user:usr,
-      }; 
+      };
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
@@ -404,33 +363,33 @@ let obj = {
       .then((data) =>{
         console.log("post-result3", data.data);
          this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
-      .then(response =>{this.loading = false;this.all = response.data}               
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.loading = false;this.all = response.data}
       );
         })
       .catch(() => {
         console.log("FAILURE!!");
       });
-     
+
   },
   simple4() {
  let a = this.count ++
     console.log('id',a)
     let field="8"
-     
+
      let name ="List"
      let ico='http://192.168.100.144:8001/api/messageicon/8/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
-      a=[]  
+      a=[]
       let holder = "Select"
       pos = "2"
-      let ecos = 0      
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
       let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
-      let quest = "1" 
-      let pos = "1"   
+      let quest = "1"
+      let pos = "1"
 
       let obj = {
           inputtypeid:name ,
@@ -444,7 +403,7 @@ let obj = {
           subquestion: a,
         	bot:boot,
           user:usr,
-      }; 
+      };
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
@@ -458,36 +417,36 @@ let obj = {
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
-      .then(response =>{this.all = response.data 
-      
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+
       let a=response.data[0].fieldicon;
-      console.log('value2',a)}              
+      console.log('value2',a)}
       );
         })
       .catch(() =>{
         console.log("FAILURE!!");
       });
-      
+
   },
   simple5() {
  let a = this.count ++
     console.log('id',a)
     let field="13"
-     
+
      let name ="Links"
      let ico='http://192.168.100.144:8001/api/messageicon/13/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
-      a=[]  
+      a=[]
       let holder = "Select"
       pos = "2"
-      let ecos = 0      
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"      
+      let ecos = 0
+      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
       let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
-      let quest = "1" 
-      let pos = "1"   
+      let quest = "1"
+      let pos = "1"
 
       let obj = {
           inputtypeid:name ,
@@ -501,7 +460,7 @@ this.axios
           subquestion: a,
         	bot:boot,
           user:usr,
-      }; 
+      };
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
@@ -515,25 +474,25 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
  this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")        
-      .then(response =>{this.all = response.data 
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
      let s=this.all
       console.log('send',s)
       // if (name==s)
       let a=response.data[0].fieldicon;
       console.log('value',a)
-      }               
+      }
       );
         })
       .catch(function() {
         console.log("FAILURE!!");
       });
-     
+
   },
    }
 };
 </script>
-<style scoped> 
+<style scoped>
 .s{
     cursor: pointer;
   float: left;
