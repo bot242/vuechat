@@ -202,41 +202,6 @@ export default {
   },
   data() {
     return {
-      // total: [],
-      // inputs: [],
-      // count: 0,
-      // ass: [],
-      // use: "Message",
-      // field2: "sadas",
-      // field3: "4",
-      // field4: "0",
-      // bot:
-      //   "http://192.168.100.144:8001/api/bot/" +
-      //   localStorage.getItem("bot_id") +
-      //   "/",
-      // user:
-      //   "http://192.168.100.144:8001/api/user/" +
-      //   localStorage.getItem("id") +
-      //   "/",
-      // // aan: [],
-      // user_id: localStorage.getItem("id"),
-      // bot_id: localStorage.getItem("bot_id"),
-      // field7: "0",
-      // texts: [],
-      // dates: [],
-      // selects: [],
-      // number: [],
-      // rating: [],
-      // links: [],
-      // options: [],
-      // emails: [],
-      // booking: [],
-      // list: [],
-      // range: [],
-      // scale: [],
-      // file: [],
-      // sel: [],
-      // mcho: [],
       showModal: false,
       value:'',
       botcount:[],
@@ -1160,11 +1125,11 @@ this.axios
 }
 .form-builder .form-builder-preview {
   position: relative;
-  width: 120%;
+  width: 100%;
   border-radius: 3px;
   background: #fff;
   padding: 10px;
-  min-height: 650px;
+  min-height: 500px;
   float: right;
   margin-top: 11px;
   overflow: auto;
@@ -1177,6 +1142,7 @@ this.axios
   border-radius: 10px;
   border: 1px solid #ccc;
   background: rgb(212, 211, 212);
+  padding-bottom: 10px;
   float: left;
 }
 .item-question {
@@ -1255,6 +1221,7 @@ this.axios
 .main {
   width: 85%;
   padding-left: 2%;
+  
 }
 .change {
   padding-left: 0px !important;
