@@ -123,7 +123,7 @@
                               @click="open(get,i)"></i>
                           </div>
                           <div class="btn is-isolated btn-school hint--bottom" aria-label="Delete">
-                            <i class="fas fa-trash-alt" @click="deleteFile(index14)"></i>
+                            <i class="fas fa-trash-alt" @click="deletedata(get.id)"></i>
                           </div>
                         </div>
                       </div>
@@ -228,6 +228,18 @@ export default {
        log: function(evt) {
       window.console.log(evt);
     },
+    init(){
+      let id=localStorage.getItem('id')
+      let botid=localStorage.getItem("bot_id")
+      console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+  this.axios
+      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .then(response =>{this.all = response.data
+      console.log( response.data)
+      }
+
+      );
+    },
     faClass(icon) {
             return `fas fa-${icon}`;
           },
@@ -241,6 +253,16 @@ export default {
 
               this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
 
+          },
+          deletedata(id){
+              console.log("delete id ",id)
+              this.axios.delete('http://192.168.100.144:8001/api/script/'+id+"/")
+              .then(res=>{
+                console.log("deleted successa",res)
+                this.init()
+              }).catch(e=>{
+           alert("unable to get server",e)
+         })
           },
     addRow() {
        let a = this.count ++
