@@ -1055,59 +1055,7 @@ this.axios
     addMcho() {
       this.mcho.push({});
     },
-    deleteMcho(mcho) {
-      this.mcho.splice(mcho, 1);
-    },
-    deleteSel(link) {
-      this.sel.splice(link, 1);
-    },
-    deleteRow: function(input, index) {
-      if (this.inputs[index] === input) {
-        console.log(this.inputs.splice(index, 1));
-      } else {
-        let found = this.inputs.indexOf(input);
-        this.inputs.splice(found, 1);
-      }
-    },
-    deleteText(index2) {
-      this.texts.splice(index2, 1);
-    },
-    deleteDate(index3) {
-      this.dates.splice(index3, 1);
-    },
-    deleteSelect(index4) {
-      this.selects.splice(index4, 1);
-    },
-    deleteNumber(index5) {
-      this.number.splice(index5, 1);
-    },
-    deleteRating(index6) {
-      this.rating.splice(index6, 1);
-    },
-    deleteLink(index7) {
-      this.links.splice(index7, 1);
-    },
-    deleteOption(index8) {
-      this.options.splice(index8, 1);
-    },
-    deleteEmail(index9) {
-      this.emails.splice(index9, 1);
-    },
-    deleteBooking(index10) {
-      this.booking.splice(index10, 1);
-    },
-    deleteList(index11) {
-      this.list.splice(index11, 1);
-    },
-    deleteRange(index12) {
-      this.range.splice(index12, 1);
-    },
-    deleteScale(index13) {
-      this.scale.splice(index13, 1);
-    },
-    deleteFile(index14) {
-      this.file.splice(index14, 1);
-    }
+
   }
 };
 </script>
@@ -1243,7 +1191,7 @@ this.axios
 .main {
   width: 85%;
   padding-left: 2%;
-  
+
 }
 .change {
   padding-left: 0px !important;
