@@ -17,29 +17,30 @@
         <span>
           Back button
           <toggle-button
-            @change="onChangeEventHandler"
+           
             style="margin-left: 10px;margin-right: 5px"
           />
         </span>
         <span>
           Skip button
-          <toggle-button @change="onChangeEventHandler" style="margin-left: 10px" />
+          <toggle-button  style="margin-left: 10px" />
         </span>
       </div>
-      <div class="form-group">
+       <div class="form-group mt-1">
         <b>Options</b>
       </div>
       <div class="row">
+       
         <div class="col-sm-6" style="margin-bottom:10px">
-          <input type="text" class="form-control" placeholder="Sample Option" />
+          <input type="text" v-model="option" class="form-control" placeholder="Sample Option" />
         </div>
         <div class="col-sm-3" style="margin-bottom:10px">
-          <span class="btn btn-success" @click="addMsel">+</span>
+          <span class="btn btn-success" @click="addMsel()">+</span>
         </div>
       </div>
-      <div class="row sample" v-for="(div, msel) in msel" v-bind:key="msel">
+      <div class="row mt-1 sample" v-for="(div, msel) in msel" v-bind:key="msel">
         <div class="col-sm-6" style="margin-bottom:10px">
-          <input type="text" class="form-control" placeholder="Sample Option" />
+        <h5 class="pl-2"> {{div.option}}</h5>
         </div>
         <div class="col-sm-3">
           <span class="btn btn-danger" style="width:35px" @click="deleteMsel(msel)">-</span>
@@ -55,6 +56,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      option:'',
        msel: [],
       selecteditor: ClassicEditor,
       selectdata: "",
@@ -65,12 +67,15 @@ export default {
   methods: {
     oncheange(event){
            this.data=event;
-           console.log("==>",this.data)
-          this.$emit('changedata',this.data)
+           let obj={data:event,option:this.msel}
+           console.log("==>", obj)
+          this.$emit('changedata',obj)
 
      },
     addMsel() {
-      this.msel.push({});
+      this.msel.push({question:this.option,answer:''});
+      console.log(this.msel)
+      this.option='';
     },
     deleteMsel(msel) {
       this.msel.splice(msel, 1);

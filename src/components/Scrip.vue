@@ -134,7 +134,7 @@
                 </div>
                 </div>
               </draggable>
-               <b-modal id="modal-1" >
+               <b-modal id="modal-1" @ok="handleOk" >
     <div class="d-block">Edit box</div>
   {{msg}}
     <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
@@ -176,6 +176,7 @@
 </template>
 
 <script>
+
 import draggable from "vuedraggable";
 import Message from "./Message";
 import TextEditor from "./TextEditor";
@@ -225,6 +226,7 @@ export default {
       );
 },
   methods: {
+    
        log: function(evt) {
       window.console.log(evt);
     },
@@ -247,13 +249,44 @@ export default {
           open(data,i){
             this.msg = ''
             this.showModal = true
-
             console.log(data,i)
             this.currentdata = data
-
               this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
-
           },
+          handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        // console.log("working success",bvModalEvt)
+         this.axios.get('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/')
+         .then(res=>{
+           
+           console.log(res.data,this.currentdata.id)
+           console.log("msg==>",this.msg)
+          let obj=res.data 
+           if(this.msg.data){
+             obj.eoc = '1'
+           obj.is_subquestion = '1'
+           obj.placeholder = this.msg.data;
+           obj.subquestion = this.msg.option
+           }else{
+             obj.placeholder = this.msg;
+           }
+           console.log(obj)
+           this.axios.put('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/',obj)
+         .then(res=>{
+           console.log("success res ==>",res.data)
+           this.init()
+this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
+          
+         }).catch(e=>{
+           alert("unable to get server")
+         })
+         
+         }).catch(e=>{
+           alert("unable to get server")
+         })
+          
+      
+        },
           deletedata(id){
               console.log("delete id ",id)
               this.axios.delete('http://192.168.100.144:8001/api/script/'+id+"/")
@@ -1058,6 +1091,12 @@ this.axios
 
   }
 };
+Vue.filter('striphtml', function (value) {
+  var div = document.createElement("div");
+  div.innerHTML = value;
+  var text = div.textContent || div.innerText || "";
+  return text;
+});
 </script>
 <style scoped>
 .form-builder {
