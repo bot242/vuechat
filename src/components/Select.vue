@@ -13,7 +13,7 @@
 
       <ckeditor @input="oncheange(selectdata)"  :editor="selecteditor" v-model="selectdata" :config="editorConfig"></ckeditor>
             </div>
-      <div class="form-check">
+      <!-- <div class="form-check">
         <span>
           Back button
           <toggle-button
@@ -25,7 +25,7 @@
           Skip button
           <toggle-button  style="margin-left: 10px" />
         </span>
-      </div>
+      </div> -->
        <div class="form-group mt-1">
         <b>Options</b>
       </div>
@@ -40,7 +40,7 @@
       </div>
       <div class="row mt-1 sample" v-for="(div, msel) in msel" v-bind:key="msel">
         <div class="col-sm-6" style="margin-bottom:10px">
-        <h5 class="pl-2"> {{div.option}}</h5>
+        <h5 class="pl-2"> {{div.question}}</h5>
         </div>
         <div class="col-sm-3">
           <span class="btn btn-danger" style="width:35px" @click="deleteMsel(msel)">-</span>
@@ -73,7 +73,7 @@ export default {
 
      },
     addMsel() {
-      this.msel.push({question:this.option,answer:''});
+      this.msel.push({question:this.option});
       console.log(this.msel)
       this.option='';
     },

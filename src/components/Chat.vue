@@ -2,7 +2,7 @@
   <div class="container-fluid bg">
     <h1 class="headline">Vue.js Chat Box</h1>
     <main>
-      <div class="img-avtor">
+      <div class="img-avtor"> 
         <div v-if="showChat" class="chat-box">
           <div class="close-icon bg-info text-white">
             <span class="float-left">Bot</span>
@@ -18,9 +18,26 @@
               class="message"
               :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
             >
-              <span v-if="message.incomming">{{ message.res.placeholder.replace(/<[^>]+>/g, '') }}</span>
-              <span v-if="!message.incomming">{{message.msg}}</span>
+              <span v-if="message.incomming && message.res.placeholder">
+                {{ message.res.placeholder.replace(/<[^>]+>/g, '') }}</span>
+              <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
             </p>
+            <div class="col-md-12"  v-if="currentobj.showmodal == 'showOption: true'">
+          <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
+          <input type="checkbox"  id="primary" class="badgebox">
+             <span class="badge">&check;</span>Primary</label>
+             <label for="primary"  class="btn btn-primary btn-sm mr-1 mt-2"> 
+          <input type="checkbox"   id="primary" class="badgebox">
+             <span class="badge">&check;</span>Primary</label>
+             <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
+          <input type="checkbox"   id="primary" class="badgebox">
+             <span class="badge">&check;</span>Primary</label>
+             <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
+          <input type="checkbox"   id="primary" class="badgebox">
+             <span class="badge">&check;</span>Primary</label>
+            </div>
+
+              
             <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
           </div>
 
@@ -125,19 +142,22 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showOption: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="bobMessage='work';sendMessage('out')"
               id="person2-form"
-              class="row px-1"
+              class="row text-center px-1"
             >
-              <b-form-select
+              <!-- <b-form-select
                 v-model="bobMessage"
                 :options="optionsss"
                 multiple
                 :select-size="4"
                 id="person2-input"
                 class="col-md-7 mr-2"
-              ></b-form-select>
-              <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
+              ></b-form-select> -->
+               
+	    
+      
+              <button class="btn btn-sm btn-success mt" style="height:30px"  type="submit">Send</button>
             </form>
             <form
               v-if="currentobj.showmodal == 'showSelect: true'"
@@ -195,7 +215,7 @@ export default {
         { value: "a", text: "This is First option" },
         { value: "b", text: "Default Selected Option" },
         { value: "c", text: "This is another option" },
-        { value: "d", text: "This one is disabled", disabled: true },
+        { value: "d", text: "This one is disabled"},
         { value: "e", text: "This is option e" },
         { value: "f", text: "This is option f" },
         { value: "g", text: "This is option g" }
@@ -218,21 +238,45 @@ export default {
             "/"
         )
         .then(response => {
+
           this.chatloading = false;
           let incomming = response.data;
           console.log("==>", incomming);
+         
           let obj = {
             incomming: true,
             res: incomming[this.chatcurrentpostion]
           };
-          this.currentobj = incomming[this.chatcurrentpostion];
-          if (incomming.length - 1 == this.chatcurrentpostion) {
+          if(incomming[this.chatcurrentpostion]){
+       this.currentobj = incomming[this.chatcurrentpostion];
+          }else{
+            return ;
+          }
+          if(this.currentobj.showmodal == 'showSelect: true' ){
+            this.axios.get('http://192.168.100.144:8001/api/subquestionadd/'+this.currentobj.id+'/')
+          .then(res =>{
+            console.log(res.data)
+            let data = res.data
+            this.optionsss = []
+            data.forEach(item => {
+                     let obj = {value:item.answer,text:item.question}
+                     this.optionsss.push(obj)
+            });
+              console.log(this.optionsss)
+
+          })
+          }
+          console.log("current obj",this.currentobj)
+           console.log("array postion",incomming.length-1,'<',this.chatcurrentpostion   )
+         if (incomming.length-1 <  this.chatcurrentpostion) {
             return;
           } else {
             this.messages.push(obj);
             this.chatcurrentpostion++;
           }
 
+        
+         
           console.log("bot-name", this.messages);
         })
         .catch(e => {
@@ -241,17 +285,16 @@ export default {
         });
     },
     sendMessage(direction) {
-         this.currentobj.showmodal = ''
-      console.log(direction, this.bobMessage);
+      console.log(direction,'==>', this.bobMessage);
       let obj = { incomming: false, msg: this.bobMessage };
+      this.currentobj.answer = this.bobMessage
+      this.axios.patch('http://192.168.100.144:8001/api/mainanswer/'+this.currentobj.id+'/',this.currentobj)
+      .then(res =>{
+       console.log('answer putted success',res.data )
+      })
       this.messages.push(obj);
-      // if (!this.bobMessage) {
-      //   return
-      // }
-      // if (direction === 'out') {
-      //   this.messages.push({body: this.bobMessage, author: 'bob'})
       console.log("Message", this.messages);
-      this.loadMsg();
+        this.loadMsg();
       this.bobMessage = "";
       // }
       Vue.nextTick(() => {

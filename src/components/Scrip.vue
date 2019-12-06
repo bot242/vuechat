@@ -24,7 +24,7 @@
 
                   <li class="card-shadow question-list" @click="addSelect" id="4">
                     <i class="fas fa-check-circle"></i>
-                    Multi Select
+                    Select
                   </li>
 
                   <li class="card-shadow question-list" @click="addNumber" id="5">
@@ -32,6 +32,41 @@
                     Number
                   </li>
 
+                </ul>
+              </b-col>
+
+              <b-col cols="6" md="6" sm="6">
+                <ul>
+                  <li class="card-shadow question-list" @click="addOption" id="8">
+                    <i class="far fa-stop-circle"></i>
+                   Multi Options
+                  </li>
+
+                  <li class="card-shadow question-list" @click="addEmail" id="9">
+                    <i class="fas fa-envelope-square"></i>
+                    Email
+                  </li>
+
+                  <!-- <li class="card-shadow question-list" @click="addBooking" id="10">
+                    <i class="far fa-clock"></i>
+                    Appointment
+                  </li> -->
+
+                  <li class="card-shadow question-list" @click="addList" id="11">
+                    <i class="far fa-list-alt"></i>
+                    List
+                  </li>
+
+                  <!-- <li class="card-shadow question-list" @click="addRange" id="12">
+                    <i class="fas fa-sliders-h"></i>
+                    Range
+                  </li>
+
+                  <li class="card-shadow question-list" @click="addScale" id="13">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Opinion Scale
+                  </li> -->
+                  
                   <li class="card-shadow question-list" @click="addRating" id="6">
                     <i class="fas fa-star-half-alt"></i>
                     Rating
@@ -40,40 +75,6 @@
                   <li class="card-shadow question-list" @click="addLink" id="7">
                     <i class="fas fa-link"></i>
                     Links
-                  </li>
-                </ul>
-              </b-col>
-
-              <b-col cols="6" md="6" sm="6">
-                <ul>
-                  <li class="card-shadow question-list" @click="addOption" id="8">
-                    <i class="far fa-stop-circle"></i>
-                    Multi Choice
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addEmail" id="9">
-                    <i class="fas fa-envelope-square"></i>
-                    Email
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addBooking" id="10">
-                    <i class="far fa-clock"></i>
-                    Appointment
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addList" id="11">
-                    <i class="far fa-list-alt"></i>
-                    List
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addRange" id="12">
-                    <i class="fas fa-sliders-h"></i>
-                    Range
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addScale" id="13">
-                    <i class="fas fa-tachometer-alt"></i>
-                    Opinion Scale
                   </li>
 
                   <li class="card-shadow question-list" @click="addFile" id="14">
@@ -268,23 +269,33 @@ export default {
            obj.placeholder = this.msg.data;
            obj.subquestion = this.msg.option
            }else{
-             obj.placeholder = this.msg;
+             obj.placeholder = this.msg;  
            }
            console.log(obj)
-           this.axios.put('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/',obj)
+           //'http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/' 
+             let id=localStorage.getItem('id')
+            let botid=localStorage.getItem("bot_id")
+           this.axios.patch('http://192.168.100.144:8001/api/scriptdetails/'+id+'/'+botid+'/',obj)
          .then(res=>{
-           console.log("success res ==>",res.data)
+            console.log("success res ==>",res.data)
+           this.axios.put('http://192.168.100.144:8001/api/subquestionadd/'+this.currentdata.id+'/',obj)
+             .then(item =>{
+               console.log("sub question ==>", item)
+             }).catch(e=>{
+           console.log("sub question ==>",e)
+         })
+          
            this.init()
 this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
           
          }).catch(e=>{
            alert("unable to get server")
          })
-         
+          
          }).catch(e=>{
            alert("unable to get server")
          })
-          
+           
       
         },
           deletedata(id){

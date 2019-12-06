@@ -14,7 +14,7 @@
       <ckeditor  @input="oncheange(optiondata)" :editor="optioneditor" v-model="optiondata" :config="editorConfig"></ckeditor>
             </div>
 
-      <div class="form-check">
+      <!-- <div class="form-check">
         <span>
           Back button
           <toggle-button
@@ -26,7 +26,7 @@
           Skip button
           <toggle-button @change="onChangeEventHandler" style="margin-left: 10px" />
         </span>
-      </div>
+      </div> -->
       <div class="form-group">
         <b>Options</b>
       </div>
