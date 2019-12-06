@@ -72,10 +72,10 @@
                     Rating
                   </li>
 
-                  <li class="card-shadow question-list" @click="addLink" id="7">
+                  <!-- <li class="card-shadow question-list" @click="addLink" id="7">
                     <i class="fas fa-link"></i>
                     Links
-                  </li>
+                  </li> -->
 
                   <li class="card-shadow question-list" @click="addFile" id="14">
                     <i class="fas fa-upload"></i>
@@ -248,7 +248,7 @@ export default {
           },
 
           open(data,i){
-            this.msg = ''
+             this.msg = ''
             this.showModal = true
             console.log(data,i)
             this.currentdata = data

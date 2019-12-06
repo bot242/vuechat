@@ -22,19 +22,46 @@
                 {{ message.res.placeholder.replace(/<[^>]+>/g, '') }}</span>
               <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
             </p>
+
+                <div class="row" v-if="currentobj.showmodal == 'showRating: true'">
+                  <div class="col-md-12">
+                  <img src="../assets/Capture5.png" v-b-tooltip.hover title="Terrible"
+                    @click="bobMessage='Terrible';sendMessage('out')" style="width:35px" alt="emoji">
+                    <img src="../assets/Capture2.png"  v-b-tooltip.hover title="Bad"
+                     @click="bobMessage='Bad';sendMessage('out')"  style="width:35px" alt="emoji">
+                     <img src="../assets/Capture4.png"  v-b-tooltip.hover title="Okay"
+                      @click="bobMessage='Okay';sendMessage('out')"  style="width:35px" alt="emoji">
+                      <img src="../assets/Capture3.png"  v-b-tooltip.hover title="Good"
+                       @click="bobMessage='Good';sendMessage('out')"  style="width:35px" alt="emoji">
+                       <img src="../assets/Capture1.png"  v-b-tooltip.hover title="Awesome"
+                        @click="bobMessage='Awesome';sendMessage('out')"  style="width:35px" alt="emoji">
+                  </div>
+                   
+                  
+
+                </div>
+             <div class="row" v-if="currentobj.showmodal == 'showList: true'">
+              <div class="col-md-7">
+               <b-list-group>
+                <b-list-group-item v-for="datas in optionsss" :key="datas.id"  @click="bobMessage=datas.text ;sendMessage('out')">{{datas.text}}</b-list-group-item>
+               
+              </b-list-group>
+              </div>
+                <!-- <div class="col-md-4">
+                   <button class="btn btn-sm btn-success mt" style="height:30px" 
+                     @click="bobMessage='continue';sendMessage('out')">continue</button>
+                </div> -->
+            </div>
             <div class="col-md-12"  v-if="currentobj.showmodal == 'showOption: true'">
-          <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
-          <input type="checkbox"  id="primary" class="badgebox">
-             <span class="badge">&check;</span>Primary</label>
-             <label for="primary"  class="btn btn-primary btn-sm mr-1 mt-2"> 
-          <input type="checkbox"   id="primary" class="badgebox">
-             <span class="badge">&check;</span>Primary</label>
-             <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
-          <input type="checkbox"   id="primary" class="badgebox">
-             <span class="badge">&check;</span>Primary</label>
-             <label for="primary" class="btn btn-primary btn-sm mr-1 mt-2"> 
-          <input type="checkbox"   id="primary" class="badgebox">
-             <span class="badge">&check;</span>Primary</label>
+              <h5>Select Multiple Option </h5>
+          <label 
+          v-for="datas in optionsss"
+          :key="datas.id" 
+           v-bind:for="datas.text" class="btn btn-primary btn-sm mr-1 mt-2"> 
+          <input @change="added(datas.text,$event)"   type="checkbox" 
+         v-bind:id="datas.text" class="badgebox">
+             <span class="badge">&check;</span>{{datas.text}}</label>
+           
             </div>
 
               
@@ -87,6 +114,8 @@
               />
               <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
             </form>
+
+
             <form
               v-if="currentobj.showmodal == 'showNumber: true'"
               @submit.prevent="sendMessage('out')"
@@ -142,7 +171,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showOption: true'"
-              @submit.prevent="bobMessage='work';sendMessage('out')"
+              @submit.prevent="sendMessage('out')"
               id="person2-form"
               class="row text-center px-1"
             >
@@ -173,21 +202,7 @@
               ></b-form-select>
               <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
             </form>
-            <div class="row" v-if="currentobj.showmodal == 'showList: true'">
-              <div class="col-md-7">
-               <b-list-group>
-                <b-list-group-item>Cras justo odio</b-list-group-item>
-                <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-                <b-list-group-item>Morbi leo risus</b-list-group-item>
-                <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-                <b-list-group-item>Vestibulum at eros</b-list-group-item>
-              </b-list-group>
-              </div>
-                <div class="col-md-4">
-                   <button class="btn btn-sm btn-success mt" style="height:30px" 
-                     @click="bobMessage='continue';sendMessage('out')">continue</button>
-                </div>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -204,42 +219,40 @@ import axios from "axios";
 export default {
   data() {
     return {
+      checkvalues:'',
       bobMessage: "",
       youMessage: "",
       showChat: false,
       messages: [],
+       temp : [],
       chatloading: true,
       chatcurrentpostion: 0,
       currentobj: "",
-      optionsss: [
-        { value: "a", text: "This is First option" },
-        { value: "b", text: "Default Selected Option" },
-        { value: "c", text: "This is another option" },
-        { value: "d", text: "This one is disabled"},
-        { value: "e", text: "This is option e" },
-        { value: "f", text: "This is option f" },
-        { value: "g", text: "This is option g" }
+      optionsss: [  
       ]
     };
   },
   methods: {
+    added(data,event){
+    console.log(data,event.target.checked) 
+    if(event.target.checked){
+    this.bobMessage +=  data + " "
+    }
+   
+
+    },
     loadMsg() {
       this.showChat = true;
       this.chatloading = true;
       let bot_id = localStorage.getItem("bot_id");
       let user_id = localStorage.getItem("id");
       axios
-        .get(
-          "http://192.168.100.144:8001/api/scriptdetails" +
-            "/" +
-            user_id +
-            "/" +
-            bot_id +
-            "/"
-        )
+        .get("http://192.168.100.144:8001/api/scriptdetails" + "/" + user_id + "/" + bot_id +  "/"  )
         .then(response => {
-
-          this.chatloading = false;
+         
+             this.chatloading = false;
+      
+        
           let incomming = response.data;
           console.log("==>", incomming);
          
@@ -250,25 +263,35 @@ export default {
           if(incomming[this.chatcurrentpostion]){
        this.currentobj = incomming[this.chatcurrentpostion];
           }else{
+            console.log("return")
+            this.currentobj.showmodal = 'false';
+            this.currentobj.placeholder = 'end';
+            let objss = {
+            incomming: true,
+            res: this.currentobj
+            }
+             this.messages.push(objss);
             return ;
           }
-          if(this.currentobj.showmodal == 'showSelect: true' ){
+         console.log("current obj",this.currentobj.id)
+          if(this.currentobj.showmodal == 'showSelect: true' || this.currentobj.showmodal == 'showOption: true' ){
             this.axios.get('http://192.168.100.144:8001/api/subquestionadd/'+this.currentobj.id+'/')
           .then(res =>{
-            console.log(res.data)
+            console.log("options ==>", res.data)
             let data = res.data
             this.optionsss = []
             data.forEach(item => {
-                     let obj = {value:item.answer,text:item.question}
+                     let obj = {value:item.question,text:item.question,id:item.id}
                      this.optionsss.push(obj)
             });
               console.log(this.optionsss)
 
           })
           }
-          console.log("current obj",this.currentobj)
+          
            console.log("array postion",incomming.length-1,'<',this.chatcurrentpostion   )
          if (incomming.length-1 <  this.chatcurrentpostion) {
+         
             return;
           } else {
             this.messages.push(obj);
@@ -288,13 +311,22 @@ export default {
       console.log(direction,'==>', this.bobMessage);
       let obj = { incomming: false, msg: this.bobMessage };
       this.currentobj.answer = this.bobMessage
+     
       this.axios.patch('http://192.168.100.144:8001/api/mainanswer/'+this.currentobj.id+'/',this.currentobj)
       .then(res =>{
+     
        console.log('answer putted success',res.data )
       })
+ this.chatloading = true;
+       setTimeout(() => {
       this.messages.push(obj);
       console.log("Message", this.messages);
-        this.loadMsg();
+      
+     
+         this.chatloading = false;
+         this.loadMsg();
+      }, 1000);
+       
       this.bobMessage = "";
       // }
       Vue.nextTick(() => {
@@ -448,4 +480,6 @@ Vue.filter("striphtml", function(value) {
 #person2-input {
   padding: 0.5em;
 }
+
+
 </style>

@@ -31,17 +31,18 @@
         <b>Options</b>
       </div>
 
-      <div class="row mb-3">
-        <div class="col-sm-6">
-          <input type="text" class="form-control" placeholder="Sample Option" />
+     <div class="row">
+       
+        <div class="col-sm-6" style="margin-bottom:10px">
+          <input type="text" v-model="option" class="form-control" placeholder="Sample Option" />
         </div>
-        <div class="col-sm-3">
-          <span class="btn btn-success" @click="addMcho">+</span>
+        <div class="col-sm-3" style="margin-bottom:10px">
+          <span class="btn btn-success" @click="addMcho()">+</span>
         </div>
       </div>
-      <div class="row sample mb-3" v-for="(div, mcho) in mcho" v-bind:key="mcho">
-        <div class="col-sm-6">
-          <input type="text" class="form-control" placeholder="Sample Option" />
+      <div class="row mt-1 sample" v-for="(div, mcho) in mcho" v-bind:key="mcho">
+        <div class="col-sm-6" style="margin-bottom:10px">
+        <h5 class="pl-2"> {{div.question}}</h5>
         </div>
         <div class="col-sm-3">
           <span class="btn btn-danger" style="width:35px" @click="deleteMcho(mcho)">-</span>
@@ -57,6 +58,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      option:'',
       mcho: [],
       optioneditor: ClassicEditor,
       optiondata: "",
@@ -65,13 +67,15 @@ export default {
   },
   methods: {
     oncheange(event){
-           this.data=event;
-           console.log("==>",this.data)
-          this.$emit('changedata',this.data)
-
+        this.data=event;
+           let obj={data:event,option:this.mcho}
+           console.log("==>", obj)
+          this.$emit('changedata',obj)
      },
     addMcho() {
-      this.mcho.push({});
+      this.mcho.push({question:this.option});
+      console.log(this.mcho)
+      this.option='';
     },
     deleteMcho(mcho) {
       this.mcho.splice(mcho, 1);
