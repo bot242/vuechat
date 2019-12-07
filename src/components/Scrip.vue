@@ -72,10 +72,10 @@
                     Rating
                   </li>
 
-                  <li class="card-shadow question-list" @click="addLink" id="7">
+                  <!-- <li class="card-shadow question-list" @click="addLink" id="7">
                     <i class="fas fa-link"></i>
                     Links
-                  </li>
+                  </li> -->
 
                   <li class="card-shadow question-list" @click="addFile" id="14">
                     <i class="fas fa-upload"></i>
@@ -93,7 +93,7 @@
                   script types
                 </a>
               </p>
-              <a href="/5d6605aac153a1688892bbd2/builder/preview">
+              <a href="/chat">
                 <button class="btn btn-blue form-big-input w-200">Preview Bot</button>
               </a>
             </div>
@@ -248,7 +248,7 @@ export default {
           },
 
           open(data,i){
-            this.msg = ''
+             this.msg = ''
             this.showModal = true
             console.log(data,i)
             this.currentdata = data
@@ -266,8 +266,9 @@ export default {
            if(this.msg.data){
              obj.eoc = '1'
            obj.is_subquestion = '1'
-          //  let a= this.msg.data.replace(/<[^>]+>/g, '')  
-           obj.placeholder = this.msg.data;
+           let a= this.msg.data.replace(/<[^>]+>/g, '')  
+           console.log("ssasdad",a)
+           obj.placeholder = a;
            obj.subquestion = this.msg.option
            }else{
              obj.placeholder = this.msg;  
