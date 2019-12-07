@@ -19,7 +19,7 @@
               :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
             >
               <span v-if="message.incomming && message.res.placeholder">
-                {{ message.res.placeholder.replace(/<[^>]+>/g, '') }}</span>
+                {{ message.res.placeholder}}</span>
               <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
             </p>
             <div class="col-md-12"  v-if="currentobj.showmodal == 'showOption: true'">
@@ -290,7 +290,7 @@ export default {
       this.currentobj.answer = this.bobMessage
       this.axios.patch('http://192.168.100.144:8001/api/mainanswer/'+this.currentobj.id+'/',this.currentobj)
       .then(res =>{
-       console.log('answer putted success',res.data )
+       console.log('answer putted success 1',res.data )
       })
       this.messages.push(obj);
       console.log("Message", this.messages);

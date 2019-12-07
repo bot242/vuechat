@@ -176,7 +176,7 @@ export default {
       console.log("ssss", ...formData);
       axios
         .patch(
-          "http://192.168.100.144:8001/api/bot/" + this.use + "/",
+          "http://192.168.100.144:8001/api/chatbots/" + this.use + "/",
           formData,
           {
             headers: {
@@ -185,17 +185,21 @@ export default {
             }
           }
         )
-        .then(function(data) {
-          console.log("adddaaaa", data.data);
-        })
-        .catch(function() {
-          console.log("FAILURE!!");
-        });
-      axios
-        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .then((data) =>{
+        console.log("post-result3", data.data);
+         this.axios
+      .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
         .then(response =>
           console.log("bot-name", (this.botcount = response.data))
-        );
+      );
+        }).catch(() => {
+        console.log("FAILURE!!");
+      });
+      // axios
+      //   .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+      //   .then(response =>
+      //     console.log("bot-name", (this.botcount = response.data))
+      //   );
       this.name = "";
     },
     onChange(event) {

@@ -266,6 +266,7 @@ export default {
            if(this.msg.data){
              obj.eoc = '1'
            obj.is_subquestion = '1'
+          //  let a= this.msg.data.replace(/<[^>]+>/g, '')  
            obj.placeholder = this.msg.data;
            obj.subquestion = this.msg.option
            }else{
@@ -502,7 +503,7 @@ let obj = {
         	bot:boot,
           user:usr,
       };
-      console.log("obj",obj)
+      console.log("obj asd",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
