@@ -266,7 +266,7 @@
                   src="../assets/images/emoji/Capture5.png"
                   v-b-tooltip.hover
                   title="Terrible"
-                  @click="bobMessage='Terrible';sendMessage('out')"
+                  @click="bobMessage='Terrible';sendMsg('out')"
                   style="width:35px"
                   alt="emoji"
                 />
@@ -274,7 +274,7 @@
                   src="../assets/images/emoji/Capture2.png"
                   v-b-tooltip.hover
                   title="Bad"
-                  @click="bobMessage='Bad';sendMessage('out')"
+                  @click="bobMessage='Bad';sendMsg('out')"
                   style="width:35px"
                   alt="emoji"
                 />
@@ -282,7 +282,7 @@
                   src="../assets/images/emoji/Capture4.png"
                   v-b-tooltip.hover
                   title="Okay"
-                  @click="bobMessage='Okay';sendMessage('out')"
+                  @click="bobMessage='Okay';sendMsg('out')"
                   style="width:35px"
                   alt="emoji"
                 />
@@ -290,7 +290,7 @@
                   src="../assets/images/emoji/Capture3.png"
                   v-b-tooltip.hover
                   title="Good"
-                  @click="bobMessage='Good';sendMessage('out')"
+                  @click="bobMessage='Good';sendMsg('out')"
                   style="width:35px"
                   alt="emoji"
                 />
@@ -298,7 +298,7 @@
                   src="../assets/images/emoji/Capture1.png"
                   v-b-tooltip.hover
                   title="Awesome"
-                  @click="bobMessage='Awesome';sendMessage('out')"
+                  @click="bobMessage='Awesome';sendMsg('out')"
                   style="width:35px"
                   alt="emoji"
                 />
@@ -310,13 +310,13 @@
                   <b-list-group-item
                     v-for="datas in optionsss"
                     :key="datas.id"
-                    @click="bobMessage=datas.text ;sendMessage('out')"
+                    @click="bobMessage=datas.text ;sendMsg('out')"
                   >{{datas.text}}</b-list-group-item>
                 </b-list-group>
               </div>
               <!-- <div class="col-md-4">
                    <button class="btn btn-sm btn-success mt" style="height:30px" 
-                     @click="bobMessage='continue';sendMessage('out')">continue</button>
+                     @click="bobMessage='continue';sendMsg('out')">continue</button>
               </div>-->
             </div>
             <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
@@ -344,7 +344,7 @@
           <div class="texting">
             <form
               v-if="currentobj.showmodal == 'showModal: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -359,7 +359,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showText: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -374,7 +374,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showDate: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -390,7 +390,7 @@
 
             <form
               v-if="currentobj.showmodal == 'showNumber: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -408,18 +408,18 @@
               <div class="col-md-7">
                 <button
                   class="btn btn-primary"
-                  @click="bobMessage='link1';sendMessage('out')"
+                  @click="bobMessage='link1';sendMsg('out')"
                 >link 1</button>
                 <button
                   class="btn btn-primary mt-2"
-                  @click="bobMessage='link2';sendMessage('out')"
+                  @click="bobMessage='link2';sendMsg('out')"
                 >link 2</button>
               </div>
               <!-- <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button> -->
             </div>
             <form
               v-if="currentobj.showmodal == 'showEmail: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -434,7 +434,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showFile: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -443,7 +443,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showOption: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row text-center px-1"
             >
@@ -460,7 +460,7 @@
             </form>
             <form
               v-if="currentobj.showmodal == 'showSelect: true'"
-              @submit.prevent="sendMessage('out')"
+              @submit.prevent="sendMsg('out')"
               id="person2-form"
               class="row px-1"
             >
@@ -775,6 +775,37 @@ export default {
 
         this.chatloading = false;
         this.loadMsg();
+      }, 1000);
+
+      this.bobMessage = "";
+      // }
+      Vue.nextTick(() => {
+        let messageDisplay = this.$refs.chatArea;
+        messageDisplay.scrollTop = messageDisplay.scrollHeight;
+      });
+    },
+    sendMsg(direction) {
+      console.log(direction, "==>", this.bobMessage);
+      let obj = { incomming: false, msg: this.bobMessage };
+      this.currentobj.answer = this.bobMessage;
+
+      this.axios
+        .patch(
+          "http://192.168.100.144:8001/api/mainanswer/" +
+            this.currentobj.id +
+            "/",
+          this.currentobj
+        )
+        .then(res => {
+          console.log("answer putted success", res.data);
+        });
+      this.chatloading = true;
+      setTimeout(() => {
+        this.messages.push(obj);
+        console.log("Message", this.messages);
+
+        this.chatloading = false;
+        this.loadMsd();
       }, 1000);
 
       this.bobMessage = "";

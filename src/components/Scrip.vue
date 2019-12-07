@@ -137,7 +137,6 @@
               </draggable>
                <b-modal id="modal-1" @ok="handleOk" >
     <div class="d-block">Edit box</div>
-  {{msg}}
     <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
 
     <TextEditor @changedata="msg =$event" v-if="currentdata.showmodal == 'showText: true'" />

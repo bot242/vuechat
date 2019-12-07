@@ -50,11 +50,33 @@ export default {
     return {
       dateeditor: ClassicEditor,
       datedata: "",
+      datas:"",
       editorConfig: {}
     };
   },
+  mounted(){
+this.init()
+  },
   methods: {
-    onChangeEventHandler() {
+init:function(){
+  var user = JSON.parse(localStorage.getItem("id"));
+      let bid = localStorage.getItem("bot_id");
+  this.axios 
+        .get(
+          "http://192.168.100.144:8001/api/scriptdetails" +
+            "/" +
+            user +
+            "/" +
+            bid +
+            "/"
+        )
+        .then(response => {
+          this.datas = response.data;
+          this.datedata=response.data[0].placeholder
+          console.log("get data  ", this.datedata);
+        });
+},
+onChangeEventHandler() {
       alert("hi");
     },
  oncheange(event){

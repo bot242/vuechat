@@ -49,10 +49,31 @@ export default {
     return {
       emaileditor: ClassicEditor,
       emaildata: "",
-      editorConfig: {}
+      editorConfig: {},
+      datas:''
     };
+  },  mounted(){
+this.email()
   },
   methods: {
+    email:function(){
+  var user = JSON.parse(localStorage.getItem("id"));
+      let bid = localStorage.getItem("bot_id");
+  this.axios 
+        .get(
+          "http://192.168.100.144:8001/api/scriptdetails" +
+            "/" +
+            user +
+            "/" +
+            bid +
+            "/"
+        )
+        .then(response => {
+          this.datas = response.data;
+          this.emaildata=response.data[0].placeholder
+          console.log("get data  ", this.emaildata);
+        });
+}, 
     oncheange(event){
            this.data=event;
            console.log("==>",this.data)

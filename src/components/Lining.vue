@@ -73,9 +73,31 @@ export default {
       option:'',
       mcho: [],
       optiondata: "",
+      datas:''
     };
   },
+   mounted(){
+this.link()
+  },
   methods: {
+     link:function(){
+  var user = JSON.parse(localStorage.getItem("id"));
+      let bid = localStorage.getItem("bot_id");
+  this.axios 
+        .get(
+          "http://192.168.100.144:8001/api/scriptdetails" +
+            "/" +
+            user +
+            "/" +
+            bid +
+            "/"
+        )
+        .then(response => {
+          this.datas = response.data;
+          this.listdata=response.data[0].placeholder
+          console.log("get data  ", this.listdata);
+        });
+}, 
    oncheange(event){
         this.data=event;
            let obj={data:event,option:this.mcho}

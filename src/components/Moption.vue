@@ -62,10 +62,32 @@ export default {
       mcho: [],
       optioneditor: ClassicEditor,
       optiondata: "",
+      datas:'',
       editorConfig: {}
     };
   },
+   mounted(){
+this.opt()
+  },
   methods: {
+     opt:function(){
+  var user = JSON.parse(localStorage.getItem("id"));
+      let bid = localStorage.getItem("bot_id");
+  this.axios 
+        .get(
+          "http://192.168.100.144:8001/api/scriptdetails" +
+            "/" +
+            user +
+            "/" +
+            bid +
+            "/"
+        )
+        .then(response => {
+          this.datas = response.data;
+          this.optiondata=response.data[0].placeholder
+          console.log("get data  ", this.optiondata);
+        });
+}, 
     oncheange(event){
         this.data=event;
            let obj={data:event,option:this.mcho}

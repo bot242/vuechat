@@ -31,7 +31,28 @@ export default {
       data:''
     }; 
   },
+   mounted(){
+this.msg()
+  },
    methods:{
+      msg:function(){
+  var user = JSON.parse(localStorage.getItem("id"));
+      let bid = localStorage.getItem("bot_id");
+  this.axios 
+        .get(
+          "http://192.168.100.144:8001/api/scriptdetails" +
+            "/" +
+            user +
+            "/" +
+            bid +
+            "/"
+        )
+        .then(response => {
+          this.datas = response.data;
+          this.editorData=response.data[0].placeholder
+          console.log("get data  ", this.editorData);
+        });
+}, 
      oncheange(event){
            this.data=event;
            console.log("==>",this.data)
