@@ -45,6 +45,9 @@
         <div class="col-sm-6" style="margin-bottom:10px">
           <input type="text" v-model="option" class="form-control" placeholder="Sample Option" />
         </div>
+        <div class="col-sm-6" style="margin-bottom:10px">
+          <input type="text" v-model="answer" class="form-control" placeholder="Sample Option" />
+        </div>
         <div class="col-sm-3" style="margin-bottom:10px">
           <span class="btn btn-success" @click="addMcho()">+</span>
         </div>
@@ -52,6 +55,9 @@
       <div class="row mt-1 sample" v-for="(div, mcho) in mcho" v-bind:key="mcho">
         <div class="col-sm-6" style="margin-bottom:10px">
         <h5 class="pl-2"> {{div.question}}</h5>
+        </div>
+        <div class="col-sm-6" style="margin-bottom:10px">
+        <h5 class="pl-2"> {{div.answer}}</h5>
         </div>
         <div class="col-sm-3">
           <span class="btn btn-danger" style="width:35px" @click="deleteMcho(mcho)">-</span>
@@ -73,7 +79,8 @@ export default {
       option:'',
       mcho: [],
       optiondata: "",
-      datas:''
+      datas:'',
+      answer:'',
     };
   },
    mounted(){
@@ -101,11 +108,11 @@ this.link()
    oncheange(event){
         this.data=event;
            let obj={data:event,option:this.mcho}
-           console.log("==>", obj)
+           console.log("==> wsada", obj)
           this.$emit('changedata',obj)
      },
     addMcho() {
-      this.mcho.push({question:this.option});
+      this.mcho.push({question:this.option,answer:this.answer});
       console.log(this.mcho)
       this.option='';
     },

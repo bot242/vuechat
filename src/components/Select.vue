@@ -34,6 +34,9 @@
         <div class="col-sm-6" style="margin-bottom:10px">
           <input type="text" v-model="option" class="form-control" placeholder="Sample Option" />
         </div>
+         <div class="col-sm-6" style="margin-bottom:10px">
+          <input type="text" v-model="answer" class="form-control" placeholder="Sample Option" />
+        </div>
         <div class="col-sm-3" style="margin-bottom:10px">
           <span class="btn btn-success" @click="addMsel()">+</span>
         </div>
@@ -41,6 +44,9 @@
       <div class="row mt-1 sample" v-for="(div, msel) in msel" v-bind:key="msel">
         <div class="col-sm-6" style="margin-bottom:10px">
         <h5 class="pl-2"> {{div.question}}</h5>
+        </div>
+        <div class="col-sm-6" style="margin-bottom:10px">
+        <h5 class="pl-2"> {{div.answer}}</h5>
         </div>
         <div class="col-sm-3">
           <span class="btn btn-danger" style="width:35px" @click="deleteMsel(msel)">-</span>
@@ -56,6 +62,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      answer:"",
       option:'',
        msel: [],
       selecteditor: ClassicEditor,
@@ -95,9 +102,10 @@ this.sel()
 
      },
     addMsel() {
-      this.msel.push({question:this.option});
-      console.log(this.msel)
+      this.msel.push({question:this.option,answer:this.answer});
+      console.log(this.msel,"sucess****")
       this.option='';
+      this.answer='';
     },
     deleteMsel(msel) {
       this.msel.splice(msel, 1);

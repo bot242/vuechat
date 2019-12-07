@@ -269,6 +269,7 @@ export default {
            console.log("ssasdad",a)
            obj.placeholder = a;
            obj.subquestion = this.msg.option
+           console.log("sublits", obj.subquestion)
            }else{
              obj.placeholder = this.msg;  
            }

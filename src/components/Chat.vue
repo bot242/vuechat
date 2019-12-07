@@ -2,504 +2,543 @@
   <div class="container-fluid bg">
     <h1 class="headline">Vue.js Chat Box</h1>
     <main>
-     <div v-for="bot in botcount" :key="bot.id">
-       
-      <div class="img-avtor">
-        <div v-if="showChat" class="chat-box">
-          <div class="close-icon bg-info text-white">
-            <span class="float-left">Bot</span>
-            <span @click="clearAllMessages" class="mr-1">
-              <i class="fa fa-refresh" aria-hidden="true"></i>
-            </span>
-            <span @click="clearAllMessages" class="mr-2">✖</span>
-          </div>
-          <div ref="chatArea" class="chat-area">
-            <p
-              v-for="message in messages"
-              :key="message.id"
-              class="message"
-              :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
-            >
-              <span v-if="message.incomming && message.res.placeholder">{{ message.res.placeholder}}</span>
-              <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
-            </p>
-
-            <div class="row" v-if="currentobj.showmodal == 'showRating: true'">
-              <div class="col-md-12">
-                <img
-                  src="../assets/images/emoji/Capture5.png"
-                  v-b-tooltip.hover
-                  title="Terrible"
-                  @click="bobMessage='Terrible';sendMessage('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture2.png"
-                  v-b-tooltip.hover
-                  title="Bad"
-                  @click="bobMessage='Bad';sendMessage('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture4.png"
-                  v-b-tooltip.hover
-                  title="Okay"
-                  @click="bobMessage='Okay';sendMessage('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture3.png"
-                  v-b-tooltip.hover
-                  title="Good"
-                  @click="bobMessage='Good';sendMessage('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture1.png"
-                  v-b-tooltip.hover
-                  title="Awesome"
-                  @click="bobMessage='Awesome';sendMessage('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-              </div>
+      <div v-for="bot in botcount" :key="bot.id">
+        <div class="img-avtor">
+          <div v-if="showChat" class="chat-box">
+            <div class="close-icon bg-info text-white">
+              <span class="float-left">Bot</span>
+              <span @click="clearAllMessages" class="mr-1">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+              </span>
+              <span @click="clearAllMessages" class="mr-2">✖</span>
             </div>
-            <div class="row" v-if="currentobj.showmodal == 'showList: true'">
-              <div class="col-md-7">
-                <b-list-group>
-                  <b-list-group-item
-                    v-for="datas in optionsss"
-                    :key="datas.id"
-                    @click="bobMessage=datas.text ;sendMessage('out')"
-                  >{{datas.text}}</b-list-group-item>
-                </b-list-group>
+            <div ref="chatArea" class="chat-area">
+              <p
+                v-for="message in messages"
+                :key="message.id"
+                class="message"
+                :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
+              >
+                <span
+                  v-if="message.incomming && message.res.placeholder"
+                >{{ message.res.placeholder}}</span>
+                
+                <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
+              </p>
+
+              <div class="row" v-if="currentobj.showmodal == 'showRating: true'">
+                <div class="col-md-12">
+                  <img
+                    src="../assets/images/emoji/Capture5.png"
+                    v-b-tooltip.hover
+                    title="Terrible"
+                    @click="bobMessage='Terrible';sendMessage('out')"
+                    style="width:35px"
+                    alt="emoji"
+                  />
+                  <img
+                    src="../assets/images/emoji/Capture2.png"
+                    v-b-tooltip.hover
+                    title="Bad"
+                    @click="bobMessage='Bad';sendMessage('out')"
+                    style="width:35px"
+                    alt="emoji"
+                  />
+                  <img
+                    src="../assets/images/emoji/Capture4.png"
+                    v-b-tooltip.hover
+                    title="Okay"
+                    @click="bobMessage='Okay';sendMessage('out')"
+                    style="width:35px"
+                    alt="emoji"
+                  />
+                  <img
+                    src="../assets/images/emoji/Capture3.png"
+                    v-b-tooltip.hover
+                    title="Good"
+                    @click="bobMessage='Good';sendMessage('out')"
+                    style="width:35px"
+                    alt="emoji"
+                  />
+                  <img
+                    src="../assets/images/emoji/Capture1.png"
+                    v-b-tooltip.hover
+                    title="Awesome"
+                    @click="bobMessage='Awesome';sendMessage('out')"
+                    style="width:35px"
+                    alt="emoji"
+                  />
+                </div>
               </div>
-              <!-- <div class="col-md-4">
+              <div class="row" v-if="currentobj.showmodal == 'showList: true'">
+                <div class="col-md-7">
+                  <b-list-group>
+                    <b-list-group-item
+                      v-for="datas in optionsss"
+                      :key="datas.id"
+                      @click="bobMessage=datas.ans ;sendMessage('out')"
+                    >
+                    {{ datas.text }}
+                    
+                    </b-list-group-item>
+                  </b-list-group>
+                </div>
+                <!-- <div class="col-md-4">
                    <button class="btn btn-sm btn-success mt" style="height:30px" 
                      @click="bobMessage='continue';sendMessage('out')">continue</button>
-              </div>-->
+                </div>-->
+              </div>
+              <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
+                <h5>Select Multiple Option</h5>
+                <label
+                  v-for="datas in optionsss"
+                  :key="datas.id"
+                  v-bind:for="datas.ans"
+                  class="btn btn-primary btn-sm mr-1 mt-2"
+                >
+                  <input
+                    @change="added(datas.ans,$event)"
+                    type="checkbox"
+                    v-bind:id="datas.text"
+                    class="badgebox"
+                  />
+                  <span class="badge">&check;</span>
+                  {{ datas.text }}
+                </label>
+              </div>
+
+              <div class="col-md-12" v-if="currentobj.showmodal == 'showSelect: true'">
+                <h5>Select one Option</h5>
+                <label
+                  v-for="datas in optionsss"
+                  :key="datas.id"
+                  v-bind:for="datas.ans"
+                  class="btn btn-primary btn-sm mr-1 mt-2"
+                >
+                  <input
+                    @change="added(datas.ans,$event)"
+                    type="checkbox"
+                    v-bind:id="datas.text"
+                    class="badgebox"
+                  />
+                  <span class="badge">&check;</span>
+                  {{datas.text}}
+                </label>
+              </div>
+
+              <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
             </div>
-            <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
-              <h5>Select Multiple Option</h5>
-              <label
-                v-for="datas in optionsss"
-                :key="datas.id"
-                v-bind:for="datas.text"
-                class="btn btn-primary btn-sm mr-1 mt-2"
+
+            <div class="texting">
+              <form
+                v-if="currentobj.showmodal == 'showModal: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
               >
                 <input
-                  @change="added(datas.text,$event)"
-                  type="checkbox"
-                  v-bind:id="datas.text"
-                  class="badgebox"
+                  v-model="bobMessage"
+                  id="person2-input"
+                  type="text"
+                  class="form-control col-md-7 mr-2"
+                  placeholder="Type your message"
                 />
-                <span class="badge">&check;</span>
-                {{datas.text}}
-              </label>
-            </div>
+                <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+              </form>
+              <form
+                v-if="currentobj.showmodal == 'showText: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
+              >
+                <textarea
+                  v-model="bobMessage"
+                  id="person2-input"
+                  class="form-control col-md-7 mr-2"
+                  rows="2"
+                  placeholder="Type your message"
+                ></textarea>
+                <button class="btn btn-sm btn-success mt-1" style="height:30px" type="submit">Send</button>
+              </form>
+              <form
+                v-if="currentobj.showmodal == 'showDate: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
+              >
+                <input
+                  v-model="bobMessage"
+                  id="person2-input"
+                  type="date"
+                  class="form-control col-md-7 mr-2"
+                  placeholder="Type your message"
+                />
+                <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+              </form>
 
-            <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
-          </div>
-
-          <div class="texting">
-            <form
-              v-if="currentobj.showmodal == 'showModal: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="text"
-                class="form-control col-md-7 mr-2"
-                placeholder="Type your message"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showText: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <textarea
-                v-model="bobMessage"
-                id="person2-input"
-                class="form-control col-md-7 mr-2"
-                rows="2"
-                placeholder="Type your message"
-              ></textarea>
-              <button class="btn btn-sm btn-success mt-1" style="height:30px" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showDate: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="date"
-                class="form-control col-md-7 mr-2"
-                placeholder="Type your message"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-
-            <form
-              v-if="currentobj.showmodal == 'showNumber: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="number"
-                class="form-control col-md-7 mr-2"
-                placeholder="999-9999-999"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <div v-if="currentobj.showmodal == 'showLink: true'" id="person2-form" class="row px-1">
-              <!-- <input v-model="bobMessage" id="person2-input"  type="text" class="form-control col-md-7 mr-2" placeholder="url link"> -->
-              <div class="col-md-7">
-                <button
-                  class="btn btn-primary"
-                  @click="bobMessage='link1';sendMessage('out')"
-                >link 1</button>
-                <button
-                  class="btn btn-primary mt-2"
-                  @click="bobMessage='link2';sendMessage('out')"
-                >link 2</button>
+              <form
+                v-if="currentobj.showmodal == 'showNumber: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
+              >
+                <input
+                  v-model="bobMessage"
+                  id="person2-input"
+                  type="number"
+                  class="form-control col-md-7 mr-2"
+                  placeholder="999-9999-999"
+                />
+                <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+              </form>
+              <div
+                v-if="currentobj.showmodal == 'showLink: true'"
+                id="person2-form"
+                class="row px-1"
+              >
+                <!-- <input v-model="bobMessage" id="person2-input"  type="text" class="form-control col-md-7 mr-2" placeholder="url link"> -->
+                <div class="col-md-7">
+                  <button
+                    class="btn btn-primary"
+                    @click="bobMessage='link1';sendMessage('out')"
+                  >link 1</button>
+                  <button
+                    class="btn btn-primary mt-2"
+                    @click="bobMessage='link2';sendMessage('out')"
+                  >link 2</button>
+                </div>
+                <!-- <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button> -->
               </div>
-              <!-- <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button> -->
-            </div>
-            <form
-              v-if="currentobj.showmodal == 'showEmail: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="email"
-                class="form-control col-md-7 mr-2"
-                placeholder="sandy@domain.com"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showFile: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input id="person2-input" type="file" class="col-md-7 mr-2" />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showOption: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row text-center px-1"
-            >
-              <!-- <b-form-select
+              <form
+                v-if="currentobj.showmodal == 'showEmail: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
+              >
+                <input
+                  v-model="bobMessage"
+                  id="person2-input"
+                  type="email"
+                  class="form-control col-md-7 mr-2"
+                  placeholder="sandy@domain.com"
+                />
+                <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+              </form>
+              <form
+                v-if="currentobj.showmodal == 'showFile: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row px-1"
+              >
+                <input id="person2-input" type="file" class="col-md-7 mr-2" />
+                <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+              </form>
+              <form
+                v-if="currentobj.showmodal == 'showOption: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row text-center px-1"
+              >
+                <!-- <b-form-select
                 v-model="bobMessage"
                 :options="optionsss"
                 multiple
                 :select-size="4"
                 id="person2-input"
                 class="col-md-7 mr-2"
-              ></b-form-select>-->
+                ></b-form-select>-->
 
-              <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showSelect: true'"
-              @submit.prevent="sendMessage('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <b-form-select
+                <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
+              </form>
+              <form
+                v-if="currentobj.showmodal == 'showSelect: true'"
+                @submit.prevent="sendMessage('out')"
+                id="person2-form"
+                class="row text-center px-1"
+              >
+                <!-- <b-form-select
                 v-model="bobMessage"
                 :options="optionsss"
+                multiple
+                :select-size="4"
                 id="person2-input"
                 class="col-md-7 mr-2"
-              ></b-form-select>
-              <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
-            </form>
+                ></b-form-select>-->
+
+                <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-       <div v-if="bot.position=='Right'">
-      <div class="right-pos">
-        <div v-if="showRchat" class="chat-box">
-          <div class="close-icon bg-info text-white">
-            <span class="float-left">Bot</span>
-            <span @click="clearAllMessages" class="mr-1">
-              <i class="fa fa-refresh" aria-hidden="true"></i>
-            </span>
-            <span @click="clearAllMessages" class="mr-2">✖</span>
-          </div>
-          <div ref="chatArea" class="chat-area">
-            <p
-              v-for="message in messages"
-              :key="message.id"
-              class="message"
-              :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
-            >
-              <span v-if="message.incomming && message.res.placeholder">{{ message.res.placeholder}}</span>
-              <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
-            </p>
+        <div v-if="bot.position=='Right'">
+          <div class="right-pos">
+            <div v-if="showRchat" class="chat-box">
+              <div class="close-icon bg-info text-white">
+                <span class="float-left">Bot</span>
+                <span @click="clearAllMessages" class="mr-1">
+                  <i class="fa fa-refresh" aria-hidden="true"></i>
+                </span>
+                <span @click="clearAllMessages" class="mr-2">✖</span>
+              </div>
+              <div ref="chatArea" class="chat-area">
+                <p
+                  v-for="message in messages"
+                  :key="message.id"
+                  class="message"
+                  :class="{ 'message-in': message.incomming , 'message-out': !message.incomming }"
+                >
+                  <span
+                    v-if="message.incomming && message.res.placeholder"
+                  >{{ message.res.placeholder}}</span>
+                  <span v-if="!message.incomming && message.msg">{{message.msg}}</span>
+                </p>
 
-            <div class="row" v-if="currentobj.showmodal == 'showRating: true'">
-              <div class="col-md-12">
-                <img
-                  src="../assets/images/emoji/Capture5.png"
-                  v-b-tooltip.hover
-                  title="Terrible"
-                  @click="bobMessage='Terrible';sendMsg('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture2.png"
-                  v-b-tooltip.hover
-                  title="Bad"
-                  @click="bobMessage='Bad';sendMsg('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture4.png"
-                  v-b-tooltip.hover
-                  title="Okay"
-                  @click="bobMessage='Okay';sendMsg('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture3.png"
-                  v-b-tooltip.hover
-                  title="Good"
-                  @click="bobMessage='Good';sendMsg('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-                <img
-                  src="../assets/images/emoji/Capture1.png"
-                  v-b-tooltip.hover
-                  title="Awesome"
-                  @click="bobMessage='Awesome';sendMsg('out')"
-                  style="width:35px"
-                  alt="emoji"
-                />
-              </div>
-            </div>
-            <div class="row" v-if="currentobj.showmodal == 'showList: true'">
-              <div class="col-md-7">
-                <b-list-group>
-                  <b-list-group-item
-                    v-for="datas in optionsss"
-                    :key="datas.id"
-                    @click="bobMessage=datas.text ;sendMsg('out')"
-                  >{{datas.text}}</b-list-group-item>
-                </b-list-group>
-              </div>
-              <!-- <div class="col-md-4">
+                <div class="row" v-if="currentobj.showmodal == 'showRating: true'">
+                  <div class="col-md-12">
+                    <img
+                      src="../assets/images/emoji/Capture5.png"
+                      v-b-tooltip.hover
+                      title="Terrible"
+                      @click="bobMessage='Terrible';sendMsg('out')"
+                      style="width:35px"
+                      alt="emoji"
+                    />
+                    <img
+                      src="../assets/images/emoji/Capture2.png"
+                      v-b-tooltip.hover
+                      title="Bad"
+                      @click="bobMessage='Bad';sendMsg('out')"
+                      style="width:35px"
+                      alt="emoji"
+                    />
+                    <img
+                      src="../assets/images/emoji/Capture4.png"
+                      v-b-tooltip.hover
+                      title="Okay"
+                      @click="bobMessage='Okay';sendMsg('out')"
+                      style="width:35px"
+                      alt="emoji"
+                    />
+                    <img
+                      src="../assets/images/emoji/Capture3.png"
+                      v-b-tooltip.hover
+                      title="Good"
+                      @click="bobMessage='Good';sendMsg('out')"
+                      style="width:35px"
+                      alt="emoji"
+                    />
+                    <img
+                      src="../assets/images/emoji/Capture1.png"
+                      v-b-tooltip.hover
+                      title="Awesome"
+                      @click="bobMessage='Awesome';sendMsg('out')"
+                      style="width:35px"
+                      alt="emoji"
+                    />
+                  </div>
+                </div>
+                <div class="row" v-if="currentobj.showmodal == 'showList: true'">
+                  <div class="col-md-7">
+                    <b-list-group>
+                      <b-list-group-item
+                        v-for="datas in optionsss"
+                        :key="datas.id"
+                        @click="bobMessage=datas.text ;sendMsg('out')"
+                      >{{datas.text}}</b-list-group-item>
+                    </b-list-group>
+                  </div>
+                  <!-- <div class="col-md-4">
                    <button class="btn btn-sm btn-success mt" style="height:30px" 
                      @click="bobMessage='continue';sendMsg('out')">continue</button>
-              </div>-->
-            </div>
-            <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
-              <h5>Select Multiple Option</h5>
-              <label
-                v-for="datas in optionsss"
-                :key="datas.id"
-                v-bind:for="datas.text"
-                class="btn btn-primary btn-sm mr-1 mt-2"
-              >
-                <input
-                  @change="added(datas.text,$event)"
-                  type="checkbox"
-                  v-bind:id="datas.text"
-                  class="badgebox"
-                />
-                <span class="badge">&check;</span>
-                {{datas.text}}
-              </label>
-            </div>
+                  </div>-->
+                </div>
+                <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
+                  <h5>Select Multiple Option</h5>
+                  <label
+                    v-for="datas in optionsss"
+                    :key="datas.id"
+                    v-bind:for="datas.text"
+                    class="btn btn-primary btn-sm mr-1 mt-2"
+                  >
+                    <input
+                      @change="added(datas.text,$event)"
+                      type="checkbox"
+                      v-bind:id="datas.text"
+                      class="badgebox"
+                    />
+                    <span class="badge">&check;</span>
+                    {{datas.text}}
+                  </label>
+                </div>
 
-            <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
-          </div>
-
-          <div class="texting">
-            <form
-              v-if="currentobj.showmodal == 'showModal: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="text"
-                class="form-control col-md-7 mr-2"
-                placeholder="Type your message"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showText: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <textarea
-                v-model="bobMessage"
-                id="person2-input"
-                class="form-control col-md-7 mr-2"
-                rows="2"
-                placeholder="Type your message"
-              ></textarea>
-              <button class="btn btn-sm btn-success mt-1" style="height:30px" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showDate: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="date"
-                class="form-control col-md-7 mr-2"
-                placeholder="Type your message"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-
-            <form
-              v-if="currentobj.showmodal == 'showNumber: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="number"
-                class="form-control col-md-7 mr-2"
-                placeholder="999-9999-999"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <div v-if="currentobj.showmodal == 'showLink: true'" id="person2-form" class="row px-1">
-              <!-- <input v-model="bobMessage" id="person2-input"  type="text" class="form-control col-md-7 mr-2" placeholder="url link"> -->
-              <div class="col-md-7">
-                <button
-                  class="btn btn-primary"
-                  @click="bobMessage='link1';sendMsg('out')"
-                >link 1</button>
-                <button
-                  class="btn btn-primary mt-2"
-                  @click="bobMessage='link2';sendMsg('out')"
-                >link 2</button>
+                <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
               </div>
-              <!-- <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button> -->
-            </div>
-            <form
-              v-if="currentobj.showmodal == 'showEmail: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input
-                v-model="bobMessage"
-                id="person2-input"
-                type="email"
-                class="form-control col-md-7 mr-2"
-                placeholder="sandy@domain.com"
-              />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showFile: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <input id="person2-input" type="file" class="col-md-7 mr-2" />
-              <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showOption: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row text-center px-1"
-            >
-              <!-- <b-form-select
+
+              <div class="texting">
+                <form
+                  v-if="currentobj.showmodal == 'showModal: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <input
+                    v-model="bobMessage"
+                    id="person2-input"
+                    type="text"
+                    class="form-control col-md-7 mr-2"
+                    placeholder="Type your message"
+                  />
+                  <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+                </form>
+                <form
+                  v-if="currentobj.showmodal == 'showText: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <textarea
+                    v-model="bobMessage"
+                    id="person2-input"
+                    class="form-control col-md-7 mr-2"
+                    rows="2"
+                    placeholder="Type your message"
+                  ></textarea>
+                  <button class="btn btn-sm btn-success mt-1" style="height:30px" type="submit">Send</button>
+                </form>
+                <form
+                  v-if="currentobj.showmodal == 'showDate: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <input
+                    v-model="bobMessage"
+                    id="person2-input"
+                    type="date"
+                    class="form-control col-md-7 mr-2"
+                    placeholder="Type your message"
+                  />
+                  <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+                </form>
+
+                <form
+                  v-if="currentobj.showmodal == 'showNumber: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <input
+                    v-model="bobMessage"
+                    id="person2-input"
+                    type="number"
+                    class="form-control col-md-7 mr-2"
+                    placeholder="999-9999-999"
+                  />
+                  <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+                </form>
+                <div
+                  v-if="currentobj.showmodal == 'showLink: true'"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <!-- <input v-model="bobMessage" id="person2-input"  type="text" class="form-control col-md-7 mr-2" placeholder="url link"> -->
+                  <div class="col-md-7">
+                    <button
+                      class="btn btn-primary"
+                      @click="bobMessage='link1';sendMsg('out')"
+                    >link 1</button>
+                    <button
+                      class="btn btn-primary mt-2"
+                      @click="bobMessage='link2';sendMsg('out')"
+                    >link 2</button>
+                  </div>
+                  <!-- <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button> -->
+                </div>
+                <form
+                  v-if="currentobj.showmodal == 'showEmail: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <input
+                    v-model="bobMessage"
+                    id="person2-input"
+                    type="email"
+                    class="form-control col-md-7 mr-2"
+                    placeholder="sandy@domain.com"
+                  />
+                  <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+                </form>
+                <form
+                  v-if="currentobj.showmodal == 'showFile: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row px-1"
+                >
+                  <input id="person2-input" type="file" class="col-md-7 mr-2" />
+                  <button class="btn btn-sm btn-success col-md-4" type="submit">Send</button>
+                </form>
+                <form
+                  v-if="currentobj.showmodal == 'showOption: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row text-center px-1"
+                >
+                  <!-- <b-form-select
                 v-model="bobMessage"
                 :options="optionsss"
                 multiple
                 :select-size="4"
                 id="person2-input"
                 class="col-md-7 mr-2"
-              ></b-form-select>-->
+                  ></b-form-select>-->
 
-              <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
-            </form>
-            <form
-              v-if="currentobj.showmodal == 'showSelect: true'"
-              @submit.prevent="sendMsg('out')"
-              id="person2-form"
-              class="row px-1"
-            >
-              <b-form-select
+                  <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
+                </form>
+                <form
+                  v-if="currentobj.showmodal == 'showSelect: true'"
+                  @submit.prevent="sendMsg('out')"
+                  id="person2-form"
+                  class="row text-center px-1"
+                >
+                  <!-- <b-form-select
                 v-model="bobMessage"
                 :options="optionsss"
+                multiple
+                :select-size="4"
                 id="person2-input"
                 class="col-md-7 mr-2"
-              ></b-form-select>
-              <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
-            </form>
+                  ></b-form-select>-->
+
+                  <button class="btn btn-sm btn-success mt" style="height:30px" type="submit">Send</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-       </div>
-     </div>
       <!-- <button class="click-me" @click="loadMsg();showChat=true">ClickMe</button>    -->
       <div v-for="bot in botcount" :key="bot.id">
-      <div v-for="full in all" :key="full.img">
+        <div v-for="full in all" :key="full.img">
+          <div v-if="bot.position=='Center'">
+            <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
+              <img :src="full.img" :style="padrig2" alt="bot here" />
+            </div>
+          </div>
 
-        <div v-if="bot.position=='Center'">
-          <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
-            <img :src="full.img"  :style="padrig2" alt="bot here" />
+          <div v-if="bot.position=='Left'">
+            <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
+              <img :src="full.img" :style="padrig1" alt="bot here" />
+            </div>
+          </div>
+
+          <div v-if="bot.position=='Right'">
+            {{ bot.position }}
+            <div class="right-pos" v-if="!showRchat" @click="loadMsd()">
+              <img :src="full.img" :style="padrig3" alt="bot here" />
+            </div>
           </div>
         </div>
-
-        <div v-if="bot.position=='Left'">
-          <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
-            <img :src="full.img"   :style="padrig1"  alt="bot here" />
-          </div>
-        </div>
-
-        <div v-if="bot.position=='Right'">
-          {{ bot.position }}
-          <div class="right-pos" v-if="!showRchat" @click="loadMsd()">
-            <img :src="full.img"   :style="padrig3"   alt="bot here" />
-          </div>
-        </div>
-      </div>
       </div>
     </main>
   </div>
@@ -509,32 +548,31 @@ import axios from "axios";
 export default {
   data() {
     return {
-    padrig3:{
-      left:'0',
-    width: '5%',
-    position: 'fixed',
-    bottom:'0'
-    },  
-  padrig2:{
-    position: 'fixed',
-    top: '300px',
-    right:' 0',
-     width: '5%',
-    background: '#fff',
-    'border-radius': '4px 0 0 4px',  
-
-},
-      padrig1:{
-        right:'0',
-    width: '5%',
-    position: 'fixed',
-    bottom:'0'
+      padrig3: {
+        left: "0",
+        width: "5%",
+        position: "fixed",
+        bottom: "0"
+      },
+      padrig2: {
+        position: "fixed",
+        top: "300px",
+        right: " 0",
+        width: "5%",
+        background: "#fff",
+        "border-radius": "4px 0 0 4px"
+      },
+      padrig1: {
+        right: "0",
+        width: "5%",
+        position: "fixed",
+        bottom: "0"
       },
       checkvalues: "",
       bobMessage: "",
       youMessage: "",
       showChat: false,
-      showRchat:false,
+      showRchat: false,
       messages: [],
       temp: [],
       chatloading: true,
@@ -543,7 +581,6 @@ export default {
       optionsss: [],
       all: [],
       botcount: ""
-
     };
   },
   mounted() {
@@ -554,6 +591,7 @@ export default {
       console.log(data, event.target.checked);
       if (event.target.checked) {
         this.bobMessage += data + " ";
+        console.log("add---",this.bobMessage,data) 
       }
     },
 
@@ -603,7 +641,7 @@ export default {
           this.chatloading = false;
 
           let incomming = response.data;
-          console.log("==>", incomming);
+          console.log("==>in", incomming);
 
           let obj = {
             incomming: true,
@@ -641,7 +679,8 @@ export default {
                   let obj = {
                     value: item.question,
                     text: item.question,
-                    id: item.id
+                    id: item.id,
+                    ans: item.answer
                   };
                   this.optionsss.push(obj);
                 });
@@ -669,7 +708,7 @@ export default {
           this.chatloading = false;
         });
     },
-     loadMsd() {
+    loadMsd() {
       this.showRchat = true;
       this.chatloading = true;
       let bot_id = localStorage.getItem("bot_id");
@@ -695,6 +734,7 @@ export default {
           };
           if (incomming[this.chatcurrentpostion]) {
             this.currentobj = incomming[this.chatcurrentpostion];
+            console.log("currebt==>", this.currentobj);
           } else {
             console.log("return");
             this.currentobj.showmodal = "false";
@@ -725,7 +765,8 @@ export default {
                   let obj = {
                     value: item.question,
                     text: item.question,
-                    id: item.id
+                    id: item.id,
+                    ans: item.answer
                   };
                   this.optionsss.push(obj);
                 });
@@ -754,7 +795,7 @@ export default {
         });
     },
     sendMessage(direction) {
-      console.log(direction, "==>", this.bobMessage);
+      console.log(direction, "==>bobmsg", this.bobMessage);
       let obj = { incomming: false, msg: this.bobMessage };
       this.currentobj.answer = this.bobMessage;
 
@@ -821,7 +862,6 @@ export default {
       this.messages = [];
       this.showChat = false;
       this.showRchat = false;
-
     }
   }
 };
@@ -833,9 +873,6 @@ Vue.filter("striphtml", function(value) {
 });
 </script>
 <style scoped>
-
-
-
 .loadimg {
   width: 70px;
   position: absolute;
@@ -849,7 +886,7 @@ Vue.filter("striphtml", function(value) {
 }
 .right-pos {
   position: absolute;
-  left:15px;
+  left: 15px;
   bottom: 15px;
 }
 .bot-img {
