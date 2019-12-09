@@ -107,7 +107,7 @@
     <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
-    <div class="app-content content">
+    <div class="app-content content" style="background-color:rgb(225, 233, 244);">
       <!-- BEGIN: Header-->
       <div class="content-overlay"></div>
       <div class="header-navbar-shadow"></div>
@@ -243,7 +243,7 @@
       </nav>
       <!-- END: Header-->
 
-      <div class="content-area-wrapper">
+      <div class="content-area-wrapper " >
         <div class="content-right">
           <div class="content-wrapper">
             <div class="content-header row"></div>

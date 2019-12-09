@@ -1241,11 +1241,11 @@ Vue.filter('striphtml', function (value) {
 .btn-blue:hover {
   color: #fff;
 }
-.main {
+/* .main {
   width: 85%;
   padding-left: 2%;
 
-}
+} */
 .change {
   padding-left: 0px !important;
 }

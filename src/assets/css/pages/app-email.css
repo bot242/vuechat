@@ -2,7 +2,7 @@
         DARK LAYOUT
 =========================================================*/
 .email-application .content-area-wrapper {
-  border : 1px solid #DAE1E7;
+  /* border : 1px solid #DAE1E7; */
   border-radius : 0.25rem;
 }
 .email-application .content-area-wrapper .sidebar .email-app-sidebar {
