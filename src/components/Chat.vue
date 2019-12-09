@@ -3,8 +3,7 @@
     <h1 class="headline">Vue.js Chat Box</h1>
     <main>
       <div v-for="bot in botcount" :key="bot.id">
-        <div>
-        <!-- <div  v-bind:class ="{'img-avtor': 'botcount[0].position=="Left"'}"> -->
+           <div class="img-avtor">
           <div v-if="showChat" class="chat-box">
             <div class="close-icon bg-info text-white">
               <span class="float-left">Bot</span>
@@ -290,12 +289,12 @@
             </div>
           </div>
 
-          <div v-if="bot.position=='Right'">
+          <!-- <div v-if="bot.position=='Right'">
             {{ bot.position }}
             <div class="right-pos" v-if="!showChat" @click="loadMsg()">
               <img :src="full.img" :style="padrig3" alt="bot here" />
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </main>
@@ -341,6 +340,7 @@ export default {
       botcount: "",
       optdesc:'',
 
+
     }; 
   },
   mounted() {
@@ -372,7 +372,7 @@ export default {
         .then(response => {
           this.botcount = response.data;
 
-          console.log("get bot  ", this.botcount);
+          console.log("get bot  ", this.botcount[0].position);
           this.msg = response.data[0].message;
           let c = response.data[0].avatar_name;
           console.log("img", c);
