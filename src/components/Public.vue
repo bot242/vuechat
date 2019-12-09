@@ -1,11 +1,11 @@
 <template>
 
 <!-- <b-tab title="Publish" class="pub"> -->
-    <div class="ssd">
+    <div class="ssd" >
                     <template>
-                        <div role="tablist">
-                            <b-card no-body>
-                                <b-card-header header-tag="header" role="tab">
+                        <div role="tablist" >
+                            <b-card no-body >
+                                <b-card-header header-tag="header" role="tab" >
                                     <b-button block href="#" v-b-toggle.accordion-1 class="but"><i class="fas fa-code"
                                             style="padding-right:30px; font-size: 30px;"></i>Install
                                         Widget on Website </b-button>

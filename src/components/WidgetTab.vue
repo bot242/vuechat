@@ -103,7 +103,7 @@
   <!-- END: Main Menu-->
 
   <!-- BEGIN: Content-->
-  <div class="app-content content">
+  <div class="app-content content" style="background-color:rgb(225, 233, 244);">
     <!-- BEGIN: Header-->
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -245,8 +245,8 @@
             <div class="app-content-overlay"></div>
             <div class="email-app-area">
               <!-- widget atb start -->
-              <b-row title="widget-tab1">
-                <b-col cols="12" md="4" sm="6">
+              <b-row title="widget-tab1" >
+                <b-col cols="12" md="4" sm="6" style="background-color:white;margin-top:15px;height:500px;">
 
                   <div class="details-slider mt-1 mb-2 ml-4">
                     Position
@@ -324,13 +324,13 @@
                 </b-col>
                 <b-col cols="12" md="8" sm="6">
                   <div class="tab1-data2 mt-1">
-                    <div class="tab-1">
+                    <!-- <div class="tab-1">
                       <div class="float-left mr-1 ml-3 indicator1"></div>
                       <div class="float-left mr-1 indicator2"></div>
                       <div class="float-left indicator3"></div>
-                    </div>
+                    </div> -->
 
-                    <div class="body1 ml-3 mr-3">
+                    <div class="body1">
                       <div v-for="bot in botcount" :key="bot.id">
                         <div v-for="full in all" :key="full.img">
                           <span v-if="bot.pos_change==='!isTrue'">
@@ -395,7 +395,7 @@
   <!-- END: Content-->
 
   <!-- BEGIN: Footer-->
-  <footer class="footer footer-static footer-light">
+  <!-- <footer class="footer footer-static footer-light">
     <p class="clearfix blue-grey lighten-2 mb-0">
       <span class="float-md-left d-block d-md-inline-block mt-25">
         COPYRIGHT &copy; 2019
@@ -413,7 +413,7 @@
         <i class="far fa-arrow-alt-circle-up"></i>
       </button>
     </p>
-  </footer>
+  </footer> -->
   <!-- END: Footer-->
 </body>
 </template>
@@ -716,7 +716,7 @@ export default {
 .tab1-data2 {
   width: 100%;
   float: left;
-  border: 2px solid #dbe2dd;
+  /* border: 2px solid #dbe2dd; */
 }
 .tab-1 {
   background-color: #f0f4f7;
@@ -831,17 +831,17 @@ export default {
   animation: launcher-frame-appear 0.25s ease forwards;
 }
 .red {
-  border: 2px solid #2dc464;
+  border: 2px solid rgb(3,66,180);
 }
 .layout:hover {
-  border: 2px solid #2dc464;
+  border: 2px solid rgb(3,66,180);
 }
 .slick-prev:before,
 .slick-next:before {
   color: black !important;
 }
 .reds {
-  border: 2px solid #2dc263;
+  border: 2px solid rgb(3,66,180);
   border-radius: 50%;
   padding: 2px;
 }
@@ -868,8 +868,10 @@ body.vertical-layout.vertical-menu-modern.menu-expanded
   background-color: #0647a5;
   border-color: #0647a5;
   color: #fff;
+
 }
 .btn-blue:hover {
   color: #fff;
 }
+
 </style>

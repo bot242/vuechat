@@ -2,20 +2,20 @@
   <div>
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="semi-dark-layout">
     <!-- BEGIN: Content-->
-    <div class="app-content content">
+    <div class="app-content content" style="background-color:rgb(3,66,180);">
         <div class="content-wrapper">
             <div class="content-header row">
             </div>
-            <div class="content-body">
-                <section class="row flexbox-container">
-                    <div class="col-xl-8 col-11 d-flex justify-content-center">
-                        <div class="card bg-authentication rounded-0 mb-0">
-                            <div class="row m-0">
+            <div class="content-body" >
+                <section class="row flexbox-container" >
+                    <div class="col-xl-8 col-11 d-flex justify-content-center" >
+                        <div class="card bg-authentication rounded-0 mb-0" >
+                            <div class="row m-0" style="background-color:rgb(225, 233, 244);" >
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
                                     <img src="../assets/images/pages/login.png" alt="branding logo">
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
-                                    <div class="card rounded-0 mb-0 px-2">
+                                    <div class="card rounded-0 mb-0 px-2" style="background-color:rgb(225, 233, 244);">
                                         <div class="card-header pb-1">
                                             <div class="card-title">
                                                 <h4 class="mb-0">Login</h4>
@@ -48,7 +48,7 @@
                                                 
 
                                                     <a href="/register" class="btn btn-outline-primary float-left btn-inline">Register</a>
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                    <button type="submit" class="btn btn-primary float-right btn-inline" >Login</button>
                                                 </form>
                                             </div>
                                         </div>
