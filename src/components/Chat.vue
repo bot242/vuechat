@@ -3,7 +3,9 @@
     <h1 class="headline">Vue.js Chat Box</h1>
     <main>
       <div v-for="bot in botcount" :key="bot.id">
-           <div :class="{imgavtor: bot.position === 'Left', rightpos:  bot.position === 'Right'}"  >
+        <p v-if="bot.position === 'Left'" class="chatname scale-up-center" style="box-shadow: 0px 0px 10px; position: absolute; right: 65px;bottom: 55px;">chat now</p>
+          <p v-if="bot.position === 'Right'" class="chatname" style="box-shadow: 0px 0px 10px; position: absolute; left: 65px;bottom: 55px;">chat now</p>
+           <div :class="{imgavtor: bot.position === 'Left', rightpos:  bot.position === 'Right',imgavtor: bot.position === 'Center'}"  >
           <div v-if="showChat" class="chat-box">
             <div class="close-icon aaa text-white">
               <span class="float-left">Chat Bot </span>
@@ -93,7 +95,7 @@
                 <label
                   v-for="datas in optionsss"
                   :key="datas.id"
-                  v-bind:for="datas.ans"
+                  v-bind:for="datas.text"
                   class="btn btn-primary btn-sm mr-1 mt-2"
                 >
                   <input
@@ -105,6 +107,14 @@
                   <span class="badge">&check;</span>
                   {{ datas.text }}
                 </label>
+                  <!-- <ul class="ks-cboxtags">
+        <li    v-for="datas in optionsss" :key="datas.id">
+            <label  v-bind:for="datas.text"> {{ datas.text }}</label>
+          <input type="checkbox"  @change="added(datas,$event)"
+           v-bind:id="datas.text">
+        
+        </li>
+                 </ul> -->
               </div>
 
               <div class="col-md-12" v-if="currentobj.showmodal == 'showSelect: true'">
@@ -112,7 +122,7 @@
                 <label
                   v-for="datas in optionsss"
                   :key="datas.id"
-                  v-bind:for="datas.ans"
+                  v-bind:for="datas.text"
                   class="btn btn-primary btn-sm mr-1 mt-2"
                 >
                   <input
@@ -126,6 +136,7 @@
                   <span class="badge">&check;</span>
                   {{datas.text}}
                 </label>
+               
               </div>
 
               <img src="../assets/chatload.gif" class="loadimg" v-if="chatloading" alt="loading" />
@@ -314,7 +325,7 @@ export default {
       padrig2: {
         position: "fixed",
         top: "300px",
-        right: " 0",
+        right: "15px",
         width: "50px",
         background: "#fff",
         "border-radius": "4px 0 0 4px"
@@ -680,7 +691,7 @@ Vue.filter("striphtml", function(value) {
 #person2-input {
   padding: 0.5em;
 }
-
+ 
 .chatname1 {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
@@ -706,7 +717,6 @@ Vue.filter("striphtml", function(value) {
   background-color: white;
   color: black;
   line-height: 24px !important;
-  position: relative;
   z-index: 2147482999;
   cursor: pointer;
   padding: 7px 10px;
@@ -715,8 +725,33 @@ Vue.filter("striphtml", function(value) {
   text-overflow: ellipsis;
   max-width: 300px;
   margin: 0px 15px;
-  top: 470px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
   animation: launcher-frame-appear 0.25s ease forwards;
 }
+
+.scale-up-center {
+	-webkit-animation: scale-up-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
+	        animation: scale-up-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
+}
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
 </style>
