@@ -3,10 +3,10 @@
     <h1 class="headline">Vue.js Chat Box</h1>
     <main>
       <div v-for="bot in botcount" :key="bot.id">
-           <div class="img-avtor">
+           <div :class="{imgavtor: bot.position === 'Left', rightpos:  bot.position === 'Right'}"  >
           <div v-if="showChat" class="chat-box">
-            <div class="close-icon bg-info text-white">
-              <span class="float-left">Bot</span>
+            <div class="close-icon aaa text-white">
+              <span class="float-left">Chat Bot </span>
               <span @click="clearAllMessages" class="mr-1">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
               </span>
@@ -278,23 +278,23 @@
       <div v-for="bot in botcount" :key="bot.id">
         <div v-for="full in all" :key="full.img">
           <div v-if="bot.position=='Center'">
-            <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
+            <div class="imgavtor" v-if="!showChat" @click="loadMsg()">
               <img :src="full.img" :style="padrig2" alt="bot here" />
             </div>
           </div>
 
           <div v-if="bot.position=='Left'">
-            <div class="img-avtor" v-if="!showChat" @click="loadMsg()">
+            <div class="imgavtor" v-if="!showChat" @click="loadMsg()">
               <img :src="full.img" :style="padrig1" alt="bot here" />
             </div>
           </div>
 
-          <!-- <div v-if="bot.position=='Right'">
+          <div v-if="bot.position=='Right'">
             {{ bot.position }}
-            <div class="right-pos" v-if="!showChat" @click="loadMsg()">
+            <div class="rightpos" v-if="!showChat" @click="loadMsg()">
               <img :src="full.img" :style="padrig3" alt="bot here" />
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </main>
@@ -306,24 +306,24 @@ export default {
   data() {
     return {
       padrig3: {
-        left: "0",
-        width: "5%",
+        left: "15px",
+        width: "50px",
         position: "fixed",
-        bottom: "0"
+        bottom: "15px"
       },
       padrig2: {
         position: "fixed",
         top: "300px",
         right: " 0",
-        width: "5%",
+        width: "50px",
         background: "#fff",
         "border-radius": "4px 0 0 4px"
       },
       padrig1: {
-        right: "0",
-        width: "5%",
+        right: "15px",
+        width: "50px",
         position: "fixed",
-        bottom: "0"
+        bottom: "15px"
       },
       checkvalues: "",
       bobMessage: "",
@@ -384,13 +384,8 @@ export default {
           this.all.push(main);
         });
     },
-      getClass(){
-        return {
-            'img-avtor': this.botcount[0].position == "Left",  
-            'img-avtor': this.botcount[0].position == "center",  
-            'right-pos': this.botcount[0].position == "Right",  
-    }
-      },
+     
+      
     loadMsg() {
      
       this.showChat = true;
@@ -418,7 +413,7 @@ export default {
            this.currentobj.showmodal = 'false'
             let objss = {
               incomming: true,
-              res:{placeholder:'end',showmodal:'false'}
+              res:{placeholder:'Thank You for using our chat bot!',showmodal:'false'}
             };
             this.messages.push(objss);
             return;
@@ -549,19 +544,22 @@ Vue.filter("striphtml", function(value) {
 });
 </script>
 <style scoped>
+.aaa{
+ background-color: #0b46bd !important;
+}
 .loadimg {
   width: 70px;
   position: absolute;
   left: 0px;
   bottom: 50px;
 }
-.img-avtor {
+.imgavtor {
   position: absolute;
   right: 15px;
   bottom: 15px;
 }
 
-.right-pos {
+.rightpos {
   position: absolute;
   left: 15px;
   bottom: 15px;
@@ -625,7 +623,7 @@ Vue.filter("striphtml", function(value) {
   height: 50vh;
   padding: 1em;
   overflow: auto;
-  width: 320px;
+  width: 300px;
   display: block;
 }
 .chat-box {
@@ -661,7 +659,7 @@ Vue.filter("striphtml", function(value) {
   padding: 0.5em;
 }
 .message-out {
-  background: #407fff;
+  background: #6895f1;
   color: white;
   margin-left: 50%;
 }

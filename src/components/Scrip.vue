@@ -272,7 +272,7 @@ export default {
            obj.subquestion = this.msg.option
            console.log("sublits", obj.subquestion)
            }else{
-             obj.placeholder = this.msg;  
+             obj.placeholder = this.msg.replace(/<[^>]+>/g, '') 
            }
            console.log(obj)
            //'http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/' 
