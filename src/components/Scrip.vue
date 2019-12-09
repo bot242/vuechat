@@ -81,6 +81,7 @@
                     <i class="fas fa-upload"></i>
                     File Upload
                   </li>
+                  
                 </ul>
               </b-col>
             </b-row>
