@@ -39,8 +39,9 @@
         <div class="col-sm-6" style="margin-bottom:10px">
           <input type="text" v-model="answer" class="form-control" placeholder="Answer  " />
         </div>
-        <div class="col-sm-3" style="margin-bottom:10px">
-          <span class="btn btn-success" @click="addMcho()">+</span>
+        <div class="col-sm-3"  style="margin-bottom:10px">
+          <button class="btn btn-success" :disabled="option == '' || answer==''" @click="addMcho()">
+            +</button>
         </div>
       </div>
       <div class="row mt-1 sample" v-for="(div, mcho) in mcho" v-bind:key="mcho">

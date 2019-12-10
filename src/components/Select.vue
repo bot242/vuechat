@@ -38,7 +38,8 @@
           <input type="text" v-model="answer" class="form-control" placeholder="Answer" />
         </div>
         <div class="col-sm-3" style="margin-bottom:10px">
-          <span class="btn btn-success" @click="addMsel()">+</span>
+          <button class="btn btn-success"
+           :disabled="option == '' || answer==''" @click="addMsel()">+</button>
         </div>
       </div>
       <div class="row mt-1 sample" v-for="(div, msel) in msel" v-bind:key="msel">

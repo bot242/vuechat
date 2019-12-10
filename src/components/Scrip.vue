@@ -167,6 +167,10 @@
     <Uploade @changedata="msg =$event" v-if="currentdata.showmodal == 'showFile: true'"/>
 
     </b-modal>
+     <b-modal id="modal-2"  >
+    <div class="d-block mb-2">Warning !</div>
+      Some Fields Are Not Filled Or Empty, Changes Not Update ! 
+     </b-modal>
             </div>
             <div id="END"></div>
           </div>
@@ -227,9 +231,8 @@ export default {
       );
 },
   methods: {
-    
        log: function(evt) {
-      window.console.log(evt);
+       window.console.log(evt);
     },
     init(){
       let id=localStorage.getItem('id')
@@ -267,11 +270,20 @@ export default {
              obj.eoc = '1'
            obj.is_subquestion = '1'
            let a= this.msg.data.replace(/<[^>]+>/g, '')  
-           console.log("ssasdad",a)
+           if(a == '' ||this.msg.option.length == 0 ){
+          this.$root.$emit('bv::show::modal', 'modal-2', '#btnShow')
+               return 0;
+           }
+          
            obj.placeholder = a;
            obj.subquestion = this.msg.option
-           console.log("sublits", obj.subquestion)
+          
            }else{
+             if(this.msg == ''){
+              
+                this.$root.$emit('bv::show::modal', 'modal-2', '#btnShow')
+               return 0;
+             }
              obj.placeholder = this.msg.replace(/<[^>]+>/g, '') 
            }
            console.log(obj)
@@ -289,7 +301,8 @@ export default {
          })
           
            this.init()
-this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
+           this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
+        
           
          }).catch(e=>{
            alert("unable to get server")
