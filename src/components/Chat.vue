@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid bg">
-    <h1 class="headline">Vue.js Chat Box</h1>
+    <!-- <h1 class="headline">Vue.js Chat Box</h1> -->
     <main>
       <div v-for="bot in botcount" :key="bot.id">
-        <p v-if="bot.position === 'Left'" class="chatname scale-up-center" style="box-shadow: 0px 0px 10px; position: absolute; right: 65px;bottom: 55px;">chat now</p>
-          <p v-if="bot.position === 'Right'" class="chatname" style="box-shadow: 0px 0px 10px; position: absolute; left: 65px;bottom: 55px;">chat now</p>
-           <div :class="{imgavtor: bot.position === 'Left', rightpos:  bot.position === 'Right',imgavtor: bot.position === 'Center'}"  >
+        <p v-if="bot.position === 'Left'&&!showChat" class="chatname scale-up-center" style="box-shadow: 0px 0px 10px; position: absolute; right: 65px;bottom: 55px;">{{bot.message}}</p>
+          <p v-if="bot.position === 'Right'&&!showChat" class="chatname scale-up-center" style="box-shadow: 0px 0px 10px; position: absolute; left: 65px;bottom: 55px;">{{bot.message}}</p>
+           <div :class="{imgavtor: bot.position === 'Left', rightpos:  bot.position === 'Right'}"  >
           <div v-if="showChat" class="chat-box">
             <div class="close-icon aaa text-white">
               <span class="float-left">Chat Bot </span>
@@ -301,7 +301,7 @@
           </div>
 
           <div v-if="bot.position=='Right'">
-            {{ bot.position }}
+            <!-- {{ bot.position }} -->
             <div class="rightpos" v-if="!showChat" @click="loadMsg()">
               <img :src="full.img" :style="padrig3" alt="bot here" />
             </div>
@@ -383,7 +383,7 @@ export default {
         .then(response => {
           this.botcount = response.data;
 
-          console.log("get bot  ", this.botcount[0].position);
+          console.log("get bot  ", this.botcount);
           this.msg = response.data[0].message;
           let c = response.data[0].avatar_name;
           console.log("img", c);
@@ -730,8 +730,8 @@ Vue.filter("striphtml", function(value) {
 }
 
 .scale-up-center {
-	-webkit-animation: scale-up-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
-	        animation: scale-up-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
+	-webkit-animation: scale-up-center 5s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
+	        animation: scale-up-center 5s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite  backwards;
 }
 @-webkit-keyframes scale-up-center {
   0% {

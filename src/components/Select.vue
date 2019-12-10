@@ -32,10 +32,10 @@
       <div class="row">
        
         <div class="col-sm-6" style="margin-bottom:10px">
-          <input type="text" v-model="option" class="form-control" placeholder="Sample Option" />
+          <input type="text" v-model="option" class="form-control" placeholder="Question" />
         </div>
          <div class="col-sm-6" style="margin-bottom:10px">
-          <input type="text" v-model="answer" class="form-control" placeholder="Sample Option" />
+          <input type="text" v-model="answer" class="form-control" placeholder="Answer" />
         </div>
         <div class="col-sm-3" style="margin-bottom:10px">
           <span class="btn btn-success" @click="addMsel()">+</span>
