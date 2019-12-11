@@ -1,107 +1,130 @@
 <template>
   <div class="main">
     <div class="form-builder">
-      <b-row>
-        <b-col cols="12" md="4" sm="9">
+      <b-row style="background-color:rgb(225,233,244)">
+        <b-col cols="6" md="4" sm="2">
           <div class="form-builder-toolbar pull-left not-selectable form-builder-toolbar-sticky">
-            <h4></h4>
-            <b-row>
-              <b-col cols="6" md="6" sm="6">
-                <ul>
-                  <li class="card-shadow question-list" @click="addRow"  id="1">
-                    <i class="fas fa-quote-left"></i>
-                    Message
-                  </li>
-                  <li class="card-shadow question-list" @click="addText"  id="2">
-                    <i class="fas fa-comment-alt"></i>
-                    Text Question
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addDate" id="3">
-                    <i class="far fa-calendar-alt"></i>
-                    Date
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addSelect" id="4">
+            <b-row style="background-color:white" >              
+              <b-col  cols="4" md="4" sm="4">                
+                <div class="card new-card" @click="addRow"  id="1">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-quote-left"></i>                    
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                    >Mesage</div>
+                </div>
+              
+                <div class="card new-card" @click="addEmail" id="9">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-envelope-square"></i>               
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                    >Email</div>
+                </div>
+              
+                <div class="card new-card" @click="addSelect" id="4">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
                     <i class="fas fa-check-circle"></i>
-                    Select
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addNumber" id="5">
-                    <i class="fas fa-hashtag"></i>
-                    Number
-                  </li>
-
-                </ul>
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                   >Select</div>
+                </div>    
+                <div class="card new-card"  @click="addFile" id="14">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-upload"></i>               
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                  >Upload</div>
+                </div>              
               </b-col>
-
-              <b-col cols="6" md="6" sm="6">
-                <ul>
-                  <li class="card-shadow question-list" @click="addOption" id="8">
-                    <i class="far fa-stop-circle"></i>
-                   Multi Options
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addEmail" id="9">
-                    <i class="fas fa-envelope-square"></i>
-                    Email
-                  </li>
-
-                  <!-- <li class="card-shadow question-list" @click="addBooking" id="10">
-                    <i class="far fa-clock"></i>
-                    Appointment
-                  </li> -->
-
-                  <li class="card-shadow question-list" @click="addList" id="11">
-                    <i class="far fa-list-alt"></i>
-                    List
-                  </li>
-
-                  <!-- <li class="card-shadow question-list" @click="addRange" id="12">
-                    <i class="fas fa-sliders-h"></i>
-                    Range
-                  </li>
-
-                  <li class="card-shadow question-list" @click="addScale" id="13">
-                    <i class="fas fa-tachometer-alt"></i>
-                    Opinion Scale
-                  </li> -->
+              <b-col  cols="4" md="4" sm="4">                
+                <div class="card new-card" @click="addDate" id="3">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="far fa-calendar-alt"></i>                   
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                    >Date</div>
+                </div>
+              
+                <div class="card new-card" @click="addOption" id="8">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="far fa-stop-circle"></i>                   
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                   >Options</div>
+                </div>
+              
+                <div class="card new-card" @click="addList" id="11">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="far fa-list-alt"></i>              
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                    >List</div>
+                </div>
                   
-                  <li class="card-shadow question-list" @click="addRating" id="6">
+                  <!-- <li class="card-shadow question-list" @click="addRating" id="6">
                     <i class="fas fa-star-half-alt"></i>
                     Rating
-                  </li>
+                  </li> -->
 
                   <!-- <li class="card-shadow question-list" @click="addLink" id="7">
                     <i class="fas fa-link"></i>
                     Links
                   </li> -->
 
-                  <li class="card-shadow question-list" @click="addFile" id="14">
+                  <!-- <li class="card-shadow question-list" @click="addFile" id="14">
                     <i class="fas fa-upload"></i>
                     File Upload
                   </li>
                   
-                </ul>
+                </ul> -->
               </b-col>
-            </b-row>
-
-            <div>
-              <p style="font-size: 15px; margin-top: 10px;">
-                <a href="https://help.collect.chat/container/show/script-types" target="_blank">
-                  Learn
-                  about
-                  script types
-                </a>
-              </p>
+               <b-col  cols="4" md="4" sm="4">
+                <div class="card new-card" @click="addRating" id="6">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-star-half-alt"></i>                
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                    >Rating</div>
+                </div>
+              
+                <div class="card new-card" @click="addText"  id="2">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-comment-alt"></i>                  
+                  </div>
+                  <div class="card-footer foot-card" 
+                    style="color:white; background-color: rgb(4, 56, 166)"
+                   >Text</div>
+                </div>
+              
+                <div class="card new-card" @click="addNumber" id="5">  
+                  <div class="card-body body-card" style="background-color:rgb(225, 233, 244)">
+                    <i class="fas fa-hashtag"></i>                
+                  </div>
+                  <div class="card-footer foot-card" 
+                  style="color:white; background-color: rgb(4, 56, 166)"
+                 >Numbr</div>
+                </div>
+                  
+              </b-col>
+              <div style="margin-bottom:30px">              
               <a href="/chat">
-                <button class="btn btn-blue form-big-input w-200">Preview Bot</button>
+                <button class="btn btn-warning" style="width:250px; margin-left:35px; margin-top:7px">Preview Bot</button>
               </a>
             </div>
+            </b-row>            
           </div>
         </b-col>
-        <b-col cols="12" md="8" sm="9">
-          <div class="form-builder-preview pull-right card-shadow">
+        <b-col cols="6" md="8" sm="12">
+          <div class="form-builder-preview pull-right card-shadow " >
             <div class="edit-form"></div>
             <div class="ui-sortable vertical-container">
               <draggable>
@@ -112,7 +135,7 @@
                       <div class="toolbar-header showme">
                         <div class="toolbar-header-buttons">
                           <div
-                            class="btn is-isolated btn-school change hint--bottom"
+                            class="btn is-isolated btn-school change hint--bottom msd"
                             aria-label="Edit"
                           >
                            <i v-if="get.showmodal == 'showModal: true'||get.showmodal=='showText: true'||
@@ -122,20 +145,21 @@
                               || get.showmodal == 'showBooking: true'|| get.showmodal == 'showRange: true' || get.showmodal == 'showScale: true'
                               || get.showmodal == 'showFile: true'"
                                class="fas fa-pen" ref="{{key}}"
-                              @click="open(get,i)"></i>
+                              @click="open(get,i)" style="color:white"></i>
                           </div>
-                          <div class="btn is-isolated btn-school hint--bottom" aria-label="Delete">
-                            <i class="fas fa-trash-alt" @click="deletedata(get.id)"></i>
+                          <div class="btn is-isolated btn-school hint--bottom msd" aria-label="Delete">
+                            <i class="fas fa-trash-alt" style="color:white" @click="deletedata(get.id)"></i>
                           </div>
                         </div>
                       </div>
                        <i :class="[faClass(get.fieldicon)]" style="width:auto"></i>
-                      <label class="static">{{get.placeholder}}</label>
+                      <label class="static" style="color:white">{{get.placeholder}}</label>
                     </div>
                   </div>
                 </div>
                 </div>
               </draggable>
+
                <b-modal id="modal-1" @ok="handleOk" >
     <div class="d-block">Edit box</div>
     <Message @changedata="msg =$event" v-if="currentdata.showmodal == 'showModal: true'" />
@@ -167,10 +191,6 @@
     <Uploade @changedata="msg =$event" v-if="currentdata.showmodal == 'showFile: true'"/>
 
     </b-modal>
-     <b-modal id="modal-2"  >
-    <div class="d-block mb-2">Warning !</div>
-      Some Fields Are Not Filled Or Empty, Changes Not Update ! 
-     </b-modal>
             </div>
             <div id="END"></div>
           </div>
@@ -231,8 +251,9 @@ export default {
       );
 },
   methods: {
+    
        log: function(evt) {
-       window.console.log(evt);
+      window.console.log(evt);
     },
     init(){
       let id=localStorage.getItem('id')
@@ -270,20 +291,11 @@ export default {
              obj.eoc = '1'
            obj.is_subquestion = '1'
            let a= this.msg.data.replace(/<[^>]+>/g, '')  
-           if(a == '' ||this.msg.option.length == 0 ){
-          this.$root.$emit('bv::show::modal', 'modal-2', '#btnShow')
-               return 0;
-           }
-          
+           console.log("ssasdad",a)
            obj.placeholder = a;
            obj.subquestion = this.msg.option
-          
+           console.log("sublits", obj.subquestion)
            }else{
-             if(this.msg == ''){
-              
-                this.$root.$emit('bv::show::modal', 'modal-2', '#btnShow')
-               return 0;
-             }
              obj.placeholder = this.msg.replace(/<[^>]+>/g, '') 
            }
            console.log(obj)
@@ -301,8 +313,7 @@ export default {
          })
           
            this.init()
-           this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
-        
+this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow') 
           
          }).catch(e=>{
            alert("unable to get server")
@@ -1127,7 +1138,7 @@ Vue.filter('striphtml', function (value) {
 </script>
 <style scoped>
 .form-builder {
-  background-color: #f4f4f4;
+  background-color: #fff;
 }
 .form-builder .form-builder-toolbar {
   width: 100%;
@@ -1157,17 +1168,17 @@ Vue.filter('striphtml', function (value) {
 
 .form-builder .card-shadow:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-  background-color: rgb(212, 211, 212);
+  background-color: #fff;
 }
 .form-builder .form-builder-preview {
   position: relative;
   width: 100%;
   border-radius: 3px;
   background: #fff;
-  padding: 10px;
+  /* padding: 10px; */
   min-height: 500px;
   float: right;
-  margin-top: 11px;
+  /* margin-top: 11px; */
   overflow: auto;
   margin-bottom: 10px;
 }
@@ -1175,22 +1186,24 @@ Vue.filter('striphtml', function (value) {
 .form-builder .card-shadow {
   transition: box-shadow 0.3s;
   height: 45px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background: rgb(212, 211, 212);
-  padding-bottom: 10px;
+  /* border-radius: 10px; */
+  /* border: 1px solid #ccc; */
+  background: #fff;
+  /* padding-bottom: 10px; */
   float: left;
 }
 .item-question {
   clear: both;
-  width: 100%;
+  width: 90%;
   cursor: pointer;
   padding: 10px 20px;
-  background-color: #f4f4f4;
-  border: 1px solid #f4f4f4;
-  border-radius: 1.3em;
+  background-color: rgb(4,54,167);
+  color: #fff;
+  /* border: 1px solid #f4f4f4; */
+  /* border-radius: 1.3em; */
+  margin-left:50px;  
   font-size: 15px;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 .showme {
   display: none;
@@ -1200,7 +1213,7 @@ Vue.filter('striphtml', function (value) {
   display: block;
 }
 .showhim:hover {
-  background: white;
+  background-color: rgb(107, 148, 206);
 }
 .row-cols {
   margin-top: 30px;
@@ -1254,9 +1267,9 @@ Vue.filter('striphtml', function (value) {
 .btn-blue:hover {
   color: #fff;
 }
-/* .main {
-  width: 85%;
-  padding-left: 2%;
+.main {
+  width: 100%;
+  /* padding-left: 2%; */
 
 } */
 .change {
@@ -1265,4 +1278,19 @@ Vue.filter('striphtml', function (value) {
 .delete {
   padding-right: unset;
 }
+.body-card {
+  padding: 10px !important;
+}
+.foot-card{
+    padding: 10px !important;
+}
+.new-card{
+      margin-top: 20px;
+      margin-bottom: 20px !important;
+      cursor: pointer;
+}
+.msd{
+  padding: 8px !important;
+}
+
 </style>

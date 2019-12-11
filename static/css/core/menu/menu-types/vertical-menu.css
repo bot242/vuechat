@@ -25,6 +25,8 @@ body.vertical-layout.vertical-menu-modern .main-menu .navigation .menu-content >
 
 body.vertical-layout.vertical-menu-modern .toggle-icon {
   margin-right : 0.425rem;
+  margin-top: 12px;
+
 }
 
 @media (min-width: 576px) {

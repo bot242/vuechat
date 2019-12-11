@@ -16,7 +16,10 @@
         <ul class="nav navbar-nav flex-row">
           <li class="nav-item mr-auto">
             <a class="navbar-brand">
-              <div class="brand-logo"></div>
+            
+             
+            <img src="../assets/images/logo/logo-inside.png" height="42" width="42" alt="branding logo">
+
               <h2 class="brand-text mb-0">zBOT</h2>
             </a>
           </li>

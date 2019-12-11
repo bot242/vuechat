@@ -91,7 +91,7 @@
                 </div>-->
               </div>
               <div class="col-md-12" v-if="currentobj.showmodal == 'showOption: true'">
-                <h5>Select Multiple Option</h5>
+                <h5>what you looking for</h5>
                 <label
                   v-for="datas in optionsss"
                   :key="datas.id"
@@ -665,7 +665,7 @@ Vue.filter("striphtml", function(value) {
   border-radius: 0px 0px 5px 5px;
 }
 .message {
-  width: 45%;
+  width: 50%;
   border-radius: 10px;
   padding: 0.5em;
 }

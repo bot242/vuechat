@@ -11,9 +11,14 @@
                         <div class="card bg-authentication rounded-0 mb-0">
                             <div class="row m-0" style="background-color:rgb(225, 233, 244);">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center pl-0 pr-3 py-0">
-                                    <img src="../assets/images/pages/register.jpg" alt="branding logo">
+                                   <div class="mt-1 mb-3">
+                                        <img src="../assets/images/pages/logo.png" alt="branding logo">
+                                    </div>
+                                    <div class="mb-5 mt-2">
+                                        <img src="../assets/images/pages/login-img.png" alt="branding logo">
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 col-12 p-0">
+                                <div class="col-lg-6 col-12 p-0 mt-5">
                                     <div class="card rounded-0 mb-0 p-2" style="background-color:rgb(225, 233, 244);">
                                         <div class="card-header pt-50 pb-1">
                                             <div class="card-title">
