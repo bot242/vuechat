@@ -162,7 +162,7 @@ this.book()
       let bid = localStorage.getItem("bot_id");
   this.axios 
         .get(
-          "http://192.168.100.144:8001/api/scriptdetails" +
+          "http://chatbotportal.herokuapp.com/api/scriptdetails" +
             "/" +
             user +
             "/" +

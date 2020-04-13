@@ -374,7 +374,7 @@ export default {
       let bid = localStorage.getItem("bot_id");
       this.axios
         .get(
-          "http://192.168.100.144:8001/api/widgetdetails/" +
+          "http://chatbotportal.herokuapp.com/api/widgetdetails/" +
             this.userid +
             "/" +
             bid +
@@ -387,7 +387,7 @@ export default {
           this.msg = response.data[0].message;
           let c = response.data[0].avatar_name;
           console.log("img", c);
-          this.gt = "http://192.168.100.144:8001/static/asset/avatar/" + c;
+          this.gt = "http://chatbotportal.herokuapp.com/static/asset/avatar/" + c;
           let get = this.gt;
           console.log("kjlkh", this.gt);
 
@@ -405,7 +405,7 @@ export default {
       let user_id = localStorage.getItem("id");
       axios
         .get(
-          "http://192.168.100.144:8001/api/scriptdetails" +
+          "http://chatbotportal.herokuapp.com/api/scriptdetails" +
             "/" +
             user_id +
             "/" +
@@ -454,7 +454,7 @@ export default {
           ) {
             this.axios
               .get(
-                "http://192.168.100.144:8001/api/subquestionadd/" +
+                "http://chatbotportal.herokuapp.com/api/subquestionadd/" +
                   this.currentobj.id +
                   "/"
               )
@@ -506,7 +506,7 @@ export default {
 
       this.axios
         .patch(
-          "http://192.168.100.144:8001/api/mainanswer/" +
+          "http://chatbotportal.herokuapp.com/api/mainanswer/" +
             this.currentobj.id +
             "/",
           this.currentobj

@@ -54,7 +54,7 @@ export default {
             formData.append('password',this.pass);            
             // console.log("user",this.a,"em",this.s,'pas',this.f)
             console.log("from",this.formData)
-            this.axios.post('http://192.168.100.144:8000/api/user/',
+            this.axios.post('http://chatbotportal.herokuapp.com/api/user/',
                 formData,
                 {
                 headers: {

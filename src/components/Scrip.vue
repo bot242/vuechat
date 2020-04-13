@@ -241,9 +241,9 @@ export default {
  mounted(){
   let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
-      console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      console.log("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
   this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
       console.log( response.data)
       }
@@ -258,9 +258,9 @@ export default {
     init(){
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
-      console.log("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      console.log("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
   this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
       console.log( response.data)
       }
@@ -281,7 +281,7 @@ export default {
           handleOk(bvModalEvt) {
         // Prevent modal from closing
         // console.log("working success",bvModalEvt)
-         this.axios.get('http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/')
+         this.axios.get('http://chatbotportal.herokuapp.com/api/script/'+this.currentdata.id+'/')
          .then(res=>{
            
            console.log(res.data,this.currentdata.id)
@@ -299,13 +299,13 @@ export default {
              obj.placeholder = this.msg.replace(/<[^>]+>/g, '') 
            }
            console.log(obj)
-           //'http://192.168.100.144:8001/api/script/'+this.currentdata.id+'/' 
+           //'http://chatbotportal.herokuapp.com/api/script/'+this.currentdata.id+'/' 
              let id=localStorage.getItem('id')
             let botid=localStorage.getItem("bot_id")
-           this.axios.patch('http://192.168.100.144:8001/api/scriptdetails/'+id+'/'+botid+'/',obj)
+           this.axios.patch('http://chatbotportal.herokuapp.com/api/scriptdetails/'+id+'/'+botid+'/',obj)
          .then(res=>{
             console.log("success res ==>",res.data)
-           this.axios.put('http://192.168.100.144:8001/api/subquestionadd/'+this.currentdata.id+'/',obj)
+           this.axios.put('http://chatbotportal.herokuapp.com/api/subquestionadd/'+this.currentdata.id+'/',obj)
              .then(item =>{
                console.log("sub question ==>", item)
              }).catch(e=>{
@@ -327,7 +327,7 @@ this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
         },
           deletedata(id){
               console.log("delete id ",id)
-              this.axios.delete('http://192.168.100.144:8001/api/script/'+id+"/")
+              this.axios.delete('http://chatbotportal.herokuapp.com/api/script/'+id+"/")
               .then(res=>{
                 console.log("deleted successa",res)
                 this.init()
@@ -341,7 +341,7 @@ this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
     let field="1"
 
      let name ="Message"
-     let ico='http://192.168.100.144:8001/api/messageicon/1/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/1/'
      this.axios.get(ico).then(res=>{
        console.log('ico',res.data)
      })
@@ -349,8 +349,8 @@ this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
       let holder = "Message"
       pos = "1"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -370,7 +370,7 @@ let obj = {
       console.log("obj",obj)
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
-      this.axios .post("http://192.168.100.144:8001/api/script/", obj, {
+      this.axios .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -379,7 +379,7 @@ let obj = {
       .then((data)=> {
 
         console.log("post-result3", data.data);
- this.axios.get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+ this.axios.get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
        .then(response =>{
          this.all = response.data
          console.log(this.all)
@@ -398,7 +398,7 @@ let obj = {
     let field="2"
 
      let name ="TextQuestion"
-     let ico='http://192.168.100.144:8001/api/messageicon/2/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/2/'
         this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -406,8 +406,8 @@ let obj = {
       let holder = "Text"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -428,7 +428,7 @@ let obj = {
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -437,7 +437,7 @@ let obj = {
       .then((data) => {
         console.log("post-result3", data.data);
  this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.loading = false;this.all = response.data});
         })
       .catch((e)=> {
@@ -450,7 +450,7 @@ let obj = {
     let field="5"
 
      let name ="Date"
-     let ico='http://192.168.100.144:8001/api/messageicon/5/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/5/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -458,8 +458,8 @@ let obj = {
       let holder = "Date"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -480,7 +480,7 @@ let obj = {
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -489,7 +489,7 @@ let obj = {
       .then((data) =>{
         console.log("post-result3", data.data);
          this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.loading = false;this.all = response.data}
       );
         })
@@ -503,7 +503,7 @@ let obj = {
     let field="7"
 
      let name ="MultiSelect"
-     let ico='http://192.168.100.144:8001/api/messageicon/7/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/7/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -511,8 +511,8 @@ let obj = {
       let holder = "Select"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -533,7 +533,7 @@ let obj = {
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -542,7 +542,7 @@ let obj = {
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -559,7 +559,7 @@ this.axios
     let field="9"
 
      let name ="Number"
-     let ico='http://192.168.100.144:8001/api/messageicon/9/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/9/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -567,8 +567,8 @@ this.axios
       let holder = "Number"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -589,7 +589,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -598,7 +598,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -615,7 +615,7 @@ this.axios
     let field="11"
 
      let name ="Rating"
-     let ico='http://192.168.100.144:8001/api/messageicon/11/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/11/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -623,8 +623,8 @@ this.axios
       let holder = "Rating"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -645,7 +645,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -654,7 +654,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -671,7 +671,7 @@ this.axios
     let field="13"
 
      let name ="Links"
-     let ico='http://192.168.100.144:8001/api/messageicon/13/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/13/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -679,8 +679,8 @@ this.axios
       let holder = "Link"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -701,7 +701,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -710,7 +710,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
  this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
      let s=this.all
       console.log('send',s)
@@ -730,7 +730,7 @@ this.axios
     let field="3"
 
      let name ="MultiChoice"
-     let ico='http://192.168.100.144:8001/api/messageicon/3/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/3/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -738,8 +738,8 @@ this.axios
       let holder = "Option"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -760,7 +760,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -769,7 +769,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -786,7 +786,7 @@ this.axios
     let field="4"
 
      let name ="Email"
-     let ico='http://192.168.100.144:8001/api/messageicon/4/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/4/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -794,8 +794,8 @@ this.axios
       let holder = "Email"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -816,7 +816,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -825,7 +825,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -842,7 +842,7 @@ this.axios
     let field="6"
 
      let name ="Appointment"
-     let ico='http://192.168.100.144:8001/api/messageicon/6/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/6/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -850,8 +850,8 @@ this.axios
       let holder = "Booking"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -872,7 +872,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -881,7 +881,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -898,7 +898,7 @@ this.axios
     let field="8"
 
      let name ="List"
-     let ico='http://192.168.100.144:8001/api/messageicon/8/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/8/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -906,8 +906,8 @@ this.axios
       let holder = "List"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -928,7 +928,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -937,7 +937,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -954,7 +954,7 @@ this.axios
     let field="10"
 
      let name ="Range"
-     let ico='http://192.168.100.144:8001/api/messageicon/10/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/10/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -962,8 +962,8 @@ this.axios
       let holder = "Range"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -984,7 +984,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -993,7 +993,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -1011,7 +1011,7 @@ this.axios
     let field="12"
 
      let name ="OpinionScale"
-     let ico='http://192.168.100.144:8001/api/messageicon/12/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/12/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -1019,8 +1019,8 @@ this.axios
       let holder = "Scale"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -1041,7 +1041,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -1050,7 +1050,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;
@@ -1068,7 +1068,7 @@ this.axios
     let field="14"
 
      let name ="FileUpload"
-     let ico='http://192.168.100.144:8001/api/messageicon/14/'
+     let ico='http://chatbotportal.herokuapp.com/api/messageicon/14/'
      this.axios.get(ico).then(res=>{
        console.log(res.data)
      })
@@ -1076,8 +1076,8 @@ this.axios
       let holder = "File"
       pos = "2"
       let ecos = 0
-      let boot = "http://192.168.100.144:8001/api/chatbots/"+localStorage.getItem('bot_id')+"/"
-      let usr = "http://192.168.100.144:8001/api/user/"+localStorage.getItem('id')+"/"
+      let boot = "http://chatbotportal.herokuapp.com/api/chatbots/"+localStorage.getItem('bot_id')+"/"
+      let usr = "http://chatbotportal.herokuapp.com/api/user/"+localStorage.getItem('id')+"/"
       let quest = "1"
       let pos = "1"
 
@@ -1098,7 +1098,7 @@ this.axios
       let id=localStorage.getItem('id')
       let botid=localStorage.getItem("bot_id")
       this.axios
-      .post("http://192.168.100.144:8001/api/script/", obj, {
+      .post("http://chatbotportal.herokuapp.com/api/script/", obj, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Content-Type": "application/json"
@@ -1107,7 +1107,7 @@ this.axios
       .then((data)=> {
         console.log("post-result3", data.data);
 this.axios
-      .get("http://192.168.100.144:8001/api/scriptdetails/"+id+"/"+botid+"/")
+      .get("http://chatbotportal.herokuapp.com/api/scriptdetails/"+id+"/"+botid+"/")
       .then(response =>{this.all = response.data
 
       let a=response.data[0].fieldicon;

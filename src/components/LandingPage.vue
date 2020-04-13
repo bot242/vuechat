@@ -902,7 +902,7 @@ export default {
       getTasks() {
       axios({
         method: "get",
-        url: "http://192.168.100.144:8000/api/avatar/",
+        url: "http://chatbotportal.herokuapp.com/api/avatar/",
         auth: {}
       }).then(response => console.log((this.image = response.data)));
     },

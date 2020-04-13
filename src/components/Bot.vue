@@ -156,7 +156,7 @@ export default {
       this.userid = user;
       console.log("user-id", this.userid);
       axios
-        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .get("http://chatbotportal.herokuapp.com/api/userbot/" + this.userid + "/")
         .then(response =>
           console.log("bot-count", (this.botcount = response.data))
         );
@@ -176,7 +176,7 @@ export default {
       console.log("ssss", ...formData);
       axios
         .patch(
-          "http://192.168.100.144:8001/api/chatbots/" + this.use + "/",
+          "http://chatbotportal.herokuapp.com/api/chatbots/" + this.use + "/",
           formData,
           {
             headers: {
@@ -188,7 +188,7 @@ export default {
         .then((data) =>{
         console.log("post-result3", data.data);
          this.axios
-      .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+      .get("http://chatbotportal.herokuapp.com/api/userbot/" + this.userid + "/")
         .then(response =>
           console.log("bot-name", (this.botcount = response.data))
       );
@@ -196,7 +196,7 @@ export default {
         console.log("FAILURE!!");
       });
       // axios
-      //   .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+      //   .get("http://chatbotportal.herokuapp.com/api/userbot/" + this.userid + "/")
       //   .then(response =>
       //     console.log("bot-name", (this.botcount = response.data))
       //   );
@@ -234,7 +234,7 @@ export default {
 
       // this.$router.push("/Public");
       axios
-        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .get("http://chatbotportal.herokuapp.com/api/userbot/" + this.userid + "/")
         .then(response =>
           console.log("bot-count", (this.botcount = response.data))
         );
@@ -248,7 +248,7 @@ export default {
       formData.append("user_id", s);
       console.log("ssss", ...formData);
       this.axios
-        .post("http://192.168.100.144:8001/api/bot/", formData, {
+        .post("http://chatbotportal.herokuapp.com/api/bot/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Content-Type": "application/json"
@@ -261,7 +261,7 @@ export default {
           console.log("FAILURE!!");
         });
       this.axios
-        .get("http://192.168.100.144:8001/api/userbot/" + this.userid + "/")
+        .get("http://chatbotportal.herokuapp.com/api/userbot/" + this.userid + "/")
         .then(response =>
           console.log("bot-count", (this.botcount = response.data))
         );
@@ -299,13 +299,13 @@ export default {
               "success"
             );
             axios
-              .delete("http://192.168.100.144:8001/api/userbot/" + this.use + "/")
+              .delete("http://chatbotportal.herokuapp.com/api/userbot/" + this.use + "/")
               .then(response => {
                 this.used.splice(id, 1).push(response.data);
                 console.log(response.data, "used");
                 axios
                   .get(
-                    "http://192.168.100.144:8001/api/userbot/" +
+                    "http://chatbotportal.herokuapp.com/api/userbot/" +
                       this.userid +
                       "/"
                   )

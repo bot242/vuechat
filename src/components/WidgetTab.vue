@@ -309,7 +309,7 @@
                         <div v-for="images in image" :key="images.id">
                           <img
                             v-bind:class="{'reds': activeIndex === images}"
-                            :src="'http://192.168.100.144:8001/static/asset/avatar/'+images.image"
+                            :src="'http://chatbotportal.herokuapp.com/static/asset/avatar/'+images.image"
                             style="width:90%;"
                             @click="setImg(images)"
                           />
@@ -512,12 +512,12 @@ export default {
       let d = localStorage.getItem("id");
       axios({
         method: "get",
-        url: "http://192.168.100.144:8001/api/avatarimageupload/" + d + "/",
+        url: "http://chatbotportal.herokuapp.com/api/avatarimageupload/" + d + "/",
         auth: {}
       }).then(response => {
         this.image = response.data;
         let c = response.data[0].image;
-        this.avimg = "http://192.168.100.144:8001/static/asset/avatar/" + c;
+        this.avimg = "http://chatbotportal.herokuapp.com/static/asset/avatar/" + c;
         let mains = response.data[0].img_modal;
         // this.pos =response.data[0].
         this.api.push("looy", avimg);
@@ -538,7 +538,7 @@ export default {
       formData.append('bot',bid)
       console.log("ssss", ...formData);
       this.axios
-        .put("http://192.168.100.144:8001/api/widget/", formData, {
+        .put("http://chatbotportal.herokuapp.com/api/widget/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "Content-Type": "application/json"
@@ -576,7 +576,7 @@ export default {
       let bid=localStorage.getItem('bot_id');
       this.axios
         .get(
-          "http://192.168.100.144:8001/api/widgetdetails/" + this.userid +"/"+ bid +"/"
+          "http://chatbotportal.herokuapp.com/api/widgetdetails/" + this.userid +"/"+ bid +"/"
         )
         .then(response => {
           this.botcount = response.data;
@@ -585,7 +585,7 @@ export default {
           this.msg = response.data[0].message;
           let c = response.data[0].avatar_name;
           console.log('img',c)
-          this.gt = "http://192.168.100.144:8001/static/asset/avatar/" + c;
+          this.gt = "http://chatbotportal.herokuapp.com/static/asset/avatar/" + c;
           let get = this.gt;
           console.log("kjlkh", this.gt);
 
@@ -642,7 +642,7 @@ export default {
     //   formData.append("user", a);
     //   console.log("test", ...formData);
     //   axios
-    //     .post("http://192.168.100.144:8001/api/imageupload/", formData, {
+    //     .post("http://chatbotportal.herokuapp.com/api/imageupload/", formData, {
     //       headers: {
     //         "Content-Type": "multipart/form-data"
     //       }
