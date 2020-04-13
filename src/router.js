@@ -28,14 +28,14 @@ let router = new Router({
       name: 'register',
       component: Register
     },
-    {
-      path: '/',
-      name: 'Home',
-      component: Home,
-      meta: {
-        requiresAuth: true
-      }
-    },
+    // {
+    //   path: '/',
+    //   name: 'Home',
+    //   component: Home,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
     {
       path: '/Widget',
       name: 'widget',
@@ -62,7 +62,7 @@ let router = new Router({
     },
 
     {
-      path: '/Publish',
+      path: '',
       name: 'Publish',
       component: Testing1,
       meta: {
